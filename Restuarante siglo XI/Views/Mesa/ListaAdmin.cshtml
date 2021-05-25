@@ -1,0 +1,35 @@
+﻿@using Restaurante_siglo_XI
+@{
+    ViewBag.Title = "Lista de las mesas";
+}
+
+<h2>Lista de las mesas</h2>
+
+@{List<Mesa> mesas = (List<Mesa>)ViewBag.mesas;}
+<button>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+<div class="row">
+    <div class="col-md-12">
+        <table>
+            <tr>
+                <th>numero de la mesa</th>
+                <th>ubicacion de la mesa</th>
+                <th>cantidad de comensales en mesa</th>
+                <th>Mesa usada(1 o 0)</th>
+            </tr>
+            @foreach (var m in mesas)
+            {
+        <tr>
+            <td>@m.id_mesa</td>
+            <td>@m.ubicacion_mesa</td>
+            <td>@m.maxima_comensales</td>
+            <td>@m.mesaUsada</td>
+
+
+        </tr>
+            }
+
+
+
+        </table>
+    </div>
+</div>

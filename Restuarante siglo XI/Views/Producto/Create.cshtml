@@ -1,0 +1,22 @@
+﻿@model Restaurante_siglo_XI.Producto
+@{
+    ViewBag.Title = "Registrar producto";
+}
+
+<h2>Ingrese el producto para registrar</h2>
+<button>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(prod => prod.nombre_producto, new { placeholder = "nombre del producto", required = "required" });
+    <br />
+    @Html.TextBoxFor(prod => prod.decripcion_producto, new { placeholder = "Descripcion del producto opcional" });
+    <br />
+    @Html.TextBoxFor(prod => prod.Stock, new { type = "number", placeholder = "cantidad producto", required = "required" });
+    <br />
+    @Html.TextBoxFor(prod => prod.precioProducto, new { type = "number", placeholder = "Precio", required = "required" });
+    <br />
+    @Html.DropDownListFor(prod => prod.id_categoria, new SelectList(ViewBag.categoria, "id_categoria", "nombre_categoria"))
+    <br />
+    <button>Guardar producto</button>
+}

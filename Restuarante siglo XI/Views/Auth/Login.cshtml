@@ -1,0 +1,21 @@
+﻿@model Restaurante_siglo_XI.Usuario
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Ingresa a tu cuenta</h2>
+
+@using (Html.BeginForm())
+{
+                @Html.TextBoxFor(u => u.Nombre_usuario, new { placeholder = "Nombre de usuario" });
+    <br />
+            //@Html.LabelFor(u => u.Password, "Contraseña");
+            @Html.PasswordFor(u => u.Password, new { placeholder = "Contraseña" });
+
+    <br />
+
+    <button>Ingresar</button>
+}
+<br />
+@TempData["mensaje"]
+

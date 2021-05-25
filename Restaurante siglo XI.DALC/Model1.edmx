@@ -1,0 +1,1109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BOLETA">
+          <Key>
+            <PropertyRef Name="ID_BOLETA" />
+          </Key>
+          <Property Name="ID_BOLETA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TOTAL_BOLETA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FECHA_BOLETA" Type="date" Nullable="false" />
+          <Property Name="ID_MESA_BOLETA" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CARGO">
+          <Key>
+            <PropertyRef Name="ID_CARGO" />
+          </Key>
+          <Property Name="ID_CARGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_CARGO" Type="varchar2" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="COMUNA">
+          <Key>
+            <PropertyRef Name="ID_COMUNA" />
+          </Key>
+          <Property Name="ID_COMUNA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_COMUNA" Type="varchar2" MaxLength="25" />
+          <Property Name="ID_REGION" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONSUMIBLE">
+          <Key>
+            <PropertyRef Name="ID_CONSUMIBLE" />
+          </Key>
+          <Property Name="ID_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_CONSUMIBLE" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="DESCRIPCION_CONSUMIBLE" Type="varchar2" MaxLength="25" />
+          <Property Name="PRECIO_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="STOCK" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_TIPO_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="DETA_MENU_CONSUMIBLE">
+          <Key>
+            <PropertyRef Name="ID_MENU" />
+            <PropertyRef Name="ID_CONSUMIBLE" />
+          </Key>
+          <Property Name="ID_MENU" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESTADOPEDIDO">
+          <Key>
+            <PropertyRef Name="ID_ESTADO" />
+          </Key>
+          <Property Name="ID_ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_ESTADO" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="ID_MENU" />
+          </Key>
+          <Property Name="ID_MENU" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION_MENU" Type="varchar2" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MESA">
+          <Key>
+            <PropertyRef Name="ID_MESA" />
+          </Key>
+          <Property Name="ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="UBICACION_MESA" Type="varchar2" MaxLength="25" />
+          <Property Name="MAX_COMENSALES_MESA" Type="number" Precision="38" Scale="0" />
+          <Property Name="USADO_MESA" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="PEDIDO">
+          <Key>
+            <PropertyRef Name="ID_PEDIDO" />
+          </Key>
+          <Property Name="ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_CONSUMIBLE_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_MENU" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="ID_PERSONA" />
+          </Key>
+          <Property Name="ID_PERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_PERSONA" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="NOMBRE_PERSONA" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="APATERNO_PERSONA" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="AMATERNO_PERSONA" Type="varchar2" MaxLength="25" />
+          <Property Name="TELEFONO_PERSONA" Type="number" Precision="38" Scale="0" />
+          <Property Name="CORREO_PERSONA" Type="varchar2" MaxLength="25" />
+          <Property Name="ACTIVO_PERSONA" Type="char" MaxLength="1" />
+          <Property Name="ID_CARGO_PERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_COMUNA_PERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REGION">
+          <Key>
+            <PropertyRef Name="ID_REGION" />
+          </Key>
+          <Property Name="ID_REGION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_REGION" Type="varchar2" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="RESERVA">
+          <Key>
+            <PropertyRef Name="ID_RESERVA" />
+          </Key>
+          <Property Name="ID_RESERVA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FECHA_RESERVA" Type="date" />
+          <Property Name="ID_MESA_RESERVA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_PERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_CONSUMIBLE">
+          <Key>
+            <PropertyRef Name="ID_TIPO_CONSUMIBLE" />
+          </Key>
+          <Property Name="ID_TIPO_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_TIPO_CONSUMIBLE" Type="varchar2" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_USUARIO" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="CONTRASENIA_USUARIO" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="ID_PERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="BOLETA_MESA_FK">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="BOLETA">
+              <PropertyRef Name="ID_MESA_BOLETA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMUNA_REGION_FK">
+          <End Role="REGION" Type="Self.REGION" Multiplicity="1" />
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGION">
+              <PropertyRef Name="ID_REGION" />
+            </Principal>
+            <Dependent Role="COMUNA">
+              <PropertyRef Name="ID_REGION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONSUMIBLE_TIPO_CONSUMIBLE_FK">
+          <End Role="TIPO_CONSUMIBLE" Type="Self.TIPO_CONSUMIBLE" Multiplicity="1" />
+          <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CONSUMIBLE">
+              <PropertyRef Name="ID_TIPO_CONSUMIBLE" />
+            </Principal>
+            <Dependent Role="CONSUMIBLE">
+              <PropertyRef Name="ID_TIPO_CONSUMIBLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETA_MENU_CONSUMIBLE_FK">
+          <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="1" />
+          <End Role="DETA_MENU_CONSUMIBLE" Type="Self.DETA_MENU_CONSUMIBLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONSUMIBLE">
+              <PropertyRef Name="ID_CONSUMIBLE" />
+            </Principal>
+            <Dependent Role="DETA_MENU_CONSUMIBLE">
+              <PropertyRef Name="ID_CONSUMIBLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETA_MENU_CONSUMIBLEFK">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
+          <End Role="DETA_MENU_CONSUMIBLE" Type="Self.DETA_MENU_CONSUMIBLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="ID_MENU" />
+            </Principal>
+            <Dependent Role="DETA_MENU_CONSUMIBLE">
+              <PropertyRef Name="ID_MENU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PEDIDO_CONSUMIBLE_FK">
+          <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONSUMIBLE">
+              <PropertyRef Name="ID_CONSUMIBLE" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="ID_CONSUMIBLE_PEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PEDIDO_ESTADOPEDIDO_FK">
+          <End Role="ESTADOPEDIDO" Type="Self.ESTADOPEDIDO" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOPEDIDO">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="ID_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PEDIDO_MENU_FK">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="ID_MENU" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="ID_MENU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PERSONA_CARGO_FK">
+          <End Role="CARGO" Type="Self.CARGO" Multiplicity="1" />
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO">
+              <PropertyRef Name="ID_CARGO" />
+            </Principal>
+            <Dependent Role="PERSONA">
+              <PropertyRef Name="ID_CARGO_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PERSONA_COMUNA_FK">
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID_COMUNA" />
+            </Principal>
+            <Dependent Role="PERSONA">
+              <PropertyRef Name="ID_COMUNA_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RESERVA_MESA_FK">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="RESERVA">
+              <PropertyRef Name="ID_MESA_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RESERVA_PERSONA_FK">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="ID_PERSONA" />
+            </Principal>
+            <Dependent Role="RESERVA">
+              <PropertyRef Name="ID_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TABLE_4_MESA_FK">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="ID_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_PERSONA_FK">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="ID_PERSONA" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_CREATE_BOLETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_TOTALB" Type="number" Mode="In" />
+          <Parameter Name="V_FECHA" Type="date" Mode="In" />
+          <Parameter Name="V_ID_MESA" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_CONSUMIBLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PRECIO" Type="number" Mode="In" />
+          <Parameter Name="V_STOCK" Type="number" Mode="In" />
+          <Parameter Name="V_ID_TIPOCONSUMIBLE" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_MENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_MESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_UBICACIONM" Type="varchar2" Mode="In" />
+          <Parameter Name="V_MAX_CON" Type="number" Mode="In" />
+          <Parameter Name="V_USADO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_PERSONA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_RUT" Type="varchar2" Mode="In" />
+          <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PATERNO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_MATERNO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_TELEFONO" Type="number" Mode="In" />
+          <Parameter Name="V_CORREO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_ACTIVO" Type="char" Mode="In" />
+          <Parameter Name="V_CARGO_ID" Type="number" Mode="In" />
+          <Parameter Name="V_COMUNA" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_FECHA" Type="date" Mode="In" />
+          <Parameter Name="V_MESA_ID" Type="number" Mode="In" />
+          <Parameter Name="V_PERSONA_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_CONTRASENIA" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PERSONA_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_CONSUMIBLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_MESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_PERSONA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_CONSUMIBLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+          <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_STOCK" Type="number" Mode="In" />
+          <Parameter Name="V_ID_CATEGORIA" Type="number" Mode="In" />
+          <Parameter Name="V_PRECIO" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_MESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+          <Parameter Name="V_UBICACIONM" Type="varchar2" Mode="In" />
+          <Parameter Name="V_MAX_CON" Type="number" Mode="In" />
+          <Parameter Name="V_USADO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_PERSONA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+          <Parameter Name="V_RUT" Type="varchar2" Mode="In" />
+          <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PATERNO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_MATERNO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_TELEFONO" Type="number" Mode="In" />
+          <Parameter Name="V_CORREO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_ACTIVO" Type="char" Mode="In" />
+          <Parameter Name="V_CARGO_ID" Type="number" Mode="In" />
+          <Parameter Name="V_COMUNA" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+          <Parameter Name="V_FECHA" Type="date" Mode="In" />
+          <Parameter Name="V_MESA" Type="number" Mode="In" />
+          <Parameter Name="V_PERSONA" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+          <Parameter Name="V_USUARIO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PASS" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PERSONA" Type="number" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="CARGO" EntityType="Self.CARGO" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="COMUNA" EntityType="Self.COMUNA" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="CONSUMIBLE" EntityType="Self.CONSUMIBLE" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="MENU" EntityType="Self.MENU" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="MESA" EntityType="Self.MESA" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="REGION" EntityType="Self.REGION" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="RESERVA" EntityType="Self.RESERVA" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="TIPO_CONSUMIBLE" EntityType="Self.TIPO_CONSUMIBLE" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="DETA_MENU_CONSUMIBLE" EntityType="Self.DETA_MENU_CONSUMIBLE" store:Type="Tables" store:Schema="RESTAURANTEXXI">
+            <DefiningQuery>SELECT 
+"DETA_MENU_CONSUMIBLE"."ID_MENU" AS "ID_MENU", 
+"DETA_MENU_CONSUMIBLE"."ID_CONSUMIBLE" AS "ID_CONSUMIBLE"
+FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="BOLETA_MESA_FK" Association="Self.BOLETA_MESA_FK">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="BOLETA" EntitySet="BOLETA" />
+          </AssociationSet>
+          <AssociationSet Name="COMUNA_REGION_FK" Association="Self.COMUNA_REGION_FK">
+            <End Role="REGION" EntitySet="REGION" />
+            <End Role="COMUNA" EntitySet="COMUNA" />
+          </AssociationSet>
+          <AssociationSet Name="CONSUMIBLE_TIPO_CONSUMIBLE_FK" Association="Self.CONSUMIBLE_TIPO_CONSUMIBLE_FK">
+            <End Role="TIPO_CONSUMIBLE" EntitySet="TIPO_CONSUMIBLE" />
+            <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
+          </AssociationSet>
+          <AssociationSet Name="DETA_MENU_CONSUMIBLE_FK" Association="Self.DETA_MENU_CONSUMIBLE_FK">
+            <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
+            <End Role="DETA_MENU_CONSUMIBLE" EntitySet="DETA_MENU_CONSUMIBLE" />
+          </AssociationSet>
+          <AssociationSet Name="DETA_MENU_CONSUMIBLEFK" Association="Self.DETA_MENU_CONSUMIBLEFK">
+            <End Role="MENU" EntitySet="MENU" />
+            <End Role="DETA_MENU_CONSUMIBLE" EntitySet="DETA_MENU_CONSUMIBLE" />
+          </AssociationSet>
+          <AssociationSet Name="PEDIDO_CONSUMIBLE_FK" Association="Self.PEDIDO_CONSUMIBLE_FK">
+            <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="PEDIDO_ESTADOPEDIDO_FK" Association="Self.PEDIDO_ESTADOPEDIDO_FK">
+            <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="PEDIDO_MENU_FK" Association="Self.PEDIDO_MENU_FK">
+            <End Role="MENU" EntitySet="MENU" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="PERSONA_CARGO_FK" Association="Self.PERSONA_CARGO_FK">
+            <End Role="CARGO" EntitySet="CARGO" />
+            <End Role="PERSONA" EntitySet="PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="PERSONA_COMUNA_FK" Association="Self.PERSONA_COMUNA_FK">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="PERSONA" EntitySet="PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="RESERVA_MESA_FK" Association="Self.RESERVA_MESA_FK">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="RESERVA" EntitySet="RESERVA" />
+          </AssociationSet>
+          <AssociationSet Name="RESERVA_PERSONA_FK" Association="Self.RESERVA_PERSONA_FK">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="RESERVA" EntitySet="RESERVA" />
+          </AssociationSet>
+          <AssociationSet Name="TABLE_4_MESA_FK" Association="Self.TABLE_4_MESA_FK">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_PERSONA_FK" Association="Self.USUARIO_PERSONA_FK">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BOLETA">
+          <Key>
+            <PropertyRef Name="ID_BOLETA" />
+          </Key>
+          <Property Name="ID_BOLETA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TOTAL_BOLETA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FECHA_BOLETA" Type="DateTime" Nullable="false" />
+          <Property Name="ID_MESA_BOLETA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="MESA" Relationship="Self.BOLETA_MESA_FK" FromRole="BOLETA" ToRole="MESA" />
+        </EntityType>
+        <EntityType Name="CARGO">
+          <Key>
+            <PropertyRef Name="ID_CARGO" />
+          </Key>
+          <Property Name="ID_CARGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_CARGO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.PERSONA_CARGO_FK" FromRole="CARGO" ToRole="PERSONA" />
+        </EntityType>
+        <EntityType Name="COMUNA">
+          <Key>
+            <PropertyRef Name="ID_COMUNA" />
+          </Key>
+          <Property Name="ID_COMUNA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_COMUNA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ID_REGION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="REGION" Relationship="Self.COMUNA_REGION_FK" FromRole="COMUNA" ToRole="REGION" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.PERSONA_COMUNA_FK" FromRole="COMUNA" ToRole="PERSONA" />
+        </EntityType>
+        <EntityType Name="CONSUMIBLE">
+          <Key>
+            <PropertyRef Name="ID_CONSUMIBLE" />
+          </Key>
+          <Property Name="ID_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_CONSUMIBLE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION_CONSUMIBLE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PRECIO_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="STOCK" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_TIPO_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="TIPO_CONSUMIBLE" Relationship="Self.CONSUMIBLE_TIPO_CONSUMIBLE_FK" FromRole="CONSUMIBLE" ToRole="TIPO_CONSUMIBLE" />
+          <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_CONSUMIBLE_FK" FromRole="CONSUMIBLE" ToRole="PEDIDO" />
+          <NavigationProperty Name="MENU" Relationship="Self.DETA_MENU_CONSUMIBLE" FromRole="CONSUMIBLE" ToRole="MENU" />
+        </EntityType>
+        <EntityType Name="ESTADOPEDIDO">
+          <Key>
+            <PropertyRef Name="ID_ESTADO" />
+          </Key>
+          <Property Name="ID_ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_ESTADO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_ESTADOPEDIDO_FK" FromRole="ESTADOPEDIDO" ToRole="PEDIDO" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="ID_MENU" />
+          </Key>
+          <Property Name="ID_MENU" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION_MENU" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_MENU_FK" FromRole="MENU" ToRole="PEDIDO" />
+          <NavigationProperty Name="CONSUMIBLE" Relationship="Self.DETA_MENU_CONSUMIBLE" FromRole="MENU" ToRole="CONSUMIBLE" />
+        </EntityType>
+        <EntityType Name="MESA">
+          <Key>
+            <PropertyRef Name="ID_MESA" />
+          </Key>
+          <Property Name="ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="UBICACION_MESA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MAX_COMENSALES_MESA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="USADO_MESA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="BOLETA" Relationship="Self.BOLETA_MESA_FK" FromRole="MESA" ToRole="BOLETA" />
+          <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_MESA_FK" FromRole="MESA" ToRole="RESERVA" />
+          <NavigationProperty Name="PEDIDO" Relationship="Self.TABLE_4_MESA_FK" FromRole="MESA" ToRole="PEDIDO" />
+        </EntityType>
+        <EntityType Name="PEDIDO">
+          <Key>
+            <PropertyRef Name="ID_PEDIDO" />
+          </Key>
+          <Property Name="ID_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_CONSUMIBLE_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_MENU" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CONSUMIBLE" Relationship="Self.PEDIDO_CONSUMIBLE_FK" FromRole="PEDIDO" ToRole="CONSUMIBLE" />
+          <NavigationProperty Name="ESTADOPEDIDO" Relationship="Self.PEDIDO_ESTADOPEDIDO_FK" FromRole="PEDIDO" ToRole="ESTADOPEDIDO" />
+          <NavigationProperty Name="MENU" Relationship="Self.PEDIDO_MENU_FK" FromRole="PEDIDO" ToRole="MENU" />
+          <NavigationProperty Name="MESA" Relationship="Self.TABLE_4_MESA_FK" FromRole="PEDIDO" ToRole="MESA" />
+        </EntityType>
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="ID_PERSONA" />
+          </Key>
+          <Property Name="ID_PERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_PERSONA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_PERSONA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APATERNO_PERSONA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AMATERNO_PERSONA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO_PERSONA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="CORREO_PERSONA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVO_PERSONA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ID_CARGO_PERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_COMUNA_PERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CARGO" Relationship="Self.PERSONA_CARGO_FK" FromRole="PERSONA" ToRole="CARGO" />
+          <NavigationProperty Name="COMUNA" Relationship="Self.PERSONA_COMUNA_FK" FromRole="PERSONA" ToRole="COMUNA" />
+          <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_PERSONA_FK" FromRole="PERSONA" ToRole="RESERVA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.USUARIO_PERSONA_FK" FromRole="PERSONA" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="REGION">
+          <Key>
+            <PropertyRef Name="ID_REGION" />
+          </Key>
+          <Property Name="ID_REGION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_REGION" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="COMUNA" Relationship="Self.COMUNA_REGION_FK" FromRole="REGION" ToRole="COMUNA" />
+        </EntityType>
+        <EntityType Name="RESERVA">
+          <Key>
+            <PropertyRef Name="ID_RESERVA" />
+          </Key>
+          <Property Name="ID_RESERVA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FECHA_RESERVA" Type="DateTime" />
+          <Property Name="ID_MESA_RESERVA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_PERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="MESA" Relationship="Self.RESERVA_MESA_FK" FromRole="RESERVA" ToRole="MESA" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.RESERVA_PERSONA_FK" FromRole="RESERVA" ToRole="PERSONA" />
+        </EntityType>
+        <EntityType Name="TIPO_CONSUMIBLE">
+          <Key>
+            <PropertyRef Name="ID_TIPO_CONSUMIBLE" />
+          </Key>
+          <Property Name="ID_TIPO_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_TIPO_CONSUMIBLE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONSUMIBLE" Relationship="Self.CONSUMIBLE_TIPO_CONSUMIBLE_FK" FromRole="TIPO_CONSUMIBLE" ToRole="CONSUMIBLE" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_USUARIO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTRASENIA_USUARIO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_PERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="PERSONA" Relationship="Self.USUARIO_PERSONA_FK" FromRole="USUARIO" ToRole="PERSONA" />
+        </EntityType>
+        <Association Name="BOLETA_MESA_FK">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="BOLETA">
+              <PropertyRef Name="ID_MESA_BOLETA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PERSONA_CARGO_FK">
+          <End Role="CARGO" Type="Self.CARGO" Multiplicity="1" />
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGO">
+              <PropertyRef Name="ID_CARGO" />
+            </Principal>
+            <Dependent Role="PERSONA">
+              <PropertyRef Name="ID_CARGO_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="COMUNA_REGION_FK">
+          <End Role="REGION" Type="Self.REGION" Multiplicity="1" />
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGION">
+              <PropertyRef Name="ID_REGION" />
+            </Principal>
+            <Dependent Role="COMUNA">
+              <PropertyRef Name="ID_REGION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PERSONA_COMUNA_FK">
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID_COMUNA" />
+            </Principal>
+            <Dependent Role="PERSONA">
+              <PropertyRef Name="ID_COMUNA_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONSUMIBLE_TIPO_CONSUMIBLE_FK">
+          <End Role="TIPO_CONSUMIBLE" Type="Self.TIPO_CONSUMIBLE" Multiplicity="1" />
+          <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_CONSUMIBLE">
+              <PropertyRef Name="ID_TIPO_CONSUMIBLE" />
+            </Principal>
+            <Dependent Role="CONSUMIBLE">
+              <PropertyRef Name="ID_TIPO_CONSUMIBLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PEDIDO_CONSUMIBLE_FK">
+          <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONSUMIBLE">
+              <PropertyRef Name="ID_CONSUMIBLE" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="ID_CONSUMIBLE_PEDIDO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PEDIDO_ESTADOPEDIDO_FK">
+          <End Role="ESTADOPEDIDO" Type="Self.ESTADOPEDIDO" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOPEDIDO">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="ID_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PEDIDO_MENU_FK">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="ID_MENU" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="ID_MENU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RESERVA_MESA_FK">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="RESERVA">
+              <PropertyRef Name="ID_MESA_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TABLE_4_MESA_FK">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="ID_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RESERVA_PERSONA_FK">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="ID_PERSONA" />
+            </Principal>
+            <Dependent Role="RESERVA">
+              <PropertyRef Name="ID_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="USUARIO_PERSONA_FK">
+          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONA">
+              <PropertyRef Name="ID_PERSONA" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETA_MENU_CONSUMIBLE">
+          <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="*" />
+          <End Role="MENU" Type="Self.MENU" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="RestauranteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BOLETA" EntityType="Self.BOLETA" />
+          <EntitySet Name="CARGO" EntityType="Self.CARGO" />
+          <EntitySet Name="COMUNA" EntityType="Self.COMUNA" />
+          <EntitySet Name="CONSUMIBLE" EntityType="Self.CONSUMIBLE" />
+          <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" />
+          <EntitySet Name="MENU" EntityType="Self.MENU" />
+          <EntitySet Name="MESA" EntityType="Self.MESA" />
+          <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" />
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" />
+          <EntitySet Name="REGION" EntityType="Self.REGION" />
+          <EntitySet Name="RESERVA" EntityType="Self.RESERVA" />
+          <EntitySet Name="TIPO_CONSUMIBLE" EntityType="Self.TIPO_CONSUMIBLE" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="BOLETA_MESA_FK" Association="Self.BOLETA_MESA_FK">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="BOLETA" EntitySet="BOLETA" />
+          </AssociationSet>
+          <AssociationSet Name="PERSONA_CARGO_FK" Association="Self.PERSONA_CARGO_FK">
+            <End Role="CARGO" EntitySet="CARGO" />
+            <End Role="PERSONA" EntitySet="PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="COMUNA_REGION_FK" Association="Self.COMUNA_REGION_FK">
+            <End Role="REGION" EntitySet="REGION" />
+            <End Role="COMUNA" EntitySet="COMUNA" />
+          </AssociationSet>
+          <AssociationSet Name="PERSONA_COMUNA_FK" Association="Self.PERSONA_COMUNA_FK">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="PERSONA" EntitySet="PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="CONSUMIBLE_TIPO_CONSUMIBLE_FK" Association="Self.CONSUMIBLE_TIPO_CONSUMIBLE_FK">
+            <End Role="TIPO_CONSUMIBLE" EntitySet="TIPO_CONSUMIBLE" />
+            <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
+          </AssociationSet>
+          <AssociationSet Name="PEDIDO_CONSUMIBLE_FK" Association="Self.PEDIDO_CONSUMIBLE_FK">
+            <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="PEDIDO_ESTADOPEDIDO_FK" Association="Self.PEDIDO_ESTADOPEDIDO_FK">
+            <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="PEDIDO_MENU_FK" Association="Self.PEDIDO_MENU_FK">
+            <End Role="MENU" EntitySet="MENU" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="RESERVA_MESA_FK" Association="Self.RESERVA_MESA_FK">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="RESERVA" EntitySet="RESERVA" />
+          </AssociationSet>
+          <AssociationSet Name="TABLE_4_MESA_FK" Association="Self.TABLE_4_MESA_FK">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
+          <AssociationSet Name="RESERVA_PERSONA_FK" Association="Self.RESERVA_PERSONA_FK">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="RESERVA" EntitySet="RESERVA" />
+          </AssociationSet>
+          <AssociationSet Name="USUARIO_PERSONA_FK" Association="Self.USUARIO_PERSONA_FK">
+            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="DETA_MENU_CONSUMIBLE" Association="Self.DETA_MENU_CONSUMIBLE">
+            <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
+            <End Role="MENU" EntitySet="MENU" />
+          </AssociationSet>
+          <FunctionImport Name="SP_CREATE_BOLETA">
+            <Parameter Name="V_TOTALB" Mode="In" Type="Decimal" />
+            <Parameter Name="V_FECHA" Mode="In" Type="DateTime" />
+            <Parameter Name="V_ID_MESA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_CONSUMIBLE">
+            <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
+            <Parameter Name="V_PRECIO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_STOCK" Mode="In" Type="Decimal" />
+            <Parameter Name="V_ID_TIPOCONSUMIBLE" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_MENU">
+            <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_MESA">
+            <Parameter Name="V_UBICACIONM" Mode="In" Type="String" />
+            <Parameter Name="V_MAX_CON" Mode="In" Type="Decimal" />
+            <Parameter Name="V_USADO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_PERSONA">
+            <Parameter Name="V_RUT" Mode="In" Type="String" />
+            <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="V_PATERNO" Mode="In" Type="String" />
+            <Parameter Name="V_MATERNO" Mode="In" Type="String" />
+            <Parameter Name="V_TELEFONO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_CORREO" Mode="In" Type="String" />
+            <Parameter Name="V_ACTIVO" Mode="In" Type="String" />
+            <Parameter Name="V_CARGO_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_COMUNA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_RESERVA">
+            <Parameter Name="V_FECHA" Mode="In" Type="DateTime" />
+            <Parameter Name="V_MESA_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_PERSONA_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_USUARIO">
+            <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="V_CONTRASENIA" Mode="In" Type="String" />
+            <Parameter Name="V_PERSONA_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_CONSUMIBLE">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_MESA">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_PERSONA">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_RESERVA">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_USUARIO">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_CONSUMIBLE">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
+            <Parameter Name="V_STOCK" Mode="In" Type="Decimal" />
+            <Parameter Name="V_ID_CATEGORIA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_PRECIO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_MESA">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_UBICACIONM" Mode="In" Type="String" />
+            <Parameter Name="V_MAX_CON" Mode="In" Type="Decimal" />
+            <Parameter Name="V_USADO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_PERSONA">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_RUT" Mode="In" Type="String" />
+            <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="V_PATERNO" Mode="In" Type="String" />
+            <Parameter Name="V_MATERNO" Mode="In" Type="String" />
+            <Parameter Name="V_TELEFONO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_CORREO" Mode="In" Type="String" />
+            <Parameter Name="V_ACTIVO" Mode="In" Type="String" />
+            <Parameter Name="V_CARGO_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_COMUNA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_RESERVA">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_FECHA" Mode="In" Type="DateTime" />
+            <Parameter Name="V_MESA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_PERSONA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_USUARIO">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_USUARIO" Mode="In" Type="String" />
+            <Parameter Name="V_PASS" Mode="In" Type="String" />
+            <Parameter Name="V_PERSONA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="RestauranteEntities">
+          <EntitySetMapping Name="BOLETA">
+            <EntityTypeMapping TypeName="Model.BOLETA">
+              <MappingFragment StoreEntitySet="BOLETA">
+                <ScalarProperty Name="ID_BOLETA" ColumnName="ID_BOLETA" />
+                <ScalarProperty Name="TOTAL_BOLETA" ColumnName="TOTAL_BOLETA" />
+                <ScalarProperty Name="FECHA_BOLETA" ColumnName="FECHA_BOLETA" />
+                <ScalarProperty Name="ID_MESA_BOLETA" ColumnName="ID_MESA_BOLETA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARGO">
+            <EntityTypeMapping TypeName="Model.CARGO">
+              <MappingFragment StoreEntitySet="CARGO">
+                <ScalarProperty Name="ID_CARGO" ColumnName="ID_CARGO" />
+                <ScalarProperty Name="NOMBRE_CARGO" ColumnName="NOMBRE_CARGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMUNA">
+            <EntityTypeMapping TypeName="Model.COMUNA">
+              <MappingFragment StoreEntitySet="COMUNA">
+                <ScalarProperty Name="ID_COMUNA" ColumnName="ID_COMUNA" />
+                <ScalarProperty Name="NOMBRE_COMUNA" ColumnName="NOMBRE_COMUNA" />
+                <ScalarProperty Name="ID_REGION" ColumnName="ID_REGION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONSUMIBLE">
+            <EntityTypeMapping TypeName="Model.CONSUMIBLE">
+              <MappingFragment StoreEntitySet="CONSUMIBLE">
+                <ScalarProperty Name="ID_CONSUMIBLE" ColumnName="ID_CONSUMIBLE" />
+                <ScalarProperty Name="NOMBRE_CONSUMIBLE" ColumnName="NOMBRE_CONSUMIBLE" />
+                <ScalarProperty Name="DESCRIPCION_CONSUMIBLE" ColumnName="DESCRIPCION_CONSUMIBLE" />
+                <ScalarProperty Name="PRECIO_CONSUMIBLE" ColumnName="PRECIO_CONSUMIBLE" />
+                <ScalarProperty Name="STOCK" ColumnName="STOCK" />
+                <ScalarProperty Name="ID_TIPO_CONSUMIBLE" ColumnName="ID_TIPO_CONSUMIBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADOPEDIDO">
+            <EntityTypeMapping TypeName="Model.ESTADOPEDIDO">
+              <MappingFragment StoreEntitySet="ESTADOPEDIDO">
+                <ScalarProperty Name="ID_ESTADO" ColumnName="ID_ESTADO" />
+                <ScalarProperty Name="NOMBRE_ESTADO" ColumnName="NOMBRE_ESTADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENU">
+            <EntityTypeMapping TypeName="Model.MENU">
+              <MappingFragment StoreEntitySet="MENU">
+                <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
+                <ScalarProperty Name="DESCRIPCION_MENU" ColumnName="DESCRIPCION_MENU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MESA">
+            <EntityTypeMapping TypeName="Model.MESA">
+              <MappingFragment StoreEntitySet="MESA">
+                <ScalarProperty Name="ID_MESA" ColumnName="ID_MESA" />
+                <ScalarProperty Name="UBICACION_MESA" ColumnName="UBICACION_MESA" />
+                <ScalarProperty Name="MAX_COMENSALES_MESA" ColumnName="MAX_COMENSALES_MESA" />
+                <ScalarProperty Name="USADO_MESA" ColumnName="USADO_MESA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PEDIDO">
+            <EntityTypeMapping TypeName="Model.PEDIDO">
+              <MappingFragment StoreEntitySet="PEDIDO">
+                <ScalarProperty Name="ID_PEDIDO" ColumnName="ID_PEDIDO" />
+                <ScalarProperty Name="ID_MESA" ColumnName="ID_MESA" />
+                <ScalarProperty Name="ID_CONSUMIBLE_PEDIDO" ColumnName="ID_CONSUMIBLE_PEDIDO" />
+                <ScalarProperty Name="ID_ESTADO" ColumnName="ID_ESTADO" />
+                <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONA">
+            <EntityTypeMapping TypeName="Model.PERSONA">
+              <MappingFragment StoreEntitySet="PERSONA">
+                <ScalarProperty Name="ID_PERSONA" ColumnName="ID_PERSONA" />
+                <ScalarProperty Name="RUT_PERSONA" ColumnName="RUT_PERSONA" />
+                <ScalarProperty Name="NOMBRE_PERSONA" ColumnName="NOMBRE_PERSONA" />
+                <ScalarProperty Name="APATERNO_PERSONA" ColumnName="APATERNO_PERSONA" />
+                <ScalarProperty Name="AMATERNO_PERSONA" ColumnName="AMATERNO_PERSONA" />
+                <ScalarProperty Name="TELEFONO_PERSONA" ColumnName="TELEFONO_PERSONA" />
+                <ScalarProperty Name="CORREO_PERSONA" ColumnName="CORREO_PERSONA" />
+                <ScalarProperty Name="ACTIVO_PERSONA" ColumnName="ACTIVO_PERSONA" />
+                <ScalarProperty Name="ID_CARGO_PERSONA" ColumnName="ID_CARGO_PERSONA" />
+                <ScalarProperty Name="ID_COMUNA_PERSONA" ColumnName="ID_COMUNA_PERSONA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGION">
+            <EntityTypeMapping TypeName="Model.REGION">
+              <MappingFragment StoreEntitySet="REGION">
+                <ScalarProperty Name="ID_REGION" ColumnName="ID_REGION" />
+                <ScalarProperty Name="NOMBRE_REGION" ColumnName="NOMBRE_REGION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESERVA">
+            <EntityTypeMapping TypeName="Model.RESERVA">
+              <MappingFragment StoreEntitySet="RESERVA">
+                <ScalarProperty Name="ID_RESERVA" ColumnName="ID_RESERVA" />
+                <ScalarProperty Name="FECHA_RESERVA" ColumnName="FECHA_RESERVA" />
+                <ScalarProperty Name="ID_MESA_RESERVA" ColumnName="ID_MESA_RESERVA" />
+                <ScalarProperty Name="ID_PERSONA" ColumnName="ID_PERSONA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_CONSUMIBLE">
+            <EntityTypeMapping TypeName="Model.TIPO_CONSUMIBLE">
+              <MappingFragment StoreEntitySet="TIPO_CONSUMIBLE">
+                <ScalarProperty Name="ID_TIPO_CONSUMIBLE" ColumnName="ID_TIPO_CONSUMIBLE" />
+                <ScalarProperty Name="NOMBRE_TIPO_CONSUMIBLE" ColumnName="NOMBRE_TIPO_CONSUMIBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="Model.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
+                <ScalarProperty Name="CONTRASENIA_USUARIO" ColumnName="CONTRASENIA_USUARIO" />
+                <ScalarProperty Name="ID_PERSONA" ColumnName="ID_PERSONA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DETA_MENU_CONSUMIBLE" TypeName="Model.DETA_MENU_CONSUMIBLE" StoreEntitySet="DETA_MENU_CONSUMIBLE">
+            <EndProperty Name="CONSUMIBLE">
+              <ScalarProperty Name="ID_CONSUMIBLE" ColumnName="ID_CONSUMIBLE" />
+            </EndProperty>
+            <EndProperty Name="MENU">
+              <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="SP_CREATE_BOLETA" FunctionName="Model.Store.SP_CREATE_BOLETA" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_CONSUMIBLE" FunctionName="Model.Store.SP_CREATE_CONSUMIBLE" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_MENU" FunctionName="Model.Store.SP_CREATE_MENU" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_MESA" FunctionName="Model.Store.SP_CREATE_MESA" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_PERSONA" FunctionName="Model.Store.SP_CREATE_PERSONA" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_RESERVA" FunctionName="Model.Store.SP_CREATE_RESERVA" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_USUARIO" FunctionName="Model.Store.SP_CREATE_USUARIO" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_CONSUMIBLE" FunctionName="Model.Store.SP_DELETE_CONSUMIBLE" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_MESA" FunctionName="Model.Store.SP_DELETE_MESA" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_PERSONA" FunctionName="Model.Store.SP_DELETE_PERSONA" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_RESERVA" FunctionName="Model.Store.SP_DELETE_RESERVA" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_USUARIO" FunctionName="Model.Store.SP_DELETE_USUARIO" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_CONSUMIBLE" FunctionName="Model.Store.SP_UPDATE_CONSUMIBLE" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_MESA" FunctionName="Model.Store.SP_UPDATE_MESA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_PERSONA" FunctionName="Model.Store.SP_UPDATE_PERSONA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_RESERVA" FunctionName="Model.Store.SP_UPDATE_RESERVA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_USUARIO" FunctionName="Model.Store.SP_UPDATE_USUARIO" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

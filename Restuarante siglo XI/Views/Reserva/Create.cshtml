@@ -1,0 +1,21 @@
+﻿@model Restaurante_siglo_XI.Reserva
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Crear Reserva</h2>
+
+@using (Html.BeginForm()) { 
+
+    @Html.TextBoxFor(r => r.fecha_reserva, new {type = "DATE" })
+    <br />
+    @Html.TextBoxFor(r => r.id_mesa_reserva, new {disabled = "disabled "})
+    <br />
+
+    <button>CREAR RESERVA</button>
+
+ }
+
+
+
+

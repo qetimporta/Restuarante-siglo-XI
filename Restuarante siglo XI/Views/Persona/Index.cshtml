@@ -1,0 +1,50 @@
+﻿@using Restaurante_siglo_XI
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de clientes registrados</h2>
+@{ List<Persona> personas = (List<Persona>)ViewBag.personas;}
+
+<button>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table-responsive">
+            <tr>
+                <th>run de persona</th>
+                <th>nombre</th>
+                <th>apellido paterno</th>
+                <th>apellido materno</th>
+                <th>telefono</th>
+                <th>correo electronico</th>
+                <th>cuenta activa</th>
+                <th>comuna</th>
+                <th>cargo</th>
+                <th>opciones</th>
+            </tr>
+            @foreach (var persona in personas)
+            {
+                <tr>
+                    <td>@persona.rutpersona</td>
+                    <td>@persona.Nombre_persona</td>
+                    <td>@persona.APaterno_persona</td>
+                    <td>@persona.AMaterno_persona</td>
+                    <td>@persona.Telefono</td>
+                    <td>@persona.Correo_persona</td>
+                    <td style="text-align:center">@persona.activo</td>
+                    <td>@persona.Comuna.nombre_comuna</td>
+                    <td>@persona.Cargo.nombre_cargo</td>
+                    <td>
+                        @Html.ActionLink("Modificar", "Edit", new { id = persona.id_persona })
+                        @Html.ActionLink("Eliminar", "Delete", new { id = persona.id_persona })
+                    </td>
+
+                </tr>
+            }
+        </table>
+
+    </div>
+</div>
+
+@TempData["mensaje"]

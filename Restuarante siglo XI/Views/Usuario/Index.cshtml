@@ -1,0 +1,12 @@
+﻿@model Restaurante_siglo_XI.Usuario
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Crea tu cuenta</h2>
+
+@Html.TextBoxFor(p => p.Nombre_usuario, new { placeholder = "nombre de usuario", required = "required" })
+<br />
+@Html.PasswordFor(p => p.Password, new {placeholder = "Contraseña", required = "required" })
+
+<button>Crear</button>

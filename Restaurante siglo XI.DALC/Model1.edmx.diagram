@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="90f1495637544663b2537b71db8d33b6" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.BOLETA" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CARGO" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.COMUNA" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CONSUMIBLE" Width="1.5" PointX="8.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ESTADOPEDIDO" Width="1.5" PointX="8.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MENU" Width="1.5" PointX="8.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MESA" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PEDIDO" Width="1.5" PointX="10.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PERSONA" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.REGION" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RESERVA" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TIPO_CONSUMIBLE" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.USUARIO" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.BOLETA_MESA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PERSONA_CARGO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.COMUNA_REGION_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PERSONA_COMUNA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.CONSUMIBLE_TIPO_CONSUMIBLE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PEDIDO_CONSUMIBLE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PEDIDO_ESTADOPEDIDO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.PEDIDO_MENU_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.RESERVA_MESA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.TABLE_4_MESA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.RESERVA_PERSONA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.USUARIO_PERSONA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.DETA_MENU_CONSUMIBLE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

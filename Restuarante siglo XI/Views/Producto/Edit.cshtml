@@ -1,0 +1,22 @@
+﻿@model Restaurante_siglo_XI.Producto
+@{
+    ViewBag.Title = "Editando producto";
+}
+<button>@Html.ActionLink("Volver a la pagina principal del administrador", "homeAdmin", "Persona")</button>
+<button>@Html.ActionLink("Volver a la lista de productos", "Index", "Producto")</button>
+<h2>Editar Producto</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(pr => pr.id_producto)
+    @Html.TextBoxFor(prod => prod.nombre_producto, new { placeholder = "nombre del producto", required = "required" });
+    <br />
+    @Html.TextBoxFor(prod => prod.decripcion_producto, new { placeholder = "Descripcion del producto opcional" });
+    <br />
+    @Html.TextBoxFor(prod => prod.Stock, new { type = "number", placeholder = "cantidad producto", required = "required" });
+    <br />
+    @Html.TextBoxFor(prod => prod.precioProducto, new { type = "number", placeholder = "Precio", required = "required" });
+    <br />
+    @Html.DropDownListFor(prod => prod.id_categoria, new SelectList(ViewBag.categoria, "id_categoria", "nombre_categoria"))
+    <br />
+    <button>Modificar producto</button>
+}

@@ -1,0 +1,27 @@
+﻿@model Restaurante_siglo_XI.Persona
+
+
+@{ViewBag.Title = "Registro de clientes";}
+
+<h2>Registro de clientes</h2>
+
+@using (Html.BeginForm())
+{
+    
+    @Html.TextBoxFor(p => p.rutpersona, new { placeholder = "Rut:XXXXXXXX-X", required = "required" })
+    <br />
+    @Html.TextBoxFor(p => p.Nombre_persona, new { placeholder = "nombre", required = "required" })
+    <br />
+    @Html.TextBoxFor(p => p.APaterno_persona, new { placeholder = "Apellido Paterno", required = "required" })
+    <br />
+    @Html.TextBoxFor(p => p.AMaterno_persona, new { placeholder = "Apellido Materno" })
+    <br />
+    @Html.TextBoxFor(p => p.Telefono, new {type= "number", placeholder = "Telefono contacto" })
+    <br />
+    @Html.TextBoxFor(p => p.Correo_persona, new { Type = "email", placeholder = "Correo Electronico", required = "required" })
+    <br />
+    @Html.DropDownListFor(p => p.comuna_id, new SelectList(ViewBag.comunas,"id_comuna", "NOMBRE_COMUNA"))
+    <br />
+    <button>Siguiente</button>
+}
+

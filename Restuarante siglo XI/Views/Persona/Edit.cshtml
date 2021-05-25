@@ -1,0 +1,29 @@
+﻿@model Restaurante_siglo_XI.Persona
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edita el cliente</h2>
+
+<button>@Html.ActionLink("Volver a la pagina principal del administrador", "homeAdmin", "Persona")</button>
+<button>@Html.ActionLink("Volver a la lista de personas", "Index", "Persona")</button>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(p => p.id_persona)
+    @Html.TextBoxFor(p => p.rutpersona, new { placeholder = "Run de la persona", required = "required" })
+    <br />
+    @Html.TextBoxFor(p => p.Nombre_persona, new { placeholder = "nombre", required = "required" })
+    <br />
+    @Html.TextBoxFor(p => p.APaterno_persona, new { placeholder = "Apellido Paterno" })
+    <br />
+    @Html.TextBoxFor(p => p.AMaterno_persona, new { placeholder = "Apellido Materno" })
+    <br />
+    @Html.TextBoxFor(p => p.Telefono, new { placeholder = "Telefono contacto" })
+    <br />
+    @Html.TextBoxFor(p => p.Correo_persona, new { Type = "email", placeholder = "Correo Electronico" })
+    <br />
+    @Html.DropDownListFor(p => p.comuna_id, new SelectList(ViewBag.comunas, "id_comuna", "nombre_comuna"))
+    @Html.DropDownListFor(p => p.cargo_id, new SelectList(ViewBag.cargo, "id", "nombre_cargo"))
+    <br />
+    <button>Modificar</button>
+}

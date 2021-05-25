@@ -1,0 +1,34 @@
+﻿@using Restaurante_siglo_XI
+@{
+    ViewBag.Title = "Lista de las reservas";
+}
+
+<h2>Lista de las reservas total</h2>
+
+
+@{List<Reserva> reservas = (List<Reserva>)ViewBag.reservas;}
+<button>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+
+<div class="row">
+    <div class="col-md-12">
+        <table>
+            <tr>
+                <th>fecha reserva</th>
+                <th>mesa a ocupar</th>
+                <th>persona</th>
+            </tr>
+            @foreach (var r in reservas)
+            {
+        <tr>
+            <td>@r.fecha_reserva</td>
+            <td>@r.mesa.id_mesa</td>
+            <td>@r.persona.rutpersona</td>
+        </tr>
+            }
+
+
+
+        </table>
+    </div>
+
+</div>
