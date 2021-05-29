@@ -1,0 +1,20 @@
+﻿@model Restaurante_siglo_XI.Pedido
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<h2>Editar el Pedido del cliente</h2>
+
+
+<button>@Html.ActionLink("Volver a la pagina principal", "homeAdmin", "Persona")</button>
+<button>@Html.ActionLink("Volver a la lista de productos", "Index", "Pedidos")</button>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.HiddenFor(p => p.id_pedido)
+
+
+    <button>Modificar Pedido</button>
+}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,14 @@ namespace Restaurante_siglo_XI
     public class Producto
     {
         public int id_producto { get; set; }
+        [Required]
         public String nombre_producto{ get; set; }
         public String decripcion_producto { get; set; }
+        [Required]
         public int  Stock{ get; set; }
+        [Required]
         public int precioProducto{ get; set; }
+        [Required]
         public int id_categoria{ get; set; }
         //public int  id_menu{ get; set; }
         public categoria categoria { get; set; }

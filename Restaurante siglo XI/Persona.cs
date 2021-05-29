@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,15 +11,21 @@ namespace Restaurante_siglo_XI
     public class Persona
     {
         public int id_persona { get; set; }
+        [Required]
         public String rutpersona{ get; set; }
+        [Required]
         public String Nombre_persona{ get; set; }
+        [Required]
         public String APaterno_persona{ get; set; }
+        [Required]
         public String AMaterno_persona { get; set; }
+
         public int Telefono { get; set; }
+        [Required]
         public String Correo_persona { get; set; }
         public String activo{ get; set; }
         public int cargo_id  { get; set; }
-
+        [Required]
         public int comuna_id{ get; set; }
         public Cargo Cargo{ get; set; }
         public Comuna Comuna { get; set; }

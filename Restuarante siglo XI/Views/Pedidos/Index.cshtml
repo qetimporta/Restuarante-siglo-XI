@@ -1,0 +1,44 @@
+﻿@using Restaurante_siglo_XI
+@{
+    ViewBag.Title = "Pedidos";
+}
+
+<h2>Lista de pedidos generados</h2>
+
+@{List<Pedido> pedido = (List<Pedido>)ViewBag.pedidos; }
+
+@using (Html.BeginForm())
+{
+
+<div class="row">
+    <div class="col-md-12">
+        <table>
+            <tr>
+                <th>Numero de la mesa</th>
+                <th>Nombre de producto</th>
+                <th>nombre del menu</th>
+                <th>estado actual</th>
+                <th>opciones</th>
+            </tr>
+            @foreach (var p in pedido)
+            {
+        <tr>
+            @if (p.id_estado != 3)
+            {
+                <td>@p.id_menu</td>
+                <td>@p.consumible.nombre_producto</td>
+                <td>@p.menu.nombre_menu</td>
+                <td>@p.estado.nombre_estado</td>
+                <td>modificar
+                    Eliminar
+                </td>
+
+            }
+
+        </tr>
+            }
+            
+        </table>
+    </div>
+</div>
+}

@@ -14,6 +14,8 @@ namespace Restaurante_siglo_XI.DALC
     
     public partial class PEDIDO
     {
+        public int id_estado;
+
         public decimal ID_PEDIDO { get; set; }
         public decimal ID_MESA { get; set; }
         public decimal ID_CONSUMIBLE_PEDIDO { get; set; }

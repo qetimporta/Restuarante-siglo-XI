@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +12,12 @@ namespace Restaurante_siglo_XI
     public class Mesa
     {
         public int id_mesa { get; set; }
+        [Required]
         public String ubicacion_mesa{ get; set; }
+        [Required]
         public int maxima_comensales { get; set; }
+        [Required]
         public String mesaUsada{ get; set; }
-
-
-        //OracleDataAdapter da = new OracleDataAdapter();
-        //OracleCommand cmd;
 
 
         RestauranteEntities db = new RestauranteEntities();
@@ -27,21 +27,8 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-                /*cmd = new OracleCommand("INSERT INTO MESA(UBICACION_MESA, MAX_COMENSALES_MESA,USADO_MESA)"+
-                    "VALUES(:ubicacion_mesa, :max_comensales_mesa, :usado_mesa)");
-                cmd.Parameters.Add("ubicacion_mesa");
-                cmd.Parameters.Add("max_comensales_mesa");
-                cmd.Parameters.Add("usado_mesa");
 
-                da.InsertCommand = cmd;*/
                 db.SP_CREATE_MESA(this.ubicacion_mesa,this.maxima_comensales,"0");
-               /* MESA m = new MESA();
-                m.UBICACION_MESA = ubicacion_mesa;
-                m.MAX_COMENSALES_MESA = maxima_comensales;
-                m.USADO_MESA = mesaUsada;
-
-                db.MESA.Add(m);
-                db.SaveChanges();*/
                 return true;
             }
             catch (Exception)

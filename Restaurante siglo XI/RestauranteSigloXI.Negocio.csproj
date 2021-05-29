@@ -52,8 +52,10 @@
     <Compile Include="Cargo.cs" />
     <Compile Include="categoria.cs" />
     <Compile Include="Comuna.cs" />
+    <Compile Include="Estado.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Mesa.cs" />
+    <Compile Include="Pedido.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
