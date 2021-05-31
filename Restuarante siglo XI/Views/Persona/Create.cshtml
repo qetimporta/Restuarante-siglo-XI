@@ -4,10 +4,10 @@
 @{ViewBag.Title = "Registro de clientes";}
 
 <h2>Registro de clientes</h2>
-
+<button>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
 @using (Html.BeginForm())
 {
-    
+
     @Html.TextBoxFor(p => p.rutpersona, new { placeholder = "Rut:XXXXXXXX-X", required = "required" })
     <br />
     @Html.TextBoxFor(p => p.Nombre_persona, new { placeholder = "nombre", required = "required" })
@@ -16,12 +16,13 @@
     <br />
     @Html.TextBoxFor(p => p.AMaterno_persona, new { placeholder = "Apellido Materno" })
     <br />
-    @Html.TextBoxFor(p => p.Telefono, new {type= "number", placeholder = "Telefono contacto" })
+    @Html.TextBoxFor(p => p.Telefono, new { type = "number", placeholder = "Telefono contacto" })
     <br />
     @Html.TextBoxFor(p => p.Correo_persona, new { Type = "email", placeholder = "Correo Electronico", required = "required" })
     <br />
-    @Html.DropDownListFor(p => p.comuna_id, new SelectList(ViewBag.comunas,"id_comuna", "NOMBRE_COMUNA"))
+    @Html.DropDownListFor(p => p.cargo_id, new SelectList(ViewBag.cargo, "id", "nombre_cargo"))
+    @Html.DropDownListFor(p => p.comuna_id, new SelectList(ViewBag.comunas, "id_comuna", "NOMBRE_COMUNA"))
     <br />
-    <button>Siguiente</button>
+    <button>Crear</button>
 }
 

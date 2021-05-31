@@ -140,6 +140,7 @@
     <Content Include="Views\Mesa\ListaAdmin.cshtml" />
     <Content Include="Views\Pedidos\Index.cshtml" />
     <Content Include="Views\Pedidos\Edit.cshtml" />
+    <None Include="Properties\PublishProfiles\IISProfile1.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

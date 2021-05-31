@@ -16,7 +16,6 @@ namespace Restaurante_siglo_XI
         public String ubicacion_mesa{ get; set; }
         [Required]
         public int maxima_comensales { get; set; }
-        [Required]
         public String mesaUsada{ get; set; }
 
 

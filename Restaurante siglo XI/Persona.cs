@@ -17,13 +17,13 @@ namespace Restaurante_siglo_XI
         public String Nombre_persona{ get; set; }
         [Required]
         public String APaterno_persona{ get; set; }
-        [Required]
         public String AMaterno_persona { get; set; }
 
         public int Telefono { get; set; }
         [Required]
         public String Correo_persona { get; set; }
         public String activo{ get; set; }
+        [Required]
         public int cargo_id  { get; set; }
         [Required]
         public int comuna_id{ get; set; }
@@ -74,6 +74,23 @@ namespace Restaurante_siglo_XI
             {
 
                return false;
+            }
+        }
+
+        public bool GuardarClienteADmin()
+        {
+
+
+            try
+            {
+                //               db.SP_CREATE_PERSONA(this.rutpersona,this.Nombre_persona,this.APaterno_persona,this.AMaterno_persona,this.Telefono,this.Correo_persona,"1",2,this.comuna_id);
+                db.SP_CREATE_PERSONA(this.rutpersona, this.Nombre_persona, this.APaterno_persona, this.AMaterno_persona, this.Telefono, this.Correo_persona, "1",this.cargo_id, this.comuna_id);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
             }
         }
 

@@ -7,10 +7,11 @@ using Restaurante_siglo_XI;
 
 namespace Restuarante_siglo_XI.Controllers
 {
+    [Authorize]
     public class PersonaController : Controller
     {
         // GET: Persona
-        [Authorize]
+        
         public ActionResult Index()
         {
             ViewBag.personas = new Persona().ReadAll();
@@ -26,6 +27,7 @@ namespace Restuarante_siglo_XI.Controllers
         // GET: Persona/Create
         public ActionResult Create()
         {
+            EnviarCargos(); 
             EnviarComunas();
             return View();
         }
@@ -63,16 +65,17 @@ namespace Restuarante_siglo_XI.Controllers
                     return View(persona);
                 }
 
-                if (persona.GuardarCliente() == true)
+                if (persona.GuardarClienteADmin() == true)
                 {
-                    return RedirectToAction("Create", "Usuario", new { id = persona.rutpersona});
+                    return RedirectToAction("homeAdmin");
                 }
-                
+                EnviarCargos();
                 EnviarComunas();
                 return View();
             }
             catch
             {
+                EnviarCargos();
                 EnviarComunas();
                 return View(persona);
             }
