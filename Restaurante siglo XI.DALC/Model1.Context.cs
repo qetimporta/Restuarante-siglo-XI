@@ -280,6 +280,19 @@ namespace Restaurante_siglo_XI.DALC
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_MESA", v_IDParameter, v_UBICACIONMParameter, v_MAX_CONParameter, v_USADOParameter);
         }
     
+        public virtual int SP_UPDATE_PEDIDO(Nullable<decimal> v_ID, Nullable<decimal> v_ID_ESTADO)
+        {
+            var v_IDParameter = v_ID.HasValue ?
+                new ObjectParameter("V_ID", v_ID) :
+                new ObjectParameter("V_ID", typeof(decimal));
+    
+            var v_ID_ESTADOParameter = v_ID_ESTADO.HasValue ?
+                new ObjectParameter("V_ID_ESTADO", v_ID_ESTADO) :
+                new ObjectParameter("V_ID_ESTADO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_PEDIDO", v_IDParameter, v_ID_ESTADOParameter);
+        }
+    
         public virtual int SP_UPDATE_PERSONA(Nullable<decimal> v_ID, string v_RUT, string v_NOMBRE, string v_PATERNO, string v_MATERNO, Nullable<decimal> v_TELEFONO, string v_CORREO, string v_ACTIVO, Nullable<decimal> v_CARGO_ID, Nullable<decimal> v_COMUNA)
         {
             var v_IDParameter = v_ID.HasValue ?

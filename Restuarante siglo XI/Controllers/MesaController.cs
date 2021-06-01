@@ -73,14 +73,14 @@ namespace Restuarante_siglo_XI.Controllers
 
         // POST: Mesa/Edit/5
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "ubicacion_mesa, maxima_comensales")]Mesa mesa)
+        public ActionResult Edit(Mesa mesa)
         {
             try
             {
                 // TODO: Add update logic here
                 mesa.ModificarMesa();
                 TempData["mensaje"] = "modificado correctamente";
-                return RedirectToAction("Index");
+                return RedirectToAction("ListaAdmin");
             }
             catch
             {
@@ -100,7 +100,7 @@ namespace Restuarante_siglo_XI.Controllers
             if (new Mesa().EliminarMesa(id))
             {
                 TempData["mensaje"] = "elimiando correctamente";
-                return RedirectToAction("Index");
+                return RedirectToAction("ListaAdmin");
             }
             TempData["mensaje"] = "no se ha podido eliminar";
             return View();

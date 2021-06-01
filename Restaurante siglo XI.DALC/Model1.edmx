@@ -325,7 +325,7 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
           <Parameter Name="V_MATERNO" Type="varchar2" Mode="In" />
           <Parameter Name="V_TELEFONO" Type="number" Mode="In" />
           <Parameter Name="V_CORREO" Type="varchar2" Mode="In" />
-          <Parameter Name="V_ACTIVO" Type="char" Mode="In" />
+          <Parameter Name="V_ACTIVO" Type="varchar2" Mode="In" />
           <Parameter Name="V_CARGO_ID" Type="number" Mode="In" />
           <Parameter Name="V_COMUNA" Type="number" Mode="In" />
         </Function>
@@ -367,6 +367,10 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
           <Parameter Name="V_UBICACIONM" Type="varchar2" Mode="In" />
           <Parameter Name="V_MAX_CON" Type="number" Mode="In" />
           <Parameter Name="V_USADO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+          <Parameter Name="V_ID_ESTADO" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_UPDATE_PERSONA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
@@ -899,6 +903,10 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <Parameter Name="V_MAX_CON" Mode="In" Type="Decimal" />
             <Parameter Name="V_USADO" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_PEDIDO">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_ID_ESTADO" Mode="In" Type="Decimal" />
+          </FunctionImport>
           <FunctionImport Name="SP_UPDATE_PERSONA">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
             <Parameter Name="V_RUT" Mode="In" Type="String" />
@@ -1080,6 +1088,7 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
           <FunctionImportMapping FunctionImportName="SP_DELETE_USUARIO" FunctionName="Model.Store.SP_DELETE_USUARIO" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_CONSUMIBLE" FunctionName="Model.Store.SP_UPDATE_CONSUMIBLE" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_MESA" FunctionName="Model.Store.SP_UPDATE_MESA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_PEDIDO" FunctionName="Model.Store.SP_UPDATE_PEDIDO" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_PERSONA" FunctionName="Model.Store.SP_UPDATE_PERSONA" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_RESERVA" FunctionName="Model.Store.SP_UPDATE_RESERVA" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_USUARIO" FunctionName="Model.Store.SP_UPDATE_USUARIO" />

@@ -15,6 +15,7 @@
                 <th>ubicacion de la mesa</th>
                 <th>cantidad de comensales en mesa</th>
                 <th>Mesa usada(1 o 0)</th>
+                <th>opciones</th>
             </tr>
             @foreach (var m in mesas)
             {
@@ -24,7 +25,10 @@
             <td>@m.ubicacion_mesa</td>
             <td>@m.maxima_comensales</td>
             <td>@m.mesaUsada</td>
-
+            <td>
+                @Html.ActionLink("Modificar", "Edit", new { id = m.id_mesa})
+                @Html.ActionLink("Eliminar", "Delete", new { id = m.id_mesa })
+            </td>
 
         </tr>
             }

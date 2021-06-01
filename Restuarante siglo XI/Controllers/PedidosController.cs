@@ -65,10 +65,11 @@ namespace Restuarante_siglo_XI.Controllers
 
         // POST: Pedidos/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Pedido pedido)
         {
             try
             {
+                pedido.ModificarPedido();
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");

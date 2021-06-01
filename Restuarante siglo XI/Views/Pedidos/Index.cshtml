@@ -29,8 +29,8 @@
                 <td>@p.consumible.nombre_producto</td>
                 <td>@p.menu.nombre_menu</td>
                 <td>@p.estado.nombre_estado</td>
-                <td>modificar
-                    Eliminar
+                <td>
+                    @Html.ActionLink("Modificar", "Edit", new { id = p.id_pedido })
                 </td>
 
             }

@@ -11,10 +11,9 @@
 <button>@Html.ActionLink("Volver a la lista de productos", "Index", "Pedidos")</button>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.HiddenFor(p => p.id_pedido)
-
-
+    @Html.DropDownListFor(p => p.id_estado, new SelectList(ViewBag.estados, "id_estado", "nombre_estado"))
     <button>Modificar Pedido</button>
 }

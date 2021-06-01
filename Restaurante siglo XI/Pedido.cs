@@ -11,13 +11,10 @@ namespace Restaurante_siglo_XI
     public class Pedido
     {
         public int id_pedido { get; set; }
-        [Required]
         public int id_mesa { get; set; }
-        [Required]
         public int id_consumible { get; set; }
         [Required]
         public int id_estado { get; set; }
-        [Required]
         public int id_menu { get; set; }
 
         public Mesa mesas { get; set; }
@@ -69,7 +66,7 @@ namespace Restaurante_siglo_XI
             
             try
             {
-                db.SaveChanges();
+                db.SP_UPDATE_PEDIDO(this.id_pedido,this.id_estado);
                 return true;
             }
             catch (Exception)
