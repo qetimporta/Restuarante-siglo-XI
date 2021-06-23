@@ -16,14 +16,15 @@ namespace Restaurante_siglo_XI.DALC
     {
         public MENU()
         {
+            this.DETA_MENU_CONSU = new HashSet<DETA_MENU_CONSU>();
             this.PEDIDO = new HashSet<PEDIDO>();
-            this.CONSUMIBLE = new HashSet<CONSUMIBLE>();
         }
     
         public decimal ID_MENU { get; set; }
+        public string NOMBRE_MENU { get; set; }
         public string DESCRIPCION_MENU { get; set; }
     
+        public virtual ICollection<DETA_MENU_CONSU> DETA_MENU_CONSU { get; set; }
         public virtual ICollection<PEDIDO> PEDIDO { get; set; }
-        public virtual ICollection<CONSUMIBLE> CONSUMIBLE { get; set; }
     }
 }

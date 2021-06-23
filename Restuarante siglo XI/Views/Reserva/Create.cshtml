@@ -1,20 +1,27 @@
 ﻿@model Restaurante_siglo_XI.Reserva
+@using Restaurante_siglo_XI
 @{
     ViewBag.Title = "Crear reserva";
 }
 
+@{ Cliente cl = (Cliente)ViewBag.cliente;}
 <h2>Crear Reserva</h2>
+<a href="@Url.Action("homeUser","Persona",new {correo = cl.correoCliente})"> VOLVER</a>
 
-@using (Html.BeginForm()) { 
+@using (Html.BeginForm())
+{
 
-    @Html.TextBoxFor(r => r.fecha_reserva, new {type = "DATE" })
+    @Html.TextBoxFor(r => r.fecha_reserva, new { type = "DATE" })
     <br />
-    @Html.TextBoxFor(r => r.id_mesa_reserva, new {disabled = "disabled "})
+    @Html.Hidden("id_cliente", (int)cl.id_cliente)
+    @Html.Hidden("correo", cl.correoCliente)
     <br />
-
+    <tr>N° de la mesa </tr>
+    @Html.DropDownListFor(p => p.id_mesa_reserva, new SelectList(ViewBag.mesas, "id_mesa", "numeroMesa"))
+    <br />
     <button>CREAR RESERVA</button>
 
- }
+}
 
 
 

@@ -28,10 +28,16 @@ namespace Restuarante_siglo_XI.Controllers
             return View();
         }
 
+
+        public void enviarUbicaciones() 
+        {
+            ViewBag.ubicacion = new ubicacionMesa().leerTodo();
+        }
         // GET: Mesa/Create
         [Authorize]
         public ActionResult Create()
         {
+            enviarUbicaciones();
             return View();
         }
 
@@ -44,16 +50,19 @@ namespace Restuarante_siglo_XI.Controllers
                 // TODO: Add insert logic here
                 if (!ModelState.IsValid)
                 {
+                    enviarUbicaciones();
                     return View(mesa);
                 }
                 if (mesa.GuardarMesa() == true)
                 {
                     return RedirectToAction("ListaAdmin");
                 }
+                enviarUbicaciones();
                 return View(mesa);
             }
             catch
             {
+                enviarUbicaciones();
                 return View(mesa);
             }
         }
@@ -68,6 +77,7 @@ namespace Restuarante_siglo_XI.Controllers
                 TempData["mensaje"] = "mesa no existe";
                 return RedirectToAction("Index");
             }
+            enviarUbicaciones();
             return View(m);
         }
 
@@ -84,6 +94,7 @@ namespace Restuarante_siglo_XI.Controllers
             }
             catch
             {
+                enviarUbicaciones();
                 return View(mesa);
             }
         }

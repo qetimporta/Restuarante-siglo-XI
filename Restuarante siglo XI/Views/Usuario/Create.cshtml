@@ -1,13 +1,24 @@
-﻿@model Restaurante_siglo_XI.Usuario
+﻿@model Restaurante_siglo_XI.Cliente
 @{
-    ViewBag.Title = "crear usuario";
+    ViewBag.Title = "CREA TU CUENTA";
 }
 
-<h2>Crea tu cuenta</h2>
-@Html.BeginForm()
+<h2>Crea tu cuenta con nosotros</h2>
+@using (Html.BeginForm())
 {
-@Html.TextBoxFor(p => p.Nombre_usuario, new { placeholder = "nombre de usuario", required = "required" })
+@Html.TextBoxFor(p => p.rutcliente, new { placeholder = "Ingresa tu rut: XXXXXXXX-X", required = "required" })
+<br />
+@Html.TextBoxFor(p => p.nombre_cliente, new { placeholder = "ingresa tu nombre", required = "required" })
+<br />
+@Html.TextBoxFor(p => p.apellidoP, new { placeholder = "ingresa tu apellido paterno", required = "required" })
+<br />
+@Html.TextBoxFor(p => p.apellidoM, new { placeholder = "ingresa tu apellido materno", required = "required" })
+<br />
+@Html.TextBoxFor(p => p.correoCliente, new { Type = "email", placeholder = "Correo Electronico", required = "required" })
 <br />
 @Html.PasswordFor(p => p.Password, new { placeholder = "Contraseña", required = "required" })
-<button>Crear</button>
+<br />
+@Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "id_comuna", "NOMBRE_COMUNA"))
+<br />
+<button>Crear cuenta</button>
  }

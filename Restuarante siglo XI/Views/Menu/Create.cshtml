@@ -1,0 +1,15 @@
+﻿@model Restaurante_siglo_XI.Menu
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Crear nuevo menu</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.TextBoxFor(m=> m.nombre_menu, new { placeholder = "nombre del menu"})
+    <br />
+    @Html.TextAreaFor(m=> m.descripcion_menu, new { placeholder = "nombre del menu"})
+    <br />
+    <button>Crear Menu</button>
+}

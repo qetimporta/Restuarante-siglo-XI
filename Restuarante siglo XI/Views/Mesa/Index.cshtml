@@ -8,7 +8,3 @@
 @{List<Mesa> mesas = (List<Mesa>)ViewBag.mesas;}
 
 
-@foreach (var m in mesas)
-{
-<button>@Html.ActionLink("Mesa: n°" + m.id_mesa, "Index", "Reserva", new { mesa_id = m.id_mesa })</button>
-}

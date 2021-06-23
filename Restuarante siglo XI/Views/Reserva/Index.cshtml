@@ -3,7 +3,7 @@
     ViewBag.Title = "Lista de las reservas";
 }
 
-<h2>Lista de las reservas total</h2>
+<h2>Lista de todas las reservas</h2>
 
 
 @{List<Reserva> reservas = (List<Reserva>)ViewBag.reservas;}
@@ -15,20 +15,16 @@
             <tr>
                 <th>fecha reserva</th>
                 <th>mesa a ocupar</th>
-                <th>persona</th>
+                <th>Cliente</th>
             </tr>
             @foreach (var r in reservas)
-            {
-        <tr>
-            <td>@r.fecha_reserva</td>
-            <td>@r.mesa.id_mesa</td>
-            <td>@r.persona.rutpersona</td>
-        </tr>
-            }
-
-
-
+             {
+                <tr>
+                    <td>@r.fecha_reserva</td>
+                    <td>@r.mesa.numeroMesa</td>
+                    <td>@r.cliente.nombre_cliente @r.cliente.apellidoP @r.cliente.apellidoM</td>
+                </tr>
+             }
         </table>
     </div>
-
 </div>

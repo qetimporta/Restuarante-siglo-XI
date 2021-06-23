@@ -7,74 +7,57 @@ using Restaurante_siglo_XI;
 
 namespace Restuarante_siglo_XI.Controllers
 {
-    public class ReservaController : Controller
+    [Authorize]
+    public class MenuController : Controller
     {
-        // GET: Reserva
-        [Authorize]
+        // GET: Menu
         public ActionResult Index()
         {
-            ViewBag.reservas = new Reserva().listarReservas();
-
             return View();
         }
 
-        // GET: Reserva/Details/5
+        // GET: Menu/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-
-        public ActionResult reCliente(int id) 
+        // GET: Menu/Create
+        public ActionResult Create()
         {
-
-
-            //se almacena en una lista los datos que se manda a buscar por el id cliente
-            ViewBag.listaReserva = new Reserva().buscarReservaCLiente(id);
             return View();
         }
 
-
-        // GET: Reserva/Create
-        public ActionResult Create(int id)
-        {
-            Cliente c = new Cliente();
-            ViewBag.cliente=c.buscarCliente(id);
-            
-            enviarMesas();
-            return View();
-        }
-        private void enviarMesas()
-        {
-            ViewBag.mesas = new Mesa().ListarMesa();
-        }
-        // POST: Reserva/Create
+        // POST: Menu/Create
         [HttpPost]
-        public ActionResult Create(Reserva reserva, string correo)
+        public ActionResult Create(Menu menu)
         {
             try
             {
                 // TODO: Add insert logic here
-                if (reserva.GuardarReserva() == true)
+                if (!ModelState.IsValid)
                 {
-                    // retorna a la pagina del usuario el correo para que pueda buscarlo
-                    return RedirectToAction("homeUser","Persona", new { correo = correo });
+                    return View(menu);
                 }
-                return View(reserva);
+                if (menu.guardarMenu() == true)
+                {
+                    return RedirectToAction("homeAdmin","Persona");
+                }
+                return View();
             }
             catch
             {
-                return View(reserva);
+                return View();
             }
         }
 
-        // GET: Reserva/Edit/5
+        // GET: Menu/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Reserva/Edit/5
+        // POST: Menu/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -90,13 +73,13 @@ namespace Restuarante_siglo_XI.Controllers
             }
         }
 
-        // GET: Reserva/Delete/5
+        // GET: Menu/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Reserva/Delete/5
+        // POST: Menu/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

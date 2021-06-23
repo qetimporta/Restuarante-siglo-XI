@@ -1,0 +1,29 @@
+﻿@using Restaurante_siglo_XI
+@{
+    ViewBag.Title = "reCliente";
+}
+
+<h2>tus reservas</h2>
+
+@{ List<Reserva> re = (List<Reserva>)ViewBag.ListaReserva;}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table>
+            <tr>
+                <th>fecha reserva</th>
+                <th>mesa a ocupar</th>
+            </tr>
+
+            @foreach (var r in re)
+            {
+                <tr>
+                    <td>@r.fecha_reserva</td>
+                    <td>@r.mesa.numeroMesa</td>
+                </tr>
+            }
+            </table>
+    </div>
+</div>

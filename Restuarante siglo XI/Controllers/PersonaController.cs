@@ -14,7 +14,7 @@ namespace Restuarante_siglo_XI.Controllers
         
         public ActionResult Index()
         {
-            ViewBag.personas = new Persona().ReadAll();
+            ViewBag.personas = new Personal().ReadAll();
             return View();
         }
 
@@ -27,11 +27,15 @@ namespace Restuarante_siglo_XI.Controllers
         // GET: Persona/Create
         public ActionResult Create()
         {
+            EnviarBodega();
             EnviarCargos(); 
             EnviarComunas();
             return View();
         }
-
+        private void EnviarBodega()
+        {
+            ViewBag.bodega = new Bodega().LeerTodo();
+        }
         private void EnviarCargos()
         {
             ViewBag.cargo = new Cargo().LeerAll();
@@ -41,26 +45,32 @@ namespace Restuarante_siglo_XI.Controllers
             ViewBag.comunas = new Comuna().LeerAll();
         }
         [Authorize]
-        public ActionResult homeAdmin()
+        public ActionResult homeAdmin(string correo)
         {
+            Personal p = new Personal();
+            ViewBag.personal = p.buscarCorreoAdmin(correo);
             return View();
         }
         [Authorize]
-        public ActionResult homeUser()
+        //GET
+        public ActionResult homeUser(String correo)
         {
+            Cliente c = new Cliente();
+           ViewBag.cliente = c.buscarClientecorreo(correo);
             return View();
         }
 
 
         // POST: Persona/Create
         [HttpPost]
-        public ActionResult Create(Persona persona)
+        public ActionResult Create(Personal persona)
         {
             try
             {
                 // TODO: Add insert logic here
                 if (!ModelState.IsValid)
                 {
+                    EnviarBodega();
                     EnviarComunas();
                     return View(persona);
                 }
@@ -69,12 +79,14 @@ namespace Restuarante_siglo_XI.Controllers
                 {
                     return RedirectToAction("homeAdmin");
                 }
+                EnviarBodega();
                 EnviarCargos();
                 EnviarComunas();
                 return View();
             }
             catch
             {
+                EnviarBodega();
                 EnviarCargos();
                 EnviarComunas();
                 return View(persona);
@@ -84,12 +96,13 @@ namespace Restuarante_siglo_XI.Controllers
         // GET: Persona/Edit/5
         public ActionResult Edit(int id)
         {
-            Persona pe = new Persona().buscar(id);
+            Personal pe = new Personal().buscar(id);
             if (pe == null)
             {
                 TempData["mensaje"] = "el cliente no existe";
                 return RedirectToAction("Index");
             }
+            EnviarBodega();
             EnviarCargos();
             EnviarComunas();
             return View(pe);
@@ -97,7 +110,7 @@ namespace Restuarante_siglo_XI.Controllers
 
         // POST: Persona/Edit/5
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "id_persona,rutPersona, nombre_persona, Apaterno_persona, Amaterno_persona, Telefono, Correo_persona, cargo_id,comuna_id")] Persona persona)
+        public ActionResult Edit(Personal persona)
         {
             try
             {
@@ -115,12 +128,12 @@ namespace Restuarante_siglo_XI.Controllers
         // GET: Persona/Delete/5
         public ActionResult Delete(int id)
         {
-            if (new Persona().buscar(id)== null)
+            if (new Personal().buscar(id)== null)
             {
                 TempData["mensaje"] = "no se encontro";
                 return RedirectToAction("Index");
             }
-            if (new Persona().BorrarCliente(id))
+            if (new Personal().BorrarCliente(id))
             {
                 TempData["mensaje"] = "elimiando correctamente";
                 return RedirectToAction("Index");

@@ -12,13 +12,13 @@ namespace Restaurante_siglo_XI.DALC
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO
+    public partial class DETA_MENU_CONSU
     {
-        public decimal ID_USUARIO { get; set; }
-        public string NOMBRE_USUARIO { get; set; }
-        public string CONTRASENIA_USUARIO { get; set; }
-        public decimal ID_PERSONA { get; set; }
+        public decimal ID_MENU_CONSU { get; set; }
+        public decimal ID_MENU { get; set; }
+        public decimal ID_CONSUMIBLE { get; set; }
     
-        public virtual PERSONA PERSONA { get; set; }
+        public virtual CONSUMIBLE CONSUMIBLE { get; set; }
+        public virtual MENU MENU { get; set; }
     }
 }

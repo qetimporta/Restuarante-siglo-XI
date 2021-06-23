@@ -17,17 +17,19 @@ namespace Restaurante_siglo_XI.DALC
         public MESA()
         {
             this.BOLETA = new HashSet<BOLETA>();
-            this.RESERVA = new HashSet<RESERVA>();
             this.PEDIDO = new HashSet<PEDIDO>();
+            this.RESERVA = new HashSet<RESERVA>();
         }
     
         public decimal ID_MESA { get; set; }
-        public string UBICACION_MESA { get; set; }
-        public Nullable<decimal> MAX_COMENSALES_MESA { get; set; }
+        public decimal NUMEROMESA { get; set; }
+        public decimal MAX_COMENSALES_MESA { get; set; }
         public string USADO_MESA { get; set; }
+        public decimal ID_UBICACION { get; set; }
     
         public virtual ICollection<BOLETA> BOLETA { get; set; }
-        public virtual ICollection<RESERVA> RESERVA { get; set; }
+        public virtual UBICACION_MESA UBICACION_MESA { get; set; }
         public virtual ICollection<PEDIDO> PEDIDO { get; set; }
+        public virtual ICollection<RESERVA> RESERVA { get; set; }
     }
 }

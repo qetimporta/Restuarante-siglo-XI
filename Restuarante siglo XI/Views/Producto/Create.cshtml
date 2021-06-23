@@ -17,6 +17,7 @@
     @Html.TextBoxFor(prod => prod.precioProducto, new { type = "number", placeholder = "Precio", required = "required" });
     <br />
     @Html.DropDownListFor(prod => prod.id_categoria, new SelectList(ViewBag.categoria, "id_categoria", "nombre_categoria"))
+    @Html.DropDownListFor(prod => prod.id_bodega, new SelectList(ViewBag.bodega, "id_bodega", "NOMBREBODEGA"))
     <br />
     <button>Guardar producto</button>
 }

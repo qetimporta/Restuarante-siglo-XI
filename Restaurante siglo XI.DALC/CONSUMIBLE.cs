@@ -16,8 +16,7 @@ namespace Restaurante_siglo_XI.DALC
     {
         public CONSUMIBLE()
         {
-            this.PEDIDO = new HashSet<PEDIDO>();
-            this.MENU = new HashSet<MENU>();
+            this.DETA_MENU_CONSU = new HashSet<DETA_MENU_CONSU>();
         }
     
         public decimal ID_CONSUMIBLE { get; set; }
@@ -26,9 +25,10 @@ namespace Restaurante_siglo_XI.DALC
         public decimal PRECIO_CONSUMIBLE { get; set; }
         public decimal STOCK { get; set; }
         public decimal ID_TIPO_CONSUMIBLE { get; set; }
+        public decimal ID_BODEGA { get; set; }
     
+        public virtual BODEGA BODEGA { get; set; }
         public virtual TIPO_CONSUMIBLE TIPO_CONSUMIBLE { get; set; }
-        public virtual ICollection<PEDIDO> PEDIDO { get; set; }
-        public virtual ICollection<MENU> MENU { get; set; }
+        public virtual ICollection<DETA_MENU_CONSU> DETA_MENU_CONSU { get; set; }
     }
 }

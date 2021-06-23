@@ -12,13 +12,12 @@ namespace Restaurante_siglo_XI
     {
         public int id_pedido { get; set; }
         public int id_mesa { get; set; }
-        public int id_consumible { get; set; }
+        public String pedidoAdicional{ get; set; }
         [Required]
         public int id_estado { get; set; }
         public int id_menu { get; set; }
 
         public Mesa mesas { get; set; }
-        public Producto consumible { get; set; }
         public Estado estado { get; set; }
         public Menu menu { get; set; }
 
@@ -34,13 +33,12 @@ namespace Restaurante_siglo_XI
             {
                 id_pedido= (int)pe.ID_PEDIDO,
                 id_menu = (int)pe.ID_MENU,
+                pedidoAdicional = pe.PEDIDOADICIONAL,
                 menu = new Menu() { id_menu = (int)pe.ID_MENU,nombre_menu=pe.MENU.DESCRIPCION_MENU },
-                id_consumible = (int)pe.ID_CONSUMIBLE_PEDIDO,
-                consumible = new Producto() { id_producto = (int)pe.ID_CONSUMIBLE_PEDIDO, nombre_producto=pe.CONSUMIBLE.NOMBRE_CONSUMIBLE, Stock =(int)pe.CONSUMIBLE.STOCK },
                 id_estado = (int)pe.ID_ESTADO,
                 estado = new Estado() { id_estado = (int)pe.ID_ESTADO, nombre_estado = pe.ESTADOPEDIDO.NOMBRE_ESTADO},
                 id_mesa = (int)pe.ID_MENU,
-                mesas = new Mesa() { id_mesa = (int)pe.ID_MENU, ubicacion_mesa = pe.MESA.UBICACION_MESA, maxima_comensales= (int)pe.MESA.MAX_COMENSALES_MESA, mesaUsada = pe.MESA.USADO_MESA }
+                mesas = new Mesa() { id_mesa = (int)pe.ID_MENU, numeroMesa = (int)pe.MESA.NUMEROMESA, maxima_comensales= (int)pe.MESA.MAX_COMENSALES_MESA, mesaUsada = pe.MESA.USADO_MESA, id_ubicacion = (int) pe.MESA.ID_UBICACION}
             }).ToList();
 
         }
@@ -51,13 +49,12 @@ namespace Restaurante_siglo_XI
             {
                 id_pedido = (int)pe.ID_PEDIDO,
                 id_menu = (int)pe.ID_MENU,
+                pedidoAdicional = pe.PEDIDOADICIONAL,
                 menu = new Menu() { id_menu = (int)pe.ID_MENU, nombre_menu = pe.MENU.DESCRIPCION_MENU },
-                id_consumible = (int)pe.ID_CONSUMIBLE_PEDIDO,
-                consumible = new Producto() { id_producto = (int)pe.ID_CONSUMIBLE_PEDIDO, nombre_producto = pe.CONSUMIBLE.NOMBRE_CONSUMIBLE, Stock = (int)pe.CONSUMIBLE.STOCK },
                 id_estado = (int)pe.ID_ESTADO,
                 estado = new Estado() { id_estado = (int)pe.ID_ESTADO, nombre_estado = pe.ESTADOPEDIDO.NOMBRE_ESTADO },
                 id_mesa = (int)pe.ID_MENU,
-                mesas = new Mesa() { id_mesa = (int)pe.ID_MENU, ubicacion_mesa = pe.MESA.UBICACION_MESA, maxima_comensales = (int)pe.MESA.MAX_COMENSALES_MESA, mesaUsada = pe.MESA.USADO_MESA }
+                mesas = new Mesa() { id_mesa = (int)pe.ID_MENU, numeroMesa = (int)pe.MESA.NUMEROMESA, maxima_comensales = (int)pe.MESA.MAX_COMENSALES_MESA, mesaUsada = pe.MESA.USADO_MESA, id_ubicacion = (int)pe.MESA.ID_UBICACION }
             }).Where(pe => pe.id_pedido == pedi).FirstOrDefault();
         }
 

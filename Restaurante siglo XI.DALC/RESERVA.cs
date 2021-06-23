@@ -15,11 +15,11 @@ namespace Restaurante_siglo_XI.DALC
     public partial class RESERVA
     {
         public decimal ID_RESERVA { get; set; }
-        public Nullable<System.DateTime> FECHA_RESERVA { get; set; }
-        public decimal ID_MESA_RESERVA { get; set; }
-        public decimal ID_PERSONA { get; set; }
+        public System.DateTime FECHA_RESERVA { get; set; }
+        public decimal ID_MESA { get; set; }
+        public decimal ID_CLIENTE { get; set; }
     
+        public virtual CLIENTE CLIENTE { get; set; }
         public virtual MESA MESA { get; set; }
-        public virtual PERSONA PERSONA { get; set; }
     }
 }

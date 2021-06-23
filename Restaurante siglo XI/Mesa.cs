@@ -13,11 +13,14 @@ namespace Restaurante_siglo_XI
     {
         public int id_mesa { get; set; }
         [Required]
-        public String ubicacion_mesa{ get; set; }
+        public int numeroMesa{ get; set; }
         [Required]
         public int maxima_comensales { get; set; }
+        [Required]
         public String mesaUsada{ get; set; }
-
+        [Required]
+        public int id_ubicacion { get; set; }
+        public ubicacionMesa ubicacion{ get; set; }
 
         RestauranteEntities db = new RestauranteEntities();
 
@@ -26,8 +29,7 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-
-                db.SP_CREATE_MESA(this.ubicacion_mesa,this.maxima_comensales,"0");
+                db.SP_CREATE_MESA(this.numeroMesa,this.id_ubicacion, this.maxima_comensales, "0");
                 return true;
             }
             catch (Exception)
@@ -44,9 +46,11 @@ namespace Restaurante_siglo_XI
         {
             return this.db.MESA.Select(m=> new Mesa() {
                 id_mesa =(int) m.ID_MESA,
-                ubicacion_mesa = m.UBICACION_MESA,
+                numeroMesa = (int)m.NUMEROMESA,
                 maxima_comensales = (int)m.MAX_COMENSALES_MESA,
-                mesaUsada = m.USADO_MESA
+                mesaUsada = m.USADO_MESA,
+                id_ubicacion = (int)m.ID_UBICACION,
+                ubicacion = new ubicacionMesa() {id_ubicacionMesa = (int)m.ID_UBICACION, nombre_ubicacion = m.UBICACION_MESA.NOMBREUBICACION }
             }).ToList();
         }
 
@@ -56,9 +60,11 @@ namespace Restaurante_siglo_XI
             return this.db.MESA.Select(m => new Mesa()
             {
                 id_mesa = (int)m.ID_MESA,
-                ubicacion_mesa = m.UBICACION_MESA,
+                numeroMesa = (int)m.NUMEROMESA,
                 maxima_comensales = (int)m.MAX_COMENSALES_MESA,
-                mesaUsada = m.USADO_MESA
+                mesaUsada = m.USADO_MESA,
+                id_ubicacion = (int)m.ID_UBICACION,
+                ubicacion = new ubicacionMesa() { id_ubicacionMesa = (int)m.ID_UBICACION, nombre_ubicacion = m.UBICACION_MESA.NOMBREUBICACION }
             }).Where(me => me.id_mesa == id_mes).FirstOrDefault();
         }
 
@@ -66,13 +72,11 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-
-                db.SP_UPDATE_MESA(this.id_mesa,this.ubicacion_mesa,this.maxima_comensales,this.mesaUsada);
+                db.SP_UPDATE_MESA(this.id_mesa,this.numeroMesa,this.id_ubicacion,this.maxima_comensales,this.mesaUsada);
                 return true;
             }
             catch (Exception)
             {
-
                 return false;
             }
         }

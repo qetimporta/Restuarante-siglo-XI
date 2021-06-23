@@ -20,10 +20,10 @@ namespace Restaurante_siglo_XI
             return db.COMUNA.Select(com=> new Comuna() { 
                 id_comuna = com.ID_COMUNA,
                 nombre_comuna = com.NOMBRE_COMUNA,
-                id_region = com.ID_REGION,
+                id_region = com.REGION_ID_REGION,
                 region = new Region()
                 {
-                    id_region = (int)com.ID_REGION,
+                    id_region = (int)com.REGION_ID_REGION,
                     nombre_region = com.REGION.NOMBRE_REGION
 
                 }

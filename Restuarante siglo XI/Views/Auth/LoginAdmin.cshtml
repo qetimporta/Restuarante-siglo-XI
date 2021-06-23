@@ -1,0 +1,17 @@
+﻿@model Restaurante_siglo_XI.Personal
+@{
+    ViewBag.Title = "LoginAdmin";
+}
+
+<h2>LoginAdmin</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(u => u.Correo_personal, new { placeholder = "Correo Electronico" })
+    <br />
+    @Html.PasswordFor(u => u.contrasenia, new { placeholder = "Contraseña" })
+    <br />
+    <button>Ingresar</button>
+}
+<br />
+@TempData["mensaje"]

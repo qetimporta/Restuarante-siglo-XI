@@ -1,6 +1,6 @@
 ﻿@model Restaurante_siglo_XI.Mesa
 @{
-    ViewBag.Title = "Crear mesas";
+    ViewBag.Title = "Crear nuevas mesas";
 }
 
 <h2>Crear nueva mesa</h2>
@@ -8,9 +8,10 @@
 
 @using (Html.BeginForm())
 {
-    @Html.TextBoxFor(m => m.ubicacion_mesa, new { placeholder = "Ubicación de la Mesa" })
+    @Html.TextBoxFor(m => m.numeroMesa, new {type="number", placeholder = "numero de la mesa" })
     <br />
-    @Html.TextBoxFor(m => m.maxima_comensales, new { placeholder = "cantidad maxima de la mesa" })
+    @Html.TextBoxFor(m => m.maxima_comensales, new { type = "number", placeholder = "cantidad maxima de la mesa" })
     <br />
+    @Html.DropDownListFor(p => p.id_ubicacion, new SelectList(ViewBag.ubicacion, "id_ubicacionMesa", "nombre_ubicacion"))
     <button>Crear Mesa</button>
 }

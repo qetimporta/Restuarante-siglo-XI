@@ -1,25 +1,18 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Pagina principal administrador";
 }
 
-<h2>Administrador</h2>
+<h2>Administrador </h2>
 
 
-<button>@Html.ActionLink("Registrar Nuevo Producto", "Create", "Producto")</button>
-<br />
-<button>@Html.ActionLink("Lista de todos los productos", "Index", "Producto")</button>
-<br />
-<button>@Html.ActionLink("Ver reservas creadas", "Index", "Reserva")</button>
-<br />
-<button>@Html.ActionLink("Lista de las mesas", "ListaAdmin", "Mesa")</button>
-<br />
-<button>@Html.ActionLink("crear Nueva Mesa", "Create", "Mesa")</button>
-<br />
-<button>@Html.ActionLink("Crear Persona", "Create", "Persona")</button>
-
-<br />
-<button>@Html.ActionLink("Ver clientes registrados", "Index", "Persona")</button>
-<br />
-<button>@Html.ActionLink("Ver pedidos", "Index", "Pedidos")</button>
-
+    <button id="botonadmin">@Html.ActionLink("Registrar Nuevo Producto", "Create", "Producto")</button>
+    <button id="botonadmin">@Html.ActionLink("Lista de todos los productos", "Index", "Producto")</button>
+    <button id="botonadmin">@Html.ActionLink("Ver reservas creadas", "Index", "Reserva")</button>
+    <button id="botonadmin">@Html.ActionLink("Lista de las mesas", "ListaAdmin", "Mesa")</button>
+    <button id="botonadmin">@Html.ActionLink("crear Nueva Mesa", "Create", "Mesa")</button>
+    <button id="botonadmin">@Html.ActionLink("Crear trabajador", "Create", "Persona")</button>
+    <button id="botonadmin">@Html.ActionLink("Crear Ciente", "Create", "Usuario")</button>
+    <button id="botonadmin">@Html.ActionLink("Ver trabajadores registrados", "Index", "Persona")</button>
+<button id="botonadmin">@Html.ActionLink("Ver pedidos en realizados", "Index", "Pedidos")</button>
+<button id="botonadmin">@Html.ActionLink("Crear Pedidos", "Index", "Pedidos")</button>
+    

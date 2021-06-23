@@ -11,30 +11,80 @@
     <div class="col-md-12">
         <table>
             <tr>
-                <th>nombre del producto|</th>
-                <th>descripcion|</th>
-                <th>stock|</th>
-                <th>precio|</th>
-                <th>categoria de producto|</th>
+                <th>nombre del producto</th>
+                <th>descripcion</th>
+                <th>stock</th>
+                <th>precio</th>
+                <th>categoria de producto</th>
+                <th>bodega</th>
                 <th>opciones</th>
             </tr>
             @foreach (var item in producto)
              {
                 <tr>
-                    <td>@item.nombre_producto</td>
-                    <td>@item.decripcion_producto</td>
-                    <td>@item.Stock</td>
-                    <td>@item.precioProducto</td>
-                    <td>@item.categoria.nombre_categoria</td>
-                    <td>
-                        @Html.ActionLink("modificar", "Edit", new { id = item.id_producto})
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.id_producto })
-                    </td>
+                    @if (item.id_bodega == 1)
+                    {
+                        <td>@item.nombre_producto</td>
+                        <td>@item.decripcion_producto</td>
+                        <td>@item.Stock</td>
+                        <td>@item.precioProducto</td>
+                        <td>@item.categoria.nombre_categoria</td>
+                        <td>@item.bodega.nombreBodega</td>
+                        <td>
+                            @Html.ActionLink("modificar", "Edit", new { id = item.id_producto })
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.id_producto })
+                        </td>
+                    }
+
                 </tr>
              }
 
         </table>
     </div>
 </div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <table>
+            <tr>
+                <th>nombre del producto</th>
+                <th>descripcion</th>
+                <th>stock</th>
+                <th>precio</th>
+                <th>categoria de producto</th>
+                <th>bodega</th>
+                <th>opciones</th>
+            </tr>
+            @foreach (var item in producto)
+            {
+                <tr>
+                    @if (item.id_bodega == 2)
+                    {
+                        <td>@item.nombre_producto</td>
+                        <td>@item.decripcion_producto</td>
+                        <td>@item.Stock</td>
+                        <td>@item.precioProducto</td>
+                        <td>@item.categoria.nombre_categoria</td>
+                        <td>@item.bodega.nombreBodega</td>
+                        <td>
+                            @Html.ActionLink("modificar", "Edit", new { id = item.id_producto })
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.id_producto })
+                        </td>
+                    }
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
 
 @TempData["mensaje"]

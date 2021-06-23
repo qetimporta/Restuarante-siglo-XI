@@ -22,6 +22,8 @@ namespace Restaurante_siglo_XI
         public int id_categoria{ get; set; }
         //public int  id_menu{ get; set; }
         public categoria categoria { get; set; }
+        public int id_bodega { get; set; }
+        public Bodega bodega { get; set; }
 
         //public Menu menu{ get; set; }
 
@@ -36,9 +38,9 @@ namespace Restaurante_siglo_XI
               Stock =(int) prod.STOCK,
               precioProducto = (int)prod.PRECIO_CONSUMIBLE,
               id_categoria = (int)prod.ID_TIPO_CONSUMIBLE,
-              categoria = new categoria() { id_categoria =(int) prod.ID_TIPO_CONSUMIBLE, nombre_categoria = prod.TIPO_CONSUMIBLE.NOMBRE_TIPO_CONSUMIBLE}
-              //id_menu = (int)prod.ID_MENU,
-              //menu = new Menu() {id_menu = (int)prod.ID_MENU, nombre_menu = prod.MENU.NOMBRE_MENU,descripcion_menu = prod.MENU.DESCRIPCION_MENU}
+              categoria = new categoria() { id_categoria =(int) prod.ID_TIPO_CONSUMIBLE, nombre_categoria = prod.TIPO_CONSUMIBLE.NOMBRE_TIPO_CONSUMIBLE},
+              id_bodega = (int) prod.ID_BODEGA,
+              bodega = new Bodega() { id_bodega = (int)prod.ID_BODEGA, nombreBodega = prod.BODEGA.NOMBRE_BODEGA}
             }).ToList();
         }
 
@@ -51,7 +53,9 @@ namespace Restaurante_siglo_XI
                 decripcion_producto = prod.DESCRIPCION_CONSUMIBLE,
                 Stock = (int)prod.STOCK,
                 id_categoria = (int)prod.ID_TIPO_CONSUMIBLE,
-                categoria = new categoria() { id_categoria = (int)prod.ID_TIPO_CONSUMIBLE, nombre_categoria = prod.TIPO_CONSUMIBLE.NOMBRE_TIPO_CONSUMIBLE}
+                categoria = new categoria() { id_categoria = (int)prod.ID_TIPO_CONSUMIBLE, nombre_categoria = prod.TIPO_CONSUMIBLE.NOMBRE_TIPO_CONSUMIBLE},
+                id_bodega = (int)prod.ID_BODEGA,
+                bodega = new Bodega() { id_bodega = (int)prod.ID_BODEGA, nombreBodega = prod.BODEGA.NOMBRE_BODEGA }
                 //id_menu = (int)prod.ID_MENU,
                 //menu = new Menu() { id_menu = (int)prod.ID_MENU, nombre_menu = prod.MENU.NOMBRE_MENU, descripcion_menu = prod.MENU.DESCRIPCION_MENU }
             }).Where(p=> p.id_producto == id_pr).FirstOrDefault();
@@ -62,7 +66,7 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-                db.SP_UPDATE_CONSUMIBLE(this.id_producto,this.nombre_producto,this.decripcion_producto,this.Stock,this.id_categoria,this.precioProducto);
+                db.SP_UPDATE_CONSUMIBLE(this.id_producto,this.nombre_producto,this.decripcion_producto,this.Stock,this.id_categoria,this.precioProducto,this.id_bodega);
                 return true;
             }
             catch (Exception)
@@ -76,7 +80,7 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-                db.SP_CREATE_CONSUMIBLE(this.nombre_producto, this.decripcion_producto, this.precioProducto,this.Stock, this.id_categoria);
+                db.SP_CREATE_CONSUMIBLE(this.nombre_producto, this.decripcion_producto, this.precioProducto,this.Stock, this.id_categoria, this.id_bodega);
                 return true;
             }
             catch (Exception)

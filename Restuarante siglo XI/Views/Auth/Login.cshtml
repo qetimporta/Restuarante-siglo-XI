@@ -1,21 +1,19 @@
-﻿@model Restaurante_siglo_XI.Usuario
+﻿@model Restaurante_siglo_XI.Cliente
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "LogIn";
 }
 
 <h2>Ingresa a tu cuenta</h2>
 
 @using (Html.BeginForm())
 {
-                @Html.TextBoxFor(u => u.Nombre_usuario, new { placeholder = "Nombre de usuario" });
-    <br />
-            //@Html.LabelFor(u => u.Password, "Contraseña");
-            @Html.PasswordFor(u => u.Password, new { placeholder = "Contraseña" });
-
-    <br />
-
-    <button>Ingresar</button>
+        @Html.TextBoxFor(u => u.correoCliente, new { placeholder = "Correo Electronico"})
+        <br />
+        @Html.PasswordFor(u => u.Password, new { placeholder = "Contraseña" })
+        <br />
+        <button>Ingresar</button>
 }
+@Html.ActionLink("no tienes cuenta? Registrate ahora!","Create","Usuario")
 <br />
 @TempData["mensaje"]
 

@@ -14,15 +14,12 @@ namespace Restaurante_siglo_XI.DALC
     
     public partial class PEDIDO
     {
-        public int id_estado;
-
         public decimal ID_PEDIDO { get; set; }
-        public decimal ID_MESA { get; set; }
-        public decimal ID_CONSUMIBLE_PEDIDO { get; set; }
+        public string PEDIDOADICIONAL { get; set; }
+        public decimal MESA_ID_MESA { get; set; }
         public decimal ID_ESTADO { get; set; }
         public decimal ID_MENU { get; set; }
     
-        public virtual CONSUMIBLE CONSUMIBLE { get; set; }
         public virtual ESTADOPEDIDO ESTADOPEDIDO { get; set; }
         public virtual MENU MENU { get; set; }
         public virtual MESA MESA { get; set; }

@@ -8,15 +8,16 @@
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(pr => pr.id_producto)
-    @Html.TextBoxFor(prod => prod.nombre_producto, new { placeholder = "nombre del producto", required = "required" });
+    @Html.TextBoxFor(prod => prod.nombre_producto, new { placeholder = "nombre del producto", required = "required" })
     <br />
-    @Html.TextBoxFor(prod => prod.decripcion_producto, new { placeholder = "Descripcion del producto opcional" });
+    @Html.TextBoxFor(prod => prod.decripcion_producto, new { placeholder = "Descripcion del producto opcional" })
     <br />
-    @Html.TextBoxFor(prod => prod.Stock, new { type = "number", placeholder = "cantidad producto", required = "required" });
+    @Html.TextBoxFor(prod => prod.Stock, new { type = "number", placeholder = "cantidad producto", required = "required" })
     <br />
-    @Html.TextBoxFor(prod => prod.precioProducto, new { type = "number", placeholder = "Precio", required = "required" });
+    @Html.TextBoxFor(prod => prod.precioProducto, new { placeholder = "Precio", required = "required" });
     <br />
     @Html.DropDownListFor(prod => prod.id_categoria, new SelectList(ViewBag.categoria, "id_categoria", "nombre_categoria"))
+    @Html.DropDownListFor(p => p.id_bodega, new SelectList(ViewBag.bodega, "id_bodega", "NOMBREBODEGA"))
     <br />
     <button>Modificar producto</button>
 }

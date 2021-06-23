@@ -1,6 +1,6 @@
-﻿@model Restaurante_siglo_XI.Persona
+﻿@model Restaurante_siglo_XI.Personal
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar";
 }
 
 <h2>Edita el cliente</h2>
@@ -10,20 +10,18 @@
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(p => p.id_persona)
-    @Html.TextBoxFor(p => p.rutpersona, new { placeholder = "Run de la persona", required = "required" })
+    @Html.TextBoxFor(p => p.rutpersona, new { placeholder = "Rut:XXXXXXXX-X", required = "required" })
     <br />
     @Html.TextBoxFor(p => p.Nombre_persona, new { placeholder = "nombre", required = "required" })
     <br />
-    @Html.TextBoxFor(p => p.APaterno_persona, new { placeholder = "Apellido Paterno" })
+    @Html.TextBoxFor(p => p.apellidosPersonal, new { placeholder = "Apellido Paterno", required = "required" })
     <br />
-    @Html.TextBoxFor(p => p.AMaterno_persona, new { placeholder = "Apellido Materno" })
+    @Html.TextBoxFor(p => p.Correo_personal, new { Type = "email", placeholder = "Correo Electronico", required = "required" })
     <br />
-    @Html.TextBoxFor(p => p.Telefono, new { placeholder = "Telefono contacto" })
+    @Html.HiddenFor(p => p.contrasenia)
     <br />
-    @Html.TextBoxFor(p => p.Correo_persona, new { Type = "email", placeholder = "Correo Electronico" })
-    <br />
-    @Html.DropDownListFor(p => p.comuna_id, new SelectList(ViewBag.comunas, "id_comuna", "nombre_comuna"))
     @Html.DropDownListFor(p => p.cargo_id, new SelectList(ViewBag.cargo, "id", "nombre_cargo"))
-    <br />
+    @Html.DropDownListFor(p => p.comuna_id, new SelectList(ViewBag.comunas, "id_comuna", "NOMBRE_COMUNA"))
+    @Html.DropDownListFor(p => p.id_bodega, new SelectList(ViewBag.bodega, "id_bodega", "NOMBREBODEGA"))
     <button>Modificar</button>
 }

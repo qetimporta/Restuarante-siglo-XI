@@ -16,12 +16,12 @@ namespace Restaurante_siglo_XI.DALC
     {
         public CARGO()
         {
-            this.PERSONA = new HashSet<PERSONA>();
+            this.PERSONAL = new HashSet<PERSONAL>();
         }
     
         public decimal ID_CARGO { get; set; }
         public string NOMBRE_CARGO { get; set; }
     
-        public virtual ICollection<PERSONA> PERSONA { get; set; }
+        public virtual ICollection<PERSONAL> PERSONAL { get; set; }
     }
 }

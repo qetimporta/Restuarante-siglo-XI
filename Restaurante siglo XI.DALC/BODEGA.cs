@@ -12,13 +12,18 @@ namespace Restaurante_siglo_XI.DALC
     using System;
     using System.Collections.Generic;
     
-    public partial class BOLETA
+    public partial class BODEGA
     {
-        public decimal ID_BOLETA { get; set; }
-        public decimal TOTAL_BOLETA { get; set; }
-        public System.DateTime FECHA_BOLETA { get; set; }
-        public decimal MESA_ID_MESA { get; set; }
+        public BODEGA()
+        {
+            this.CONSUMIBLE = new HashSet<CONSUMIBLE>();
+            this.PERSONAL = new HashSet<PERSONAL>();
+        }
     
-        public virtual MESA MESA { get; set; }
+        public decimal ID_BODEGA { get; set; }
+        public string NOMBRE_BODEGA { get; set; }
+    
+        public virtual ICollection<CONSUMIBLE> CONSUMIBLE { get; set; }
+        public virtual ICollection<PERSONAL> PERSONAL { get; set; }
     }
 }

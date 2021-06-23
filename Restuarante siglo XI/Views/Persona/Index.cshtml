@@ -4,7 +4,7 @@
 }
 
 <h2>Listado de clientes registrados</h2>
-@{ List<Persona> personas = (List<Persona>)ViewBag.personas;}
+@{ List<Personal> personas = (List<Personal>)ViewBag.personas;}
 
 <button>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
 
@@ -12,39 +12,88 @@
     <div class="col-md-12">
         <table class="table-responsive">
             <tr>
-                <th>run de persona</th>
-                <th>nombre</th>
-                <th>apellido paterno</th>
-                <th>apellido materno</th>
-                <th>telefono</th>
+                <th>run de personal</th>
+                <th>nombre del funcionario</th>
+                <th>apellidos paternos y maternos</th>
                 <th>correo electronico</th>
                 <th>cuenta activa</th>
-                <th>comuna</th>
+                <th>comuna que pertenece</th>
                 <th>cargo</th>
+                <th>bodega</th>
                 <th>opciones</th>
             </tr>
             @foreach (var persona in personas)
             {
-                <tr>
-                    <td>@persona.rutpersona</td>
-                    <td>@persona.Nombre_persona</td>
-                    <td>@persona.APaterno_persona</td>
-                    <td>@persona.AMaterno_persona</td>
-                    <td>@persona.Telefono</td>
-                    <td>@persona.Correo_persona</td>
-                    <td style="text-align:center">@persona.activo</td>
-                    <td>@persona.Comuna.nombre_comuna</td>
-                    <td>@persona.Cargo.nombre_cargo</td>
-                    <td>
-                        @Html.ActionLink("Modificar", "Edit", new { id = persona.id_persona })
-                        @Html.ActionLink("Eliminar", "Delete", new { id = persona.id_persona })
-                    </td>
-
-                </tr>
+        <tr>
+            @if (persona.activo == "1")
+            {
+                <td>@persona.rutpersona</td>
+                <td>@persona.Nombre_persona</td>
+                <td>@persona.apellidosPersonal</td>
+                <td>@persona.Correo_personal</td>
+                <td>@persona.activo</td>
+                <td>@persona.Comuna.nombre_comuna</td>
+                <td>@persona.Cargo.nombre_cargo</td>
+                <td>@persona.Bodega.nombreBodega</td>
+                <td>
+                    @Html.ActionLink("Modificar", "Edit", new { id = persona.id_persona })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = persona.id_persona })
+                </td>
             }
+
+
+        </tr>
+                }
+
         </table>
 
     </div>
 </div>
 
-@TempData["mensaje"]
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table-responsive">
+            <tr>
+                <th>run de personal</th>
+                <th>nombre del funcionario</th>
+                <th>apellidos paternos y maternos</th>
+                <th>correo electronico</th>
+                <th>cuenta activa</th>
+                <th>comuna que pertenece</th>
+                <th>cargo</th>
+                <th>bodega</th>
+                <th>opciones</th>
+            </tr>
+            @foreach (var person in personas)
+            {
+                <tr>
+                    @if (person.activo == "0")
+                    {
+                        <td>@person.rutpersona</td>
+                        <td>@person.Nombre_persona</td>
+                        <td>@person.apellidosPersonal</td>
+                        <td>@person.Correo_personal</td>
+                        <td>@person.activo</td>
+                        <td>@person.Comuna.nombre_comuna</td>
+                        <td>@person.Cargo.nombre_cargo</td>
+                        <td>@person.Bodega.nombreBodega</td>
+                        <td>
+                            @Html.ActionLink("Modificar", "Edit", new { id = person.id_persona })
+                            @Html.ActionLink("Eliminar", "Delete", new { id = person.id_persona })
+                        </td>
+                    }
+
+
+                </tr>
+            }
+
+        </table>
+
+    </div>
+    @TempData["mensaje"]

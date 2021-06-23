@@ -14,39 +14,39 @@ namespace Restaurante_siglo_XI
         [Required]
         public DateTime fecha_reserva { get; set; }
         [Required]
-        public int id_persona{ get; set; }
+        public int id_cliente{ get; set; }
         [Required]
         public int id_mesa_reserva { get; set; }
 
-        public Persona persona { get; set; }
+        public Cliente cliente{ get; set; }
         public Mesa mesa { get; set; }
 
         RestauranteEntities db = new RestauranteEntities();
 
-
+        // lista todas la reservas creadas 
         public List<Reserva> listarReservas()
         {
             return this.db.RESERVA.Select(r => new Reserva() { 
             
             id_reserva = (int) r.ID_RESERVA,
             fecha_reserva = (DateTime)r.FECHA_RESERVA,
-            id_persona = (int)r.ID_PERSONA,
-            persona = new Persona() { id_persona = (int)r.ID_PERSONA,rutpersona = r.PERSONA.RUT_PERSONA, Nombre_persona = r.PERSONA.NOMBRE_PERSONA, AMaterno_persona = r.PERSONA.AMATERNO_PERSONA
-            ,APaterno_persona= r.PERSONA.APATERNO_PERSONA, Correo_persona = r.PERSONA.CORREO_PERSONA, activo = r.PERSONA.ACTIVO_PERSONA,cargo_id = (int)r.PERSONA.ID_CARGO_PERSONA, comuna_id = (int)r.PERSONA.ID_COMUNA_PERSONA},
+                id_cliente = (int)r.ID_CLIENTE,
+                cliente = new Cliente() { id_cliente = (int)r.ID_CLIENTE,rutcliente = r.CLIENTE.RUTCLIENTE, nombre_cliente= r.CLIENTE.NOMBRE, apellidoM= r.CLIENTE.APELLIDOMATERNO
+            ,apellidoP= r.CLIENTE.APELLIDOPATERNO, correoCliente= r.CLIENTE.CORREO_ELECTRONICO, id_comuna= (int)r.CLIENTE.COMUNA_ID_COMUNA},
 
-            id_mesa_reserva = (int)r.ID_MESA_RESERVA,
-            mesa = new Mesa() { id_mesa = (int)r.ID_MESA_RESERVA, ubicacion_mesa = r.MESA.UBICACION_MESA, maxima_comensales = (int)r.MESA.MAX_COMENSALES_MESA, mesaUsada = r.MESA.USADO_MESA}
+            id_mesa_reserva = (int)r.ID_MESA,
+            mesa = new Mesa() { id_mesa = (int)r.ID_MESA, numeroMesa= (int)r.MESA.NUMEROMESA, maxima_comensales = (int)r.MESA.MAX_COMENSALES_MESA, mesaUsada = r.MESA.USADO_MESA}
 
             }).ToList();
 
         }
-
-
+            
+        //metodo para guardar reservas que el cliente hace
         public bool GuardarReserva() 
         {
             try
             {
-                db.SP_CREATE_RESERVA(this.fecha_reserva, this.id_mesa_reserva,this.id_persona);
+                db.SP_CREATE_RESERVA(this.fecha_reserva, this.id_mesa_reserva,this.id_cliente);
                 return true;
 
             }
@@ -58,6 +58,8 @@ namespace Restaurante_siglo_XI
             
         }
 
+
+        // busca por medio de un id la reserva creada
         public Reserva buscar(int id) {
 
             return this.db.RESERVA.Select(r => new Reserva()
@@ -65,33 +67,61 @@ namespace Restaurante_siglo_XI
 
                 id_reserva = (int)r.ID_RESERVA,
                 fecha_reserva = (DateTime)r.FECHA_RESERVA,
-                id_persona = (int)r.ID_PERSONA,
-                persona = new Persona()
+                id_cliente = (int)r.ID_CLIENTE,
+                cliente = new Cliente()
                 {
-                    id_persona = (int)r.ID_PERSONA,
-                    rutpersona = r.PERSONA.RUT_PERSONA,
-                    Nombre_persona = r.PERSONA.NOMBRE_PERSONA,
-                    AMaterno_persona = r.PERSONA.AMATERNO_PERSONA
+                    id_cliente = (int)r.ID_CLIENTE,
+                    rutcliente = r.CLIENTE.RUTCLIENTE,
+                    nombre_cliente = r.CLIENTE.NOMBRE,
+                    apellidoM = r.CLIENTE.APELLIDOMATERNO
             ,
-                    APaterno_persona = r.PERSONA.APATERNO_PERSONA,
-                    Correo_persona = r.PERSONA.CORREO_PERSONA,
-                    activo = r.PERSONA.ACTIVO_PERSONA,
-                    cargo_id = (int)r.PERSONA.ID_CARGO_PERSONA,
-                    comuna_id = (int)r.PERSONA.ID_COMUNA_PERSONA
+                    apellidoP = r.CLIENTE.APELLIDOPATERNO,
+                    correoCliente = r.CLIENTE.CORREO_ELECTRONICO,
+                    id_comuna = (int)r.CLIENTE.COMUNA_ID_COMUNA
                 },
 
-                id_mesa_reserva = (int)r.ID_MESA_RESERVA,
-                mesa = new Mesa() { id_mesa = (int)r.ID_MESA_RESERVA, ubicacion_mesa = r.MESA.UBICACION_MESA, maxima_comensales = (int)r.MESA.MAX_COMENSALES_MESA, mesaUsada = r.MESA.USADO_MESA }
+                id_mesa_reserva = (int)r.ID_MESA,
+                mesa = new Mesa() { id_mesa = (int)r.ID_MESA, numeroMesa = (int)r.MESA.NUMEROMESA, maxima_comensales = (int)r.MESA.MAX_COMENSALES_MESA, mesaUsada = r.MESA.USADO_MESA }
 
-            }).Where(re => re.id_persona == id).FirstOrDefault();
-
-
+            }).Where(re => re.id_reserva == id).FirstOrDefault();
         }
+
+
+        public List<Reserva> buscarReservaCLiente(int id)
+        {
+
+            return this.db.RESERVA.Select(r => new Reserva()
+            {
+
+                id_reserva = (int)r.ID_RESERVA,
+                fecha_reserva = (DateTime)r.FECHA_RESERVA,
+                id_cliente = (int)r.ID_CLIENTE,
+                cliente = new Cliente()
+                {
+                    id_cliente = (int)r.ID_CLIENTE,
+                    rutcliente = r.CLIENTE.RUTCLIENTE,
+                    nombre_cliente = r.CLIENTE.NOMBRE,
+                    apellidoM = r.CLIENTE.APELLIDOMATERNO,
+                    apellidoP = r.CLIENTE.APELLIDOPATERNO,
+                    correoCliente = r.CLIENTE.CORREO_ELECTRONICO,
+                    id_comuna = (int)r.CLIENTE.COMUNA_ID_COMUNA
+                },
+
+                id_mesa_reserva = (int)r.ID_MESA,
+                mesa = new Mesa() { id_mesa = (int)r.ID_MESA, numeroMesa = (int)r.MESA.NUMEROMESA, maxima_comensales = (int)r.MESA.MAX_COMENSALES_MESA, mesaUsada = r.MESA.USADO_MESA }
+
+            }).Where(re => re.id_cliente == id).ToList();
+        }
+
+
+
+
+
         public bool ModificarReserva() 
         {
             try
             {
-                db.SP_UPDATE_RESERVA(this.id_reserva, this.fecha_reserva, this.id_mesa_reserva,this.id_persona);
+                db.SP_UPDATE_RESERVA(this.id_reserva, this.fecha_reserva, this.id_mesa_reserva,this.id_cliente);
                 return true;
             }
             catch (Exception)

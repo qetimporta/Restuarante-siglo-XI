@@ -22,26 +22,23 @@ namespace Restuarante_siglo_XI.Controllers
         {
             return View();
         }
-
- 
-        // GET: Usuario/Create
-        public ActionResult Create(String rut)
+        private void EnviarComunas()
         {
-            
-                Persona per = new Persona();
-                
-                if (per.buscarRUTcliente(rut) == null)
-                {
-                    TempData["mensaje"] ="no existe esa persona";
-                    return RedirectToAction("Create", "Persona");
-                }
-                return View();
+            ViewBag.comunas = new Comuna().LeerAll();
+        }
+
+        // GET: Usuario/Create
+        public ActionResult Create()
+        {
+
+            EnviarComunas();
+            return View();
 
         }
 
         // POST: Usuario/Create
         [HttpPost]
-        public ActionResult Create(Usuario usua)
+        public ActionResult Create(Cliente usua)
         {
             try
             {

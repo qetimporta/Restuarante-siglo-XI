@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BODEGA">
+          <Key>
+            <PropertyRef Name="ID_BODEGA" />
+          </Key>
+          <Property Name="ID_BODEGA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_BODEGA" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="BOLETA">
           <Key>
             <PropertyRef Name="ID_BOLETA" />
@@ -12,22 +19,35 @@
           <Property Name="ID_BOLETA" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="TOTAL_BOLETA" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="FECHA_BOLETA" Type="date" Nullable="false" />
-          <Property Name="ID_MESA_BOLETA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="CARGO">
           <Key>
             <PropertyRef Name="ID_CARGO" />
           </Key>
           <Property Name="ID_CARGO" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_CARGO" Type="varchar2" MaxLength="25" />
+          <Property Name="NOMBRE_CARGO" Type="varchar2" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUTCLIENTE" Type="varchar2" MaxLength="12" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDOPATERNO" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDOMATERNO" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="CORREO_ELECTRONICO" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="CONTRASENIA" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="COMUNA_ID_COMUNA" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="COMUNA">
           <Key>
             <PropertyRef Name="ID_COMUNA" />
           </Key>
           <Property Name="ID_COMUNA" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_COMUNA" Type="varchar2" MaxLength="25" />
-          <Property Name="ID_REGION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_COMUNA" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="REGION_ID_REGION" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="CONSUMIBLE">
           <Key>
@@ -39,14 +59,13 @@
           <Property Name="PRECIO_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="STOCK" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_TIPO_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_BODEGA" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="DETA_MENU_CONSUMIBLE">
+        <EntityType Name="DETA_MENU_CONSU">
           <Key>
-            <PropertyRef Name="ID_MENU" />
-            <PropertyRef Name="ID_CONSUMIBLE" />
+            <PropertyRef Name="ID_MENU_CONSU" />
           </Key>
+          <Property Name="ID_MENU_CONSU" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_MENU" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
@@ -62,73 +81,73 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
             <PropertyRef Name="ID_MENU" />
           </Key>
           <Property Name="ID_MENU" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="DESCRIPCION_MENU" Type="varchar2" MaxLength="100" />
+          <Property Name="NOMBRE_MENU" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="DESCRIPCION_MENU" Type="varchar2" MaxLength="200" />
         </EntityType>
         <EntityType Name="MESA">
           <Key>
             <PropertyRef Name="ID_MESA" />
           </Key>
           <Property Name="ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="UBICACION_MESA" Type="varchar2" MaxLength="25" />
-          <Property Name="MAX_COMENSALES_MESA" Type="number" Precision="38" Scale="0" />
-          <Property Name="USADO_MESA" Type="char" MaxLength="1" />
+          <Property Name="NUMEROMESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MAX_COMENSALES_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USADO_MESA" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="ID_UBICACION" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="PEDIDO">
           <Key>
             <PropertyRef Name="ID_PEDIDO" />
           </Key>
           <Property Name="ID_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ID_CONSUMIBLE_PEDIDO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PEDIDOADICIONAL" Type="varchar2" MaxLength="200" />
+          <Property Name="MESA_ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_MENU" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
-        <EntityType Name="PERSONA">
+        <EntityType Name="PERSONAL">
           <Key>
-            <PropertyRef Name="ID_PERSONA" />
+            <PropertyRef Name="ID_PERSONAL" />
           </Key>
-          <Property Name="ID_PERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="RUT_PERSONA" Type="varchar2" MaxLength="10" Nullable="false" />
-          <Property Name="NOMBRE_PERSONA" Type="varchar2" MaxLength="25" Nullable="false" />
-          <Property Name="APATERNO_PERSONA" Type="varchar2" MaxLength="25" Nullable="false" />
-          <Property Name="AMATERNO_PERSONA" Type="varchar2" MaxLength="25" />
-          <Property Name="TELEFONO_PERSONA" Type="number" Precision="38" Scale="0" />
-          <Property Name="CORREO_PERSONA" Type="varchar2" MaxLength="25" />
-          <Property Name="ACTIVO_PERSONA" Type="char" MaxLength="1" />
-          <Property Name="ID_CARGO_PERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ID_COMUNA_PERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_PERSONAL" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_PERSONAL" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="NOMBREPERSONAL" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="APELLIDOSPERSONAL" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="CORRREOEMPRESA" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="ACTIVO_PERSONAL" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CONTRASENIAP" Type="varchar2" MaxLength="25" Nullable="false" />
+          <Property Name="CARGO_ID_CARGO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COMUNA_ID_COMUNA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="BODEGA_ID_BODEGA" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="REGION">
           <Key>
             <PropertyRef Name="ID_REGION" />
           </Key>
           <Property Name="ID_REGION" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_REGION" Type="varchar2" MaxLength="25" />
+          <Property Name="NOMBRE_REGION" Type="varchar2" MaxLength="25" Nullable="false" />
         </EntityType>
         <EntityType Name="RESERVA">
           <Key>
             <PropertyRef Name="ID_RESERVA" />
           </Key>
           <Property Name="ID_RESERVA" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="FECHA_RESERVA" Type="date" />
-          <Property Name="ID_MESA_RESERVA" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ID_PERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FECHA_RESERVA" Type="date" Nullable="false" />
+          <Property Name="ID_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="number" Precision="38" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="TIPO_CONSUMIBLE">
           <Key>
             <PropertyRef Name="ID_TIPO_CONSUMIBLE" />
           </Key>
           <Property Name="ID_TIPO_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_TIPO_CONSUMIBLE" Type="varchar2" MaxLength="25" />
+          <Property Name="NOMBRE_TIPO_CONSUMIBLE" Type="varchar2" MaxLength="25" Nullable="false" />
         </EntityType>
-        <EntityType Name="USUARIO">
+        <EntityType Name="UBICACION_MESA">
           <Key>
-            <PropertyRef Name="ID_USUARIO" />
+            <PropertyRef Name="ID_UBICACION" />
           </Key>
-          <Property Name="ID_USUARIO" Type="number" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_USUARIO" Type="varchar2" MaxLength="25" Nullable="false" />
-          <Property Name="CONTRASENIA_USUARIO" Type="varchar2" MaxLength="25" Nullable="false" />
-          <Property Name="ID_PERSONA" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_UBICACION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBREUBICACION" Type="varchar2" MaxLength="200" Nullable="false" />
         </EntityType>
         <Association Name="BOLETA_MESA_FK">
           <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
@@ -138,7 +157,19 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
               <PropertyRef Name="ID_MESA" />
             </Principal>
             <Dependent Role="BOLETA">
-              <PropertyRef Name="ID_MESA_BOLETA" />
+              <PropertyRef Name="MESA_ID_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLIENTE_COMUNA_FK">
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID_COMUNA" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="COMUNA_ID_COMUNA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -150,7 +181,19 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
               <PropertyRef Name="ID_REGION" />
             </Principal>
             <Dependent Role="COMUNA">
-              <PropertyRef Name="ID_REGION" />
+              <PropertyRef Name="REGION_ID_REGION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CONSUMIBLE_BODEGA_FK">
+          <End Role="BODEGA" Type="Self.BODEGA" Multiplicity="1" />
+          <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BODEGA">
+              <PropertyRef Name="ID_BODEGA" />
+            </Principal>
+            <Dependent Role="CONSUMIBLE">
+              <PropertyRef Name="ID_BODEGA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -166,39 +209,39 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DETA_MENU_CONSUMIBLE_FK">
+        <Association Name="DETA_MENU_CONSU_CONSUMIBLE_FK">
           <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="1" />
-          <End Role="DETA_MENU_CONSUMIBLE" Type="Self.DETA_MENU_CONSUMIBLE" Multiplicity="*" />
+          <End Role="DETA_MENU_CONSU" Type="Self.DETA_MENU_CONSU" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CONSUMIBLE">
               <PropertyRef Name="ID_CONSUMIBLE" />
             </Principal>
-            <Dependent Role="DETA_MENU_CONSUMIBLE">
+            <Dependent Role="DETA_MENU_CONSU">
               <PropertyRef Name="ID_CONSUMIBLE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DETA_MENU_CONSUMIBLEFK">
+        <Association Name="DETA_MENU_CONSU_MENU_FK">
           <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
-          <End Role="DETA_MENU_CONSUMIBLE" Type="Self.DETA_MENU_CONSUMIBLE" Multiplicity="*" />
+          <End Role="DETA_MENU_CONSU" Type="Self.DETA_MENU_CONSU" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MENU">
               <PropertyRef Name="ID_MENU" />
             </Principal>
-            <Dependent Role="DETA_MENU_CONSUMIBLE">
+            <Dependent Role="DETA_MENU_CONSU">
               <PropertyRef Name="ID_MENU" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PEDIDO_CONSUMIBLE_FK">
-          <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="1" />
-          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+        <Association Name="MESA_UBICACION_MESA_FK">
+          <End Role="UBICACION_MESA" Type="Self.UBICACION_MESA" Multiplicity="1" />
+          <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CONSUMIBLE">
-              <PropertyRef Name="ID_CONSUMIBLE" />
+            <Principal Role="UBICACION_MESA">
+              <PropertyRef Name="ID_UBICACION" />
             </Principal>
-            <Dependent Role="PEDIDO">
-              <PropertyRef Name="ID_CONSUMIBLE_PEDIDO" />
+            <Dependent Role="MESA">
+              <PropertyRef Name="ID_UBICACION" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -226,27 +269,63 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="PEDIDO_MESA_FK">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="MESA_ID_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PERSONA_CARGO_FK">
           <End Role="CARGO" Type="Self.CARGO" Multiplicity="1" />
-          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CARGO">
               <PropertyRef Name="ID_CARGO" />
             </Principal>
-            <Dependent Role="PERSONA">
-              <PropertyRef Name="ID_CARGO_PERSONA" />
+            <Dependent Role="PERSONAL">
+              <PropertyRef Name="CARGO_ID_CARGO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="PERSONA_COMUNA_FK">
           <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
-          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="COMUNA">
               <PropertyRef Name="ID_COMUNA" />
             </Principal>
-            <Dependent Role="PERSONA">
-              <PropertyRef Name="ID_COMUNA_PERSONA" />
+            <Dependent Role="PERSONAL">
+              <PropertyRef Name="COMUNA_ID_COMUNA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PERSONAL_BODEGA_FK">
+          <End Role="BODEGA" Type="Self.BODEGA" Multiplicity="1" />
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BODEGA">
+              <PropertyRef Name="ID_BODEGA" />
+            </Principal>
+            <Dependent Role="PERSONAL">
+              <PropertyRef Name="BODEGA_ID_BODEGA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RESERVA_CLIENTE_FK">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="RESERVA">
+              <PropertyRef Name="ID_CLIENTE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -258,43 +337,7 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
               <PropertyRef Name="ID_MESA" />
             </Principal>
             <Dependent Role="RESERVA">
-              <PropertyRef Name="ID_MESA_RESERVA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="RESERVA_PERSONA_FK">
-          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
-          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERSONA">
-              <PropertyRef Name="ID_PERSONA" />
-            </Principal>
-            <Dependent Role="RESERVA">
-              <PropertyRef Name="ID_PERSONA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TABLE_4_MESA_FK">
-          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
-          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MESA">
               <PropertyRef Name="ID_MESA" />
-            </Principal>
-            <Dependent Role="PEDIDO">
-              <PropertyRef Name="ID_MESA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="USUARIO_PERSONA_FK">
-          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
-          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERSONA">
-              <PropertyRef Name="ID_PERSONA" />
-            </Principal>
-            <Dependent Role="USUARIO">
-              <PropertyRef Name="ID_PERSONA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -303,28 +346,36 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
           <Parameter Name="V_FECHA" Type="date" Mode="In" />
           <Parameter Name="V_ID_MESA" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_CREATE_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_RUT" Type="varchar2" Mode="In" />
+          <Parameter Name="V_APELLIDOPATERNO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_APELLIDOMATERNO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_CORREO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_CONTRASENIA" Type="varchar2" Mode="In" />
+          <Parameter Name="V_ID_COMUNA" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_CREATE_CONSUMIBLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
           <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
           <Parameter Name="V_PRECIO" Type="number" Mode="In" />
           <Parameter Name="V_STOCK" Type="number" Mode="In" />
           <Parameter Name="V_ID_TIPOCONSUMIBLE" Type="number" Mode="In" />
-        </Function>
-        <Function Name="SP_CREATE_MENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
-          <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_BODEGA" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_CREATE_MESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
-          <Parameter Name="V_UBICACIONM" Type="varchar2" Mode="In" />
+          <Parameter Name="V_NUMEROMESA" Type="number" Mode="In" />
+          <Parameter Name="V_UBICACIONM" Type="number" Mode="In" />
           <Parameter Name="V_MAX_CON" Type="number" Mode="In" />
           <Parameter Name="V_USADO" Type="varchar2" Mode="In" />
         </Function>
-        <Function Name="SP_CREATE_PERSONA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+        <Function Name="SP_CREATE_PERSONAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_RUT" Type="varchar2" Mode="In" />
           <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
-          <Parameter Name="V_PATERNO" Type="varchar2" Mode="In" />
-          <Parameter Name="V_MATERNO" Type="varchar2" Mode="In" />
-          <Parameter Name="V_TELEFONO" Type="number" Mode="In" />
+          <Parameter Name="V_APELLDOS" Type="varchar2" Mode="In" />
           <Parameter Name="V_CORREO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_CONTRASENA" Type="varchar2" Mode="In" />
+          <Parameter Name="V_ID_BODEGA" Type="number" Mode="In" />
           <Parameter Name="V_ACTIVO" Type="varchar2" Mode="In" />
           <Parameter Name="V_CARGO_ID" Type="number" Mode="In" />
           <Parameter Name="V_COMUNA" Type="number" Mode="In" />
@@ -332,12 +383,10 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
         <Function Name="SP_CREATE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_FECHA" Type="date" Mode="In" />
           <Parameter Name="V_MESA_ID" Type="number" Mode="In" />
-          <Parameter Name="V_PERSONA_ID" Type="number" Mode="In" />
+          <Parameter Name="V_ID_CLIENTE" Type="number" Mode="In" />
         </Function>
-        <Function Name="SP_CREATE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
-          <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
-          <Parameter Name="V_CONTRASENIA" Type="varchar2" Mode="In" />
-          <Parameter Name="V_PERSONA_ID" Type="number" Mode="In" />
+        <Function Name="SP_DELETE_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_DELETE_CONSUMIBLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
@@ -345,14 +394,20 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
         <Function Name="SP_DELETE_MESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
         </Function>
-        <Function Name="SP_DELETE_PERSONA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+        <Function Name="SP_DELETE_PERSONAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_DELETE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
         </Function>
-        <Function Name="SP_DELETE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+        <Function Name="SP_UPDATE_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
+          <Parameter Name="V_RUT" Type="varchar2" Mode="In" />
+          <Parameter Name="V_USUARIO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_APELLIDOP" Type="varchar2" Mode="In" />
+          <Parameter Name="V_APELLIDOM" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PASS" Type="varchar2" Mode="In" />
+          <Parameter Name="V_COMUNA" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_UPDATE_CONSUMIBLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
@@ -361,10 +416,12 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
           <Parameter Name="V_STOCK" Type="number" Mode="In" />
           <Parameter Name="V_ID_CATEGORIA" Type="number" Mode="In" />
           <Parameter Name="V_PRECIO" Type="number" Mode="In" />
+          <Parameter Name="V_BODEGA" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_UPDATE_MESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
-          <Parameter Name="V_UBICACIONM" Type="varchar2" Mode="In" />
+          <Parameter Name="V_NUMEROMESA" Type="number" Mode="In" />
+          <Parameter Name="V_UBICACIONM" Type="number" Mode="In" />
           <Parameter Name="V_MAX_CON" Type="number" Mode="In" />
           <Parameter Name="V_USADO" Type="varchar2" Mode="In" />
         </Function>
@@ -372,15 +429,14 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
           <Parameter Name="V_ID" Type="number" Mode="In" />
           <Parameter Name="V_ID_ESTADO" Type="number" Mode="In" />
         </Function>
-        <Function Name="SP_UPDATE_PERSONA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+        <Function Name="SP_UPDATE_PERSONAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
           <Parameter Name="V_RUT" Type="varchar2" Mode="In" />
           <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
           <Parameter Name="V_PATERNO" Type="varchar2" Mode="In" />
-          <Parameter Name="V_MATERNO" Type="varchar2" Mode="In" />
-          <Parameter Name="V_TELEFONO" Type="number" Mode="In" />
+          <Parameter Name="V_CONTRASENA" Type="varchar2" Mode="In" />
           <Parameter Name="V_CORREO" Type="varchar2" Mode="In" />
-          <Parameter Name="V_ACTIVO" Type="char" Mode="In" />
+          <Parameter Name="V_BODEGA" Type="number" Mode="In" />
           <Parameter Name="V_CARGO_ID" Type="number" Mode="In" />
           <Parameter Name="V_COMUNA" Type="number" Mode="In" />
         </Function>
@@ -390,55 +446,54 @@ advertencia 6002: La tabla o vista 'RESTAURANTEXXI.DETA_MENU_CONSUMIBLE' no tien
           <Parameter Name="V_MESA" Type="number" Mode="In" />
           <Parameter Name="V_PERSONA" Type="number" Mode="In" />
         </Function>
-        <Function Name="SP_UPDATE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
-          <Parameter Name="V_ID" Type="number" Mode="In" />
-          <Parameter Name="V_USUARIO" Type="varchar2" Mode="In" />
-          <Parameter Name="V_PASS" Type="varchar2" Mode="In" />
-          <Parameter Name="V_PERSONA" Type="number" Mode="In" />
-        </Function>
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="BODEGA" EntityType="Self.BODEGA" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="BOLETA" EntityType="Self.BOLETA" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="CARGO" EntityType="Self.CARGO" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="COMUNA" EntityType="Self.COMUNA" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="CONSUMIBLE" EntityType="Self.CONSUMIBLE" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="DETA_MENU_CONSU" EntityType="Self.DETA_MENU_CONSU" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="MENU" EntityType="Self.MENU" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="MESA" EntityType="Self.MESA" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="RESTAURANTEXXI" store:Type="Tables" />
-          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="PERSONAL" EntityType="Self.PERSONAL" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="REGION" EntityType="Self.REGION" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="RESERVA" EntityType="Self.RESERVA" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="TIPO_CONSUMIBLE" EntityType="Self.TIPO_CONSUMIBLE" Schema="RESTAURANTEXXI" store:Type="Tables" />
-          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="RESTAURANTEXXI" store:Type="Tables" />
-          <EntitySet Name="DETA_MENU_CONSUMIBLE" EntityType="Self.DETA_MENU_CONSUMIBLE" store:Type="Tables" store:Schema="RESTAURANTEXXI">
-            <DefiningQuery>SELECT 
-"DETA_MENU_CONSUMIBLE"."ID_MENU" AS "ID_MENU", 
-"DETA_MENU_CONSUMIBLE"."ID_CONSUMIBLE" AS "ID_CONSUMIBLE"
-FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="UBICACION_MESA" EntityType="Self.UBICACION_MESA" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <AssociationSet Name="BOLETA_MESA_FK" Association="Self.BOLETA_MESA_FK">
             <End Role="MESA" EntitySet="MESA" />
             <End Role="BOLETA" EntitySet="BOLETA" />
+          </AssociationSet>
+          <AssociationSet Name="CLIENTE_COMUNA_FK" Association="Self.CLIENTE_COMUNA_FK">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
           </AssociationSet>
           <AssociationSet Name="COMUNA_REGION_FK" Association="Self.COMUNA_REGION_FK">
             <End Role="REGION" EntitySet="REGION" />
             <End Role="COMUNA" EntitySet="COMUNA" />
           </AssociationSet>
+          <AssociationSet Name="CONSUMIBLE_BODEGA_FK" Association="Self.CONSUMIBLE_BODEGA_FK">
+            <End Role="BODEGA" EntitySet="BODEGA" />
+            <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
+          </AssociationSet>
           <AssociationSet Name="CONSUMIBLE_TIPO_CONSUMIBLE_FK" Association="Self.CONSUMIBLE_TIPO_CONSUMIBLE_FK">
             <End Role="TIPO_CONSUMIBLE" EntitySet="TIPO_CONSUMIBLE" />
             <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
           </AssociationSet>
-          <AssociationSet Name="DETA_MENU_CONSUMIBLE_FK" Association="Self.DETA_MENU_CONSUMIBLE_FK">
+          <AssociationSet Name="DETA_MENU_CONSU_CONSUMIBLE_FK" Association="Self.DETA_MENU_CONSU_CONSUMIBLE_FK">
             <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
-            <End Role="DETA_MENU_CONSUMIBLE" EntitySet="DETA_MENU_CONSUMIBLE" />
+            <End Role="DETA_MENU_CONSU" EntitySet="DETA_MENU_CONSU" />
           </AssociationSet>
-          <AssociationSet Name="DETA_MENU_CONSUMIBLEFK" Association="Self.DETA_MENU_CONSUMIBLEFK">
+          <AssociationSet Name="DETA_MENU_CONSU_MENU_FK" Association="Self.DETA_MENU_CONSU_MENU_FK">
             <End Role="MENU" EntitySet="MENU" />
-            <End Role="DETA_MENU_CONSUMIBLE" EntitySet="DETA_MENU_CONSUMIBLE" />
+            <End Role="DETA_MENU_CONSU" EntitySet="DETA_MENU_CONSU" />
           </AssociationSet>
-          <AssociationSet Name="PEDIDO_CONSUMIBLE_FK" Association="Self.PEDIDO_CONSUMIBLE_FK">
-            <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
-            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          <AssociationSet Name="MESA_UBICACION_MESA_FK" Association="Self.MESA_UBICACION_MESA_FK">
+            <End Role="UBICACION_MESA" EntitySet="UBICACION_MESA" />
+            <End Role="MESA" EntitySet="MESA" />
           </AssociationSet>
           <AssociationSet Name="PEDIDO_ESTADOPEDIDO_FK" Association="Self.PEDIDO_ESTADOPEDIDO_FK">
             <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
@@ -448,29 +503,29 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <End Role="MENU" EntitySet="MENU" />
             <End Role="PEDIDO" EntitySet="PEDIDO" />
           </AssociationSet>
+          <AssociationSet Name="PEDIDO_MESA_FK" Association="Self.PEDIDO_MESA_FK">
+            <End Role="MESA" EntitySet="MESA" />
+            <End Role="PEDIDO" EntitySet="PEDIDO" />
+          </AssociationSet>
           <AssociationSet Name="PERSONA_CARGO_FK" Association="Self.PERSONA_CARGO_FK">
             <End Role="CARGO" EntitySet="CARGO" />
-            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="PERSONAL" EntitySet="PERSONAL" />
           </AssociationSet>
           <AssociationSet Name="PERSONA_COMUNA_FK" Association="Self.PERSONA_COMUNA_FK">
             <End Role="COMUNA" EntitySet="COMUNA" />
-            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="PERSONAL" EntitySet="PERSONAL" />
+          </AssociationSet>
+          <AssociationSet Name="PERSONAL_BODEGA_FK" Association="Self.PERSONAL_BODEGA_FK">
+            <End Role="BODEGA" EntitySet="BODEGA" />
+            <End Role="PERSONAL" EntitySet="PERSONAL" />
+          </AssociationSet>
+          <AssociationSet Name="RESERVA_CLIENTE_FK" Association="Self.RESERVA_CLIENTE_FK">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="RESERVA" EntitySet="RESERVA" />
           </AssociationSet>
           <AssociationSet Name="RESERVA_MESA_FK" Association="Self.RESERVA_MESA_FK">
             <End Role="MESA" EntitySet="MESA" />
             <End Role="RESERVA" EntitySet="RESERVA" />
-          </AssociationSet>
-          <AssociationSet Name="RESERVA_PERSONA_FK" Association="Self.RESERVA_PERSONA_FK">
-            <End Role="PERSONA" EntitySet="PERSONA" />
-            <End Role="RESERVA" EntitySet="RESERVA" />
-          </AssociationSet>
-          <AssociationSet Name="TABLE_4_MESA_FK" Association="Self.TABLE_4_MESA_FK">
-            <End Role="MESA" EntitySet="MESA" />
-            <End Role="PEDIDO" EntitySet="PEDIDO" />
-          </AssociationSet>
-          <AssociationSet Name="USUARIO_PERSONA_FK" Association="Self.USUARIO_PERSONA_FK">
-            <End Role="PERSONA" EntitySet="PERSONA" />
-            <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -478,6 +533,15 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BODEGA">
+          <Key>
+            <PropertyRef Name="ID_BODEGA" />
+          </Key>
+          <Property Name="ID_BODEGA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_BODEGA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CONSUMIBLE" Relationship="Self.CONSUMIBLE_BODEGA_FK" FromRole="BODEGA" ToRole="CONSUMIBLE" />
+          <NavigationProperty Name="PERSONAL" Relationship="Self.PERSONAL_BODEGA_FK" FromRole="BODEGA" ToRole="PERSONAL" />
+        </EntityType>
         <EntityType Name="BOLETA">
           <Key>
             <PropertyRef Name="ID_BOLETA" />
@@ -485,7 +549,7 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
           <Property Name="ID_BOLETA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="TOTAL_BOLETA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="FECHA_BOLETA" Type="DateTime" Nullable="false" />
-          <Property Name="ID_MESA_BOLETA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MESA_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <NavigationProperty Name="MESA" Relationship="Self.BOLETA_MESA_FK" FromRole="BOLETA" ToRole="MESA" />
         </EntityType>
         <EntityType Name="CARGO">
@@ -493,18 +557,34 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <PropertyRef Name="ID_CARGO" />
           </Key>
           <Property Name="ID_CARGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_CARGO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PERSONA" Relationship="Self.PERSONA_CARGO_FK" FromRole="CARGO" ToRole="PERSONA" />
+          <Property Name="NOMBRE_CARGO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PERSONAL" Relationship="Self.PERSONA_CARGO_FK" FromRole="CARGO" ToRole="PERSONAL" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUTCLIENTE" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDOPATERNO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDOMATERNO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CORREO_ELECTRONICO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTRASENIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COMUNA_ID_COMUNA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="COMUNA" Relationship="Self.CLIENTE_COMUNA_FK" FromRole="CLIENTE" ToRole="COMUNA" />
+          <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="CLIENTE" ToRole="RESERVA" />
         </EntityType>
         <EntityType Name="COMUNA">
           <Key>
             <PropertyRef Name="ID_COMUNA" />
           </Key>
           <Property Name="ID_COMUNA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_COMUNA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="ID_REGION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_COMUNA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="REGION_ID_REGION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.CLIENTE_COMUNA_FK" FromRole="COMUNA" ToRole="CLIENTE" />
           <NavigationProperty Name="REGION" Relationship="Self.COMUNA_REGION_FK" FromRole="COMUNA" ToRole="REGION" />
-          <NavigationProperty Name="PERSONA" Relationship="Self.PERSONA_COMUNA_FK" FromRole="COMUNA" ToRole="PERSONA" />
+          <NavigationProperty Name="PERSONAL" Relationship="Self.PERSONA_COMUNA_FK" FromRole="COMUNA" ToRole="PERSONAL" />
         </EntityType>
         <EntityType Name="CONSUMIBLE">
           <Key>
@@ -516,9 +596,20 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
           <Property Name="PRECIO_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="STOCK" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_TIPO_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_BODEGA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="BODEGA" Relationship="Self.CONSUMIBLE_BODEGA_FK" FromRole="CONSUMIBLE" ToRole="BODEGA" />
           <NavigationProperty Name="TIPO_CONSUMIBLE" Relationship="Self.CONSUMIBLE_TIPO_CONSUMIBLE_FK" FromRole="CONSUMIBLE" ToRole="TIPO_CONSUMIBLE" />
-          <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_CONSUMIBLE_FK" FromRole="CONSUMIBLE" ToRole="PEDIDO" />
-          <NavigationProperty Name="MENU" Relationship="Self.DETA_MENU_CONSUMIBLE" FromRole="CONSUMIBLE" ToRole="MENU" />
+          <NavigationProperty Name="DETA_MENU_CONSU" Relationship="Self.DETA_MENU_CONSU_CONSUMIBLE_FK" FromRole="CONSUMIBLE" ToRole="DETA_MENU_CONSU" />
+        </EntityType>
+        <EntityType Name="DETA_MENU_CONSU">
+          <Key>
+            <PropertyRef Name="ID_MENU_CONSU" />
+          </Key>
+          <Property Name="ID_MENU_CONSU" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_MENU" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CONSUMIBLE" Relationship="Self.DETA_MENU_CONSU_CONSUMIBLE_FK" FromRole="DETA_MENU_CONSU" ToRole="CONSUMIBLE" />
+          <NavigationProperty Name="MENU" Relationship="Self.DETA_MENU_CONSU_MENU_FK" FromRole="DETA_MENU_CONSU" ToRole="MENU" />
         </EntityType>
         <EntityType Name="ESTADOPEDIDO">
           <Key>
@@ -533,61 +624,62 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <PropertyRef Name="ID_MENU" />
           </Key>
           <Property Name="ID_MENU" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="DESCRIPCION_MENU" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE_MENU" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DETA_MENU_CONSU" Relationship="Self.DETA_MENU_CONSU_MENU_FK" FromRole="MENU" ToRole="DETA_MENU_CONSU" />
           <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_MENU_FK" FromRole="MENU" ToRole="PEDIDO" />
-          <NavigationProperty Name="CONSUMIBLE" Relationship="Self.DETA_MENU_CONSUMIBLE" FromRole="MENU" ToRole="CONSUMIBLE" />
         </EntityType>
         <EntityType Name="MESA">
           <Key>
             <PropertyRef Name="ID_MESA" />
           </Key>
           <Property Name="ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="UBICACION_MESA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="MAX_COMENSALES_MESA" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="USADO_MESA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="NUMEROMESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="MAX_COMENSALES_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USADO_MESA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_UBICACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <NavigationProperty Name="BOLETA" Relationship="Self.BOLETA_MESA_FK" FromRole="MESA" ToRole="BOLETA" />
+          <NavigationProperty Name="UBICACION_MESA" Relationship="Self.MESA_UBICACION_MESA_FK" FromRole="MESA" ToRole="UBICACION_MESA" />
+          <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_MESA_FK" FromRole="MESA" ToRole="PEDIDO" />
           <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_MESA_FK" FromRole="MESA" ToRole="RESERVA" />
-          <NavigationProperty Name="PEDIDO" Relationship="Self.TABLE_4_MESA_FK" FromRole="MESA" ToRole="PEDIDO" />
         </EntityType>
         <EntityType Name="PEDIDO">
           <Key>
             <PropertyRef Name="ID_PEDIDO" />
           </Key>
           <Property Name="ID_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ID_CONSUMIBLE_PEDIDO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PEDIDOADICIONAL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MESA_ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_MENU" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <NavigationProperty Name="CONSUMIBLE" Relationship="Self.PEDIDO_CONSUMIBLE_FK" FromRole="PEDIDO" ToRole="CONSUMIBLE" />
           <NavigationProperty Name="ESTADOPEDIDO" Relationship="Self.PEDIDO_ESTADOPEDIDO_FK" FromRole="PEDIDO" ToRole="ESTADOPEDIDO" />
           <NavigationProperty Name="MENU" Relationship="Self.PEDIDO_MENU_FK" FromRole="PEDIDO" ToRole="MENU" />
-          <NavigationProperty Name="MESA" Relationship="Self.TABLE_4_MESA_FK" FromRole="PEDIDO" ToRole="MESA" />
+          <NavigationProperty Name="MESA" Relationship="Self.PEDIDO_MESA_FK" FromRole="PEDIDO" ToRole="MESA" />
         </EntityType>
-        <EntityType Name="PERSONA">
+        <EntityType Name="PERSONAL">
           <Key>
-            <PropertyRef Name="ID_PERSONA" />
+            <PropertyRef Name="ID_PERSONAL" />
           </Key>
-          <Property Name="ID_PERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="RUT_PERSONA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NOMBRE_PERSONA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="APATERNO_PERSONA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AMATERNO_PERSONA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="TELEFONO_PERSONA" Type="Decimal" Precision="38" Scale="0" />
-          <Property Name="CORREO_PERSONA" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="ACTIVO_PERSONA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="ID_CARGO_PERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ID_COMUNA_PERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <NavigationProperty Name="CARGO" Relationship="Self.PERSONA_CARGO_FK" FromRole="PERSONA" ToRole="CARGO" />
-          <NavigationProperty Name="COMUNA" Relationship="Self.PERSONA_COMUNA_FK" FromRole="PERSONA" ToRole="COMUNA" />
-          <NavigationProperty Name="RESERVA" Relationship="Self.RESERVA_PERSONA_FK" FromRole="PERSONA" ToRole="RESERVA" />
-          <NavigationProperty Name="USUARIO" Relationship="Self.USUARIO_PERSONA_FK" FromRole="PERSONA" ToRole="USUARIO" />
+          <Property Name="ID_PERSONAL" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="RUT_PERSONAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBREPERSONAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDOSPERSONAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CORRREOEMPRESA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACTIVO_PERSONAL" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CONTRASENIAP" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CARGO_ID_CARGO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="COMUNA_ID_COMUNA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="BODEGA_ID_BODEGA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="BODEGA" Relationship="Self.PERSONAL_BODEGA_FK" FromRole="PERSONAL" ToRole="BODEGA" />
+          <NavigationProperty Name="CARGO" Relationship="Self.PERSONA_CARGO_FK" FromRole="PERSONAL" ToRole="CARGO" />
+          <NavigationProperty Name="COMUNA" Relationship="Self.PERSONA_COMUNA_FK" FromRole="PERSONAL" ToRole="COMUNA" />
         </EntityType>
         <EntityType Name="REGION">
           <Key>
             <PropertyRef Name="ID_REGION" />
           </Key>
           <Property Name="ID_REGION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_REGION" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE_REGION" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="COMUNA" Relationship="Self.COMUNA_REGION_FK" FromRole="REGION" ToRole="COMUNA" />
         </EntityType>
         <EntityType Name="RESERVA">
@@ -595,30 +687,52 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <PropertyRef Name="ID_RESERVA" />
           </Key>
           <Property Name="ID_RESERVA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="FECHA_RESERVA" Type="DateTime" />
-          <Property Name="ID_MESA_RESERVA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="ID_PERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="FECHA_RESERVA" Type="DateTime" Nullable="false" />
+          <Property Name="ID_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.RESERVA_CLIENTE_FK" FromRole="RESERVA" ToRole="CLIENTE" />
           <NavigationProperty Name="MESA" Relationship="Self.RESERVA_MESA_FK" FromRole="RESERVA" ToRole="MESA" />
-          <NavigationProperty Name="PERSONA" Relationship="Self.RESERVA_PERSONA_FK" FromRole="RESERVA" ToRole="PERSONA" />
         </EntityType>
         <EntityType Name="TIPO_CONSUMIBLE">
           <Key>
             <PropertyRef Name="ID_TIPO_CONSUMIBLE" />
           </Key>
           <Property Name="ID_TIPO_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_TIPO_CONSUMIBLE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE_TIPO_CONSUMIBLE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CONSUMIBLE" Relationship="Self.CONSUMIBLE_TIPO_CONSUMIBLE_FK" FromRole="TIPO_CONSUMIBLE" ToRole="CONSUMIBLE" />
         </EntityType>
-        <EntityType Name="USUARIO">
+        <EntityType Name="UBICACION_MESA">
           <Key>
-            <PropertyRef Name="ID_USUARIO" />
+            <PropertyRef Name="ID_UBICACION" />
           </Key>
-          <Property Name="ID_USUARIO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <Property Name="NOMBRE_USUARIO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CONTRASENIA_USUARIO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID_PERSONA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
-          <NavigationProperty Name="PERSONA" Relationship="Self.USUARIO_PERSONA_FK" FromRole="USUARIO" ToRole="PERSONA" />
+          <Property Name="ID_UBICACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBREUBICACION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MESA" Relationship="Self.MESA_UBICACION_MESA_FK" FromRole="UBICACION_MESA" ToRole="MESA" />
         </EntityType>
+        <Association Name="CONSUMIBLE_BODEGA_FK">
+          <End Role="BODEGA" Type="Self.BODEGA" Multiplicity="1" />
+          <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BODEGA">
+              <PropertyRef Name="ID_BODEGA" />
+            </Principal>
+            <Dependent Role="CONSUMIBLE">
+              <PropertyRef Name="ID_BODEGA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PERSONAL_BODEGA_FK">
+          <End Role="BODEGA" Type="Self.BODEGA" Multiplicity="1" />
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BODEGA">
+              <PropertyRef Name="ID_BODEGA" />
+            </Principal>
+            <Dependent Role="PERSONAL">
+              <PropertyRef Name="BODEGA_ID_BODEGA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="BOLETA_MESA_FK">
           <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
           <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
@@ -627,19 +741,43 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
               <PropertyRef Name="ID_MESA" />
             </Principal>
             <Dependent Role="BOLETA">
-              <PropertyRef Name="ID_MESA_BOLETA" />
+              <PropertyRef Name="MESA_ID_MESA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="PERSONA_CARGO_FK">
           <End Role="CARGO" Type="Self.CARGO" Multiplicity="1" />
-          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CARGO">
               <PropertyRef Name="ID_CARGO" />
             </Principal>
-            <Dependent Role="PERSONA">
-              <PropertyRef Name="ID_CARGO_PERSONA" />
+            <Dependent Role="PERSONAL">
+              <PropertyRef Name="CARGO_ID_CARGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLIENTE_COMUNA_FK">
+          <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID_COMUNA" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="COMUNA_ID_COMUNA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RESERVA_CLIENTE_FK">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="RESERVA">
+              <PropertyRef Name="ID_CLIENTE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -651,19 +789,19 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
               <PropertyRef Name="ID_REGION" />
             </Principal>
             <Dependent Role="COMUNA">
-              <PropertyRef Name="ID_REGION" />
+              <PropertyRef Name="REGION_ID_REGION" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="PERSONA_COMUNA_FK">
           <End Role="COMUNA" Type="Self.COMUNA" Multiplicity="1" />
-          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="*" />
+          <End Role="PERSONAL" Type="Self.PERSONAL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="COMUNA">
               <PropertyRef Name="ID_COMUNA" />
             </Principal>
-            <Dependent Role="PERSONA">
-              <PropertyRef Name="ID_COMUNA_PERSONA" />
+            <Dependent Role="PERSONAL">
+              <PropertyRef Name="COMUNA_ID_COMUNA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -679,15 +817,27 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PEDIDO_CONSUMIBLE_FK">
+        <Association Name="DETA_MENU_CONSU_CONSUMIBLE_FK">
           <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="1" />
-          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <End Role="DETA_MENU_CONSU" Type="Self.DETA_MENU_CONSU" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CONSUMIBLE">
               <PropertyRef Name="ID_CONSUMIBLE" />
             </Principal>
-            <Dependent Role="PEDIDO">
-              <PropertyRef Name="ID_CONSUMIBLE_PEDIDO" />
+            <Dependent Role="DETA_MENU_CONSU">
+              <PropertyRef Name="ID_CONSUMIBLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DETA_MENU_CONSU_MENU_FK">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="1" />
+          <End Role="DETA_MENU_CONSU" Type="Self.DETA_MENU_CONSU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="ID_MENU" />
+            </Principal>
+            <Dependent Role="DETA_MENU_CONSU">
+              <PropertyRef Name="ID_MENU" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -715,6 +865,30 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="MESA_UBICACION_MESA_FK">
+          <End Role="UBICACION_MESA" Type="Self.UBICACION_MESA" Multiplicity="1" />
+          <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UBICACION_MESA">
+              <PropertyRef Name="ID_UBICACION" />
+            </Principal>
+            <Dependent Role="MESA">
+              <PropertyRef Name="ID_UBICACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PEDIDO_MESA_FK">
+          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
+          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MESA">
+              <PropertyRef Name="ID_MESA" />
+            </Principal>
+            <Dependent Role="PEDIDO">
+              <PropertyRef Name="MESA_ID_MESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="RESERVA_MESA_FK">
           <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
           <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
@@ -723,71 +897,50 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
               <PropertyRef Name="ID_MESA" />
             </Principal>
             <Dependent Role="RESERVA">
-              <PropertyRef Name="ID_MESA_RESERVA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TABLE_4_MESA_FK">
-          <End Role="MESA" Type="Self.MESA" Multiplicity="1" />
-          <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MESA">
-              <PropertyRef Name="ID_MESA" />
-            </Principal>
-            <Dependent Role="PEDIDO">
               <PropertyRef Name="ID_MESA" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="RESERVA_PERSONA_FK">
-          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
-          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERSONA">
-              <PropertyRef Name="ID_PERSONA" />
-            </Principal>
-            <Dependent Role="RESERVA">
-              <PropertyRef Name="ID_PERSONA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="USUARIO_PERSONA_FK">
-          <End Role="PERSONA" Type="Self.PERSONA" Multiplicity="1" />
-          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERSONA">
-              <PropertyRef Name="ID_PERSONA" />
-            </Principal>
-            <Dependent Role="USUARIO">
-              <PropertyRef Name="ID_PERSONA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="DETA_MENU_CONSUMIBLE">
-          <End Role="CONSUMIBLE" Type="Self.CONSUMIBLE" Multiplicity="*" />
-          <End Role="MENU" Type="Self.MENU" Multiplicity="*" />
         </Association>
         <EntityContainer Name="RestauranteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BODEGA" EntityType="Self.BODEGA" />
           <EntitySet Name="BOLETA" EntityType="Self.BOLETA" />
           <EntitySet Name="CARGO" EntityType="Self.CARGO" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
           <EntitySet Name="COMUNA" EntityType="Self.COMUNA" />
           <EntitySet Name="CONSUMIBLE" EntityType="Self.CONSUMIBLE" />
+          <EntitySet Name="DETA_MENU_CONSU" EntityType="Self.DETA_MENU_CONSU" />
           <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" />
           <EntitySet Name="MENU" EntityType="Self.MENU" />
           <EntitySet Name="MESA" EntityType="Self.MESA" />
           <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" />
-          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" />
+          <EntitySet Name="PERSONAL" EntityType="Self.PERSONAL" />
           <EntitySet Name="REGION" EntityType="Self.REGION" />
           <EntitySet Name="RESERVA" EntityType="Self.RESERVA" />
           <EntitySet Name="TIPO_CONSUMIBLE" EntityType="Self.TIPO_CONSUMIBLE" />
-          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <EntitySet Name="UBICACION_MESA" EntityType="Self.UBICACION_MESA" />
+          <AssociationSet Name="CONSUMIBLE_BODEGA_FK" Association="Self.CONSUMIBLE_BODEGA_FK">
+            <End Role="BODEGA" EntitySet="BODEGA" />
+            <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
+          </AssociationSet>
+          <AssociationSet Name="PERSONAL_BODEGA_FK" Association="Self.PERSONAL_BODEGA_FK">
+            <End Role="BODEGA" EntitySet="BODEGA" />
+            <End Role="PERSONAL" EntitySet="PERSONAL" />
+          </AssociationSet>
           <AssociationSet Name="BOLETA_MESA_FK" Association="Self.BOLETA_MESA_FK">
             <End Role="MESA" EntitySet="MESA" />
             <End Role="BOLETA" EntitySet="BOLETA" />
           </AssociationSet>
           <AssociationSet Name="PERSONA_CARGO_FK" Association="Self.PERSONA_CARGO_FK">
             <End Role="CARGO" EntitySet="CARGO" />
-            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="PERSONAL" EntitySet="PERSONAL" />
+          </AssociationSet>
+          <AssociationSet Name="CLIENTE_COMUNA_FK" Association="Self.CLIENTE_COMUNA_FK">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="RESERVA_CLIENTE_FK" Association="Self.RESERVA_CLIENTE_FK">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="RESERVA" EntitySet="RESERVA" />
           </AssociationSet>
           <AssociationSet Name="COMUNA_REGION_FK" Association="Self.COMUNA_REGION_FK">
             <End Role="REGION" EntitySet="REGION" />
@@ -795,15 +948,19 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
           </AssociationSet>
           <AssociationSet Name="PERSONA_COMUNA_FK" Association="Self.PERSONA_COMUNA_FK">
             <End Role="COMUNA" EntitySet="COMUNA" />
-            <End Role="PERSONA" EntitySet="PERSONA" />
+            <End Role="PERSONAL" EntitySet="PERSONAL" />
           </AssociationSet>
           <AssociationSet Name="CONSUMIBLE_TIPO_CONSUMIBLE_FK" Association="Self.CONSUMIBLE_TIPO_CONSUMIBLE_FK">
             <End Role="TIPO_CONSUMIBLE" EntitySet="TIPO_CONSUMIBLE" />
             <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
           </AssociationSet>
-          <AssociationSet Name="PEDIDO_CONSUMIBLE_FK" Association="Self.PEDIDO_CONSUMIBLE_FK">
+          <AssociationSet Name="DETA_MENU_CONSU_CONSUMIBLE_FK" Association="Self.DETA_MENU_CONSU_CONSUMIBLE_FK">
             <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
-            <End Role="PEDIDO" EntitySet="PEDIDO" />
+            <End Role="DETA_MENU_CONSU" EntitySet="DETA_MENU_CONSU" />
+          </AssociationSet>
+          <AssociationSet Name="DETA_MENU_CONSU_MENU_FK" Association="Self.DETA_MENU_CONSU_MENU_FK">
+            <End Role="MENU" EntitySet="MENU" />
+            <End Role="DETA_MENU_CONSU" EntitySet="DETA_MENU_CONSU" />
           </AssociationSet>
           <AssociationSet Name="PEDIDO_ESTADOPEDIDO_FK" Association="Self.PEDIDO_ESTADOPEDIDO_FK">
             <End Role="ESTADOPEDIDO" EntitySet="ESTADOPEDIDO" />
@@ -813,30 +970,31 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <End Role="MENU" EntitySet="MENU" />
             <End Role="PEDIDO" EntitySet="PEDIDO" />
           </AssociationSet>
-          <AssociationSet Name="RESERVA_MESA_FK" Association="Self.RESERVA_MESA_FK">
+          <AssociationSet Name="MESA_UBICACION_MESA_FK" Association="Self.MESA_UBICACION_MESA_FK">
+            <End Role="UBICACION_MESA" EntitySet="UBICACION_MESA" />
             <End Role="MESA" EntitySet="MESA" />
-            <End Role="RESERVA" EntitySet="RESERVA" />
           </AssociationSet>
-          <AssociationSet Name="TABLE_4_MESA_FK" Association="Self.TABLE_4_MESA_FK">
+          <AssociationSet Name="PEDIDO_MESA_FK" Association="Self.PEDIDO_MESA_FK">
             <End Role="MESA" EntitySet="MESA" />
             <End Role="PEDIDO" EntitySet="PEDIDO" />
           </AssociationSet>
-          <AssociationSet Name="RESERVA_PERSONA_FK" Association="Self.RESERVA_PERSONA_FK">
-            <End Role="PERSONA" EntitySet="PERSONA" />
+          <AssociationSet Name="RESERVA_MESA_FK" Association="Self.RESERVA_MESA_FK">
+            <End Role="MESA" EntitySet="MESA" />
             <End Role="RESERVA" EntitySet="RESERVA" />
-          </AssociationSet>
-          <AssociationSet Name="USUARIO_PERSONA_FK" Association="Self.USUARIO_PERSONA_FK">
-            <End Role="PERSONA" EntitySet="PERSONA" />
-            <End Role="USUARIO" EntitySet="USUARIO" />
-          </AssociationSet>
-          <AssociationSet Name="DETA_MENU_CONSUMIBLE" Association="Self.DETA_MENU_CONSUMIBLE">
-            <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
-            <End Role="MENU" EntitySet="MENU" />
           </AssociationSet>
           <FunctionImport Name="SP_CREATE_BOLETA">
             <Parameter Name="V_TOTALB" Mode="In" Type="Decimal" />
             <Parameter Name="V_FECHA" Mode="In" Type="DateTime" />
             <Parameter Name="V_ID_MESA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_CLIENTE">
+            <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="V_RUT" Mode="In" Type="String" />
+            <Parameter Name="V_APELLIDOPATERNO" Mode="In" Type="String" />
+            <Parameter Name="V_APELLIDOMATERNO" Mode="In" Type="String" />
+            <Parameter Name="V_CORREO" Mode="In" Type="String" />
+            <Parameter Name="V_CONTRASENIA" Mode="In" Type="String" />
+            <Parameter Name="V_ID_COMUNA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_CREATE_CONSUMIBLE">
             <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
@@ -844,22 +1002,21 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <Parameter Name="V_PRECIO" Mode="In" Type="Decimal" />
             <Parameter Name="V_STOCK" Mode="In" Type="Decimal" />
             <Parameter Name="V_ID_TIPOCONSUMIBLE" Mode="In" Type="Decimal" />
-          </FunctionImport>
-          <FunctionImport Name="SP_CREATE_MENU">
-            <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
+            <Parameter Name="V_BODEGA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_CREATE_MESA">
-            <Parameter Name="V_UBICACIONM" Mode="In" Type="String" />
+            <Parameter Name="V_NUMEROMESA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_UBICACIONM" Mode="In" Type="Decimal" />
             <Parameter Name="V_MAX_CON" Mode="In" Type="Decimal" />
             <Parameter Name="V_USADO" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SP_CREATE_PERSONA">
+          <FunctionImport Name="SP_CREATE_PERSONAL">
             <Parameter Name="V_RUT" Mode="In" Type="String" />
             <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
-            <Parameter Name="V_PATERNO" Mode="In" Type="String" />
-            <Parameter Name="V_MATERNO" Mode="In" Type="String" />
-            <Parameter Name="V_TELEFONO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_APELLDOS" Mode="In" Type="String" />
             <Parameter Name="V_CORREO" Mode="In" Type="String" />
+            <Parameter Name="V_CONTRASENA" Mode="In" Type="String" />
+            <Parameter Name="V_ID_BODEGA" Mode="In" Type="Decimal" />
             <Parameter Name="V_ACTIVO" Mode="In" Type="String" />
             <Parameter Name="V_CARGO_ID" Mode="In" Type="Decimal" />
             <Parameter Name="V_COMUNA" Mode="In" Type="Decimal" />
@@ -867,12 +1024,10 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
           <FunctionImport Name="SP_CREATE_RESERVA">
             <Parameter Name="V_FECHA" Mode="In" Type="DateTime" />
             <Parameter Name="V_MESA_ID" Mode="In" Type="Decimal" />
-            <Parameter Name="V_PERSONA_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_ID_CLIENTE" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="SP_CREATE_USUARIO">
-            <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
-            <Parameter Name="V_CONTRASENIA" Mode="In" Type="String" />
-            <Parameter Name="V_PERSONA_ID" Mode="In" Type="Decimal" />
+          <FunctionImport Name="SP_DELETE_CLIENTE">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_DELETE_CONSUMIBLE">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
@@ -880,14 +1035,20 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
           <FunctionImport Name="SP_DELETE_MESA">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="SP_DELETE_PERSONA">
+          <FunctionImport Name="SP_DELETE_PERSONAL">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_DELETE_RESERVA">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="SP_DELETE_USUARIO">
+          <FunctionImport Name="SP_UPDATE_CLIENTE">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_RUT" Mode="In" Type="String" />
+            <Parameter Name="V_USUARIO" Mode="In" Type="String" />
+            <Parameter Name="V_APELLIDOP" Mode="In" Type="String" />
+            <Parameter Name="V_APELLIDOM" Mode="In" Type="String" />
+            <Parameter Name="V_PASS" Mode="In" Type="String" />
+            <Parameter Name="V_COMUNA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_UPDATE_CONSUMIBLE">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
@@ -896,10 +1057,12 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <Parameter Name="V_STOCK" Mode="In" Type="Decimal" />
             <Parameter Name="V_ID_CATEGORIA" Mode="In" Type="Decimal" />
             <Parameter Name="V_PRECIO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_BODEGA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_UPDATE_MESA">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
-            <Parameter Name="V_UBICACIONM" Mode="In" Type="String" />
+            <Parameter Name="V_NUMEROMESA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_UBICACIONM" Mode="In" Type="Decimal" />
             <Parameter Name="V_MAX_CON" Mode="In" Type="Decimal" />
             <Parameter Name="V_USADO" Mode="In" Type="String" />
           </FunctionImport>
@@ -907,15 +1070,14 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
             <Parameter Name="V_ID_ESTADO" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="SP_UPDATE_PERSONA">
+          <FunctionImport Name="SP_UPDATE_PERSONAL">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
             <Parameter Name="V_RUT" Mode="In" Type="String" />
             <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
             <Parameter Name="V_PATERNO" Mode="In" Type="String" />
-            <Parameter Name="V_MATERNO" Mode="In" Type="String" />
-            <Parameter Name="V_TELEFONO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_CONTRASENA" Mode="In" Type="String" />
             <Parameter Name="V_CORREO" Mode="In" Type="String" />
-            <Parameter Name="V_ACTIVO" Mode="In" Type="String" />
+            <Parameter Name="V_BODEGA" Mode="In" Type="Decimal" />
             <Parameter Name="V_CARGO_ID" Mode="In" Type="Decimal" />
             <Parameter Name="V_COMUNA" Mode="In" Type="Decimal" />
           </FunctionImport>
@@ -925,12 +1087,6 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <Parameter Name="V_MESA" Mode="In" Type="Decimal" />
             <Parameter Name="V_PERSONA" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="SP_UPDATE_USUARIO">
-            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
-            <Parameter Name="V_USUARIO" Mode="In" Type="String" />
-            <Parameter Name="V_PASS" Mode="In" Type="String" />
-            <Parameter Name="V_PERSONA" Mode="In" Type="Decimal" />
-          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -938,13 +1094,21 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="RestauranteEntities">
+          <EntitySetMapping Name="BODEGA">
+            <EntityTypeMapping TypeName="Model.BODEGA">
+              <MappingFragment StoreEntitySet="BODEGA">
+                <ScalarProperty Name="ID_BODEGA" ColumnName="ID_BODEGA" />
+                <ScalarProperty Name="NOMBRE_BODEGA" ColumnName="NOMBRE_BODEGA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BOLETA">
             <EntityTypeMapping TypeName="Model.BOLETA">
               <MappingFragment StoreEntitySet="BOLETA">
                 <ScalarProperty Name="ID_BOLETA" ColumnName="ID_BOLETA" />
                 <ScalarProperty Name="TOTAL_BOLETA" ColumnName="TOTAL_BOLETA" />
                 <ScalarProperty Name="FECHA_BOLETA" ColumnName="FECHA_BOLETA" />
-                <ScalarProperty Name="ID_MESA_BOLETA" ColumnName="ID_MESA_BOLETA" />
+                <ScalarProperty Name="MESA_ID_MESA" ColumnName="MESA_ID_MESA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -956,12 +1120,26 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="Model.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="RUTCLIENTE" ColumnName="RUTCLIENTE" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOPATERNO" ColumnName="APELLIDOPATERNO" />
+                <ScalarProperty Name="APELLIDOMATERNO" ColumnName="APELLIDOMATERNO" />
+                <ScalarProperty Name="CORREO_ELECTRONICO" ColumnName="CORREO_ELECTRONICO" />
+                <ScalarProperty Name="CONTRASENIA" ColumnName="CONTRASENIA" />
+                <ScalarProperty Name="COMUNA_ID_COMUNA" ColumnName="COMUNA_ID_COMUNA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="COMUNA">
             <EntityTypeMapping TypeName="Model.COMUNA">
               <MappingFragment StoreEntitySet="COMUNA">
                 <ScalarProperty Name="ID_COMUNA" ColumnName="ID_COMUNA" />
                 <ScalarProperty Name="NOMBRE_COMUNA" ColumnName="NOMBRE_COMUNA" />
-                <ScalarProperty Name="ID_REGION" ColumnName="ID_REGION" />
+                <ScalarProperty Name="REGION_ID_REGION" ColumnName="REGION_ID_REGION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -974,6 +1152,16 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
                 <ScalarProperty Name="PRECIO_CONSUMIBLE" ColumnName="PRECIO_CONSUMIBLE" />
                 <ScalarProperty Name="STOCK" ColumnName="STOCK" />
                 <ScalarProperty Name="ID_TIPO_CONSUMIBLE" ColumnName="ID_TIPO_CONSUMIBLE" />
+                <ScalarProperty Name="ID_BODEGA" ColumnName="ID_BODEGA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETA_MENU_CONSU">
+            <EntityTypeMapping TypeName="Model.DETA_MENU_CONSU">
+              <MappingFragment StoreEntitySet="DETA_MENU_CONSU">
+                <ScalarProperty Name="ID_MENU_CONSU" ColumnName="ID_MENU_CONSU" />
+                <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
+                <ScalarProperty Name="ID_CONSUMIBLE" ColumnName="ID_CONSUMIBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -989,6 +1177,7 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <EntityTypeMapping TypeName="Model.MENU">
               <MappingFragment StoreEntitySet="MENU">
                 <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
+                <ScalarProperty Name="NOMBRE_MENU" ColumnName="NOMBRE_MENU" />
                 <ScalarProperty Name="DESCRIPCION_MENU" ColumnName="DESCRIPCION_MENU" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -997,9 +1186,10 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <EntityTypeMapping TypeName="Model.MESA">
               <MappingFragment StoreEntitySet="MESA">
                 <ScalarProperty Name="ID_MESA" ColumnName="ID_MESA" />
-                <ScalarProperty Name="UBICACION_MESA" ColumnName="UBICACION_MESA" />
+                <ScalarProperty Name="NUMEROMESA" ColumnName="NUMEROMESA" />
                 <ScalarProperty Name="MAX_COMENSALES_MESA" ColumnName="MAX_COMENSALES_MESA" />
                 <ScalarProperty Name="USADO_MESA" ColumnName="USADO_MESA" />
+                <ScalarProperty Name="ID_UBICACION" ColumnName="ID_UBICACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1007,26 +1197,26 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
             <EntityTypeMapping TypeName="Model.PEDIDO">
               <MappingFragment StoreEntitySet="PEDIDO">
                 <ScalarProperty Name="ID_PEDIDO" ColumnName="ID_PEDIDO" />
-                <ScalarProperty Name="ID_MESA" ColumnName="ID_MESA" />
-                <ScalarProperty Name="ID_CONSUMIBLE_PEDIDO" ColumnName="ID_CONSUMIBLE_PEDIDO" />
+                <ScalarProperty Name="PEDIDOADICIONAL" ColumnName="PEDIDOADICIONAL" />
+                <ScalarProperty Name="MESA_ID_MESA" ColumnName="MESA_ID_MESA" />
                 <ScalarProperty Name="ID_ESTADO" ColumnName="ID_ESTADO" />
                 <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PERSONA">
-            <EntityTypeMapping TypeName="Model.PERSONA">
-              <MappingFragment StoreEntitySet="PERSONA">
-                <ScalarProperty Name="ID_PERSONA" ColumnName="ID_PERSONA" />
-                <ScalarProperty Name="RUT_PERSONA" ColumnName="RUT_PERSONA" />
-                <ScalarProperty Name="NOMBRE_PERSONA" ColumnName="NOMBRE_PERSONA" />
-                <ScalarProperty Name="APATERNO_PERSONA" ColumnName="APATERNO_PERSONA" />
-                <ScalarProperty Name="AMATERNO_PERSONA" ColumnName="AMATERNO_PERSONA" />
-                <ScalarProperty Name="TELEFONO_PERSONA" ColumnName="TELEFONO_PERSONA" />
-                <ScalarProperty Name="CORREO_PERSONA" ColumnName="CORREO_PERSONA" />
-                <ScalarProperty Name="ACTIVO_PERSONA" ColumnName="ACTIVO_PERSONA" />
-                <ScalarProperty Name="ID_CARGO_PERSONA" ColumnName="ID_CARGO_PERSONA" />
-                <ScalarProperty Name="ID_COMUNA_PERSONA" ColumnName="ID_COMUNA_PERSONA" />
+          <EntitySetMapping Name="PERSONAL">
+            <EntityTypeMapping TypeName="Model.PERSONAL">
+              <MappingFragment StoreEntitySet="PERSONAL">
+                <ScalarProperty Name="ID_PERSONAL" ColumnName="ID_PERSONAL" />
+                <ScalarProperty Name="RUT_PERSONAL" ColumnName="RUT_PERSONAL" />
+                <ScalarProperty Name="NOMBREPERSONAL" ColumnName="NOMBREPERSONAL" />
+                <ScalarProperty Name="APELLIDOSPERSONAL" ColumnName="APELLIDOSPERSONAL" />
+                <ScalarProperty Name="CORRREOEMPRESA" ColumnName="CORRREOEMPRESA" />
+                <ScalarProperty Name="ACTIVO_PERSONAL" ColumnName="ACTIVO_PERSONAL" />
+                <ScalarProperty Name="CONTRASENIAP" ColumnName="CONTRASENIAP" />
+                <ScalarProperty Name="CARGO_ID_CARGO" ColumnName="CARGO_ID_CARGO" />
+                <ScalarProperty Name="COMUNA_ID_COMUNA" ColumnName="COMUNA_ID_COMUNA" />
+                <ScalarProperty Name="BODEGA_ID_BODEGA" ColumnName="BODEGA_ID_BODEGA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1043,8 +1233,8 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
               <MappingFragment StoreEntitySet="RESERVA">
                 <ScalarProperty Name="ID_RESERVA" ColumnName="ID_RESERVA" />
                 <ScalarProperty Name="FECHA_RESERVA" ColumnName="FECHA_RESERVA" />
-                <ScalarProperty Name="ID_MESA_RESERVA" ColumnName="ID_MESA_RESERVA" />
-                <ScalarProperty Name="ID_PERSONA" ColumnName="ID_PERSONA" />
+                <ScalarProperty Name="ID_MESA" ColumnName="ID_MESA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1056,42 +1246,31 @@ FROM "RESTAURANTEXXI"."DETA_MENU_CONSUMIBLE" "DETA_MENU_CONSUMIBLE"</DefiningQue
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="USUARIO">
-            <EntityTypeMapping TypeName="Model.USUARIO">
-              <MappingFragment StoreEntitySet="USUARIO">
-                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
-                <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
-                <ScalarProperty Name="CONTRASENIA_USUARIO" ColumnName="CONTRASENIA_USUARIO" />
-                <ScalarProperty Name="ID_PERSONA" ColumnName="ID_PERSONA" />
+          <EntitySetMapping Name="UBICACION_MESA">
+            <EntityTypeMapping TypeName="Model.UBICACION_MESA">
+              <MappingFragment StoreEntitySet="UBICACION_MESA">
+                <ScalarProperty Name="ID_UBICACION" ColumnName="ID_UBICACION" />
+                <ScalarProperty Name="NOMBREUBICACION" ColumnName="NOMBREUBICACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DETA_MENU_CONSUMIBLE" TypeName="Model.DETA_MENU_CONSUMIBLE" StoreEntitySet="DETA_MENU_CONSUMIBLE">
-            <EndProperty Name="CONSUMIBLE">
-              <ScalarProperty Name="ID_CONSUMIBLE" ColumnName="ID_CONSUMIBLE" />
-            </EndProperty>
-            <EndProperty Name="MENU">
-              <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="SP_CREATE_BOLETA" FunctionName="Model.Store.SP_CREATE_BOLETA" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_CLIENTE" FunctionName="Model.Store.SP_CREATE_CLIENTE" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_CONSUMIBLE" FunctionName="Model.Store.SP_CREATE_CONSUMIBLE" />
-          <FunctionImportMapping FunctionImportName="SP_CREATE_MENU" FunctionName="Model.Store.SP_CREATE_MENU" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_MESA" FunctionName="Model.Store.SP_CREATE_MESA" />
-          <FunctionImportMapping FunctionImportName="SP_CREATE_PERSONA" FunctionName="Model.Store.SP_CREATE_PERSONA" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_PERSONAL" FunctionName="Model.Store.SP_CREATE_PERSONAL" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_RESERVA" FunctionName="Model.Store.SP_CREATE_RESERVA" />
-          <FunctionImportMapping FunctionImportName="SP_CREATE_USUARIO" FunctionName="Model.Store.SP_CREATE_USUARIO" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_CLIENTE" FunctionName="Model.Store.SP_DELETE_CLIENTE" />
           <FunctionImportMapping FunctionImportName="SP_DELETE_CONSUMIBLE" FunctionName="Model.Store.SP_DELETE_CONSUMIBLE" />
           <FunctionImportMapping FunctionImportName="SP_DELETE_MESA" FunctionName="Model.Store.SP_DELETE_MESA" />
-          <FunctionImportMapping FunctionImportName="SP_DELETE_PERSONA" FunctionName="Model.Store.SP_DELETE_PERSONA" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_PERSONAL" FunctionName="Model.Store.SP_DELETE_PERSONAL" />
           <FunctionImportMapping FunctionImportName="SP_DELETE_RESERVA" FunctionName="Model.Store.SP_DELETE_RESERVA" />
-          <FunctionImportMapping FunctionImportName="SP_DELETE_USUARIO" FunctionName="Model.Store.SP_DELETE_USUARIO" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_CLIENTE" FunctionName="Model.Store.SP_UPDATE_CLIENTE" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_CONSUMIBLE" FunctionName="Model.Store.SP_UPDATE_CONSUMIBLE" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_MESA" FunctionName="Model.Store.SP_UPDATE_MESA" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_PEDIDO" FunctionName="Model.Store.SP_UPDATE_PEDIDO" />
-          <FunctionImportMapping FunctionImportName="SP_UPDATE_PERSONA" FunctionName="Model.Store.SP_UPDATE_PERSONA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_PERSONAL" FunctionName="Model.Store.SP_UPDATE_PERSONAL" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_RESERVA" FunctionName="Model.Store.SP_UPDATE_RESERVA" />
-          <FunctionImportMapping FunctionImportName="SP_UPDATE_USUARIO" FunctionName="Model.Store.SP_UPDATE_USUARIO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

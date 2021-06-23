@@ -1,10 +1,15 @@
-﻿
+﻿@using Restaurante_siglo_XI
 @{
     ViewBag.Title = "Home";
 }
 
-<h2>homeUser</h2>
+@{ Cliente personas = (Cliente)ViewBag.cliente;}
 
-Crear reserva
+<!--
+    -->
 
-<button>@Html.ActionLink("Ver reservas creadas", "Create", "Reserva")</button>
+<h2>Bienvenido @personas.nombre_cliente @personas.apellidoP @personas.apellidoM</h2>
+
+<button id="botonCliente"><a href="@Url.Action("Create","Reserva",new {id = personas.id_cliente })"> Crear Reservas</a></button>
+<br />
+<button id="botonCLiente"><a href="@Url.Action("reCliente","Reserva",new {id = personas.id_cliente })"> Ver Reservas creadas</a></button>

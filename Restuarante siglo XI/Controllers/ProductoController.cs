@@ -26,6 +26,7 @@ namespace Restuarante_siglo_XI.Controllers
         // GET: Producto/Create
         public ActionResult Create()
         {
+            EnviarBodega();
             enviarCategiorias();
             return View();
         }
@@ -34,15 +35,20 @@ namespace Restuarante_siglo_XI.Controllers
         {
             ViewBag.categoria = new categoria().LeerAllCategoria();
         }
+        private void EnviarBodega()
+        {
+            ViewBag.bodega = new Bodega().LeerTodo();
+        }
         // POST: Producto/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "nombre_producto, descripcion, Stock,precioProducto,id_categoria")]Producto producto)
+        public ActionResult Create(Producto producto)
         {
             try
             {
                 // TODO: Add insert logic here
                 if (!ModelState.IsValid)
                 {
+                    EnviarBodega();
                     enviarCategiorias();
                     return View(producto);
                 }
@@ -68,13 +74,14 @@ namespace Restuarante_siglo_XI.Controllers
                 TempData["mensaje"] = "producto no encontrado";
                 return RedirectToAction("Index");
             }
+            EnviarBodega();
             enviarCategiorias();
             return View(producto);
         }
 
         // POST: Producto/Edit/5
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "id_producto, nombre_producto, decripcion_producto, stock, precioProducto, id_categoria")]Producto producto)
+        public ActionResult Edit(Producto producto)
         {
             try
             {

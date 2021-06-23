@@ -12,28 +12,23 @@ namespace Restaurante_siglo_XI.DALC
     using System;
     using System.Collections.Generic;
     
-    public partial class PERSONA
+    public partial class CLIENTE
     {
-        public PERSONA()
+        public CLIENTE()
         {
             this.RESERVA = new HashSet<RESERVA>();
-            this.USUARIO = new HashSet<USUARIO>();
         }
     
-        public decimal ID_PERSONA { get; set; }
-        public string RUT_PERSONA { get; set; }
-        public string NOMBRE_PERSONA { get; set; }
-        public string APATERNO_PERSONA { get; set; }
-        public string AMATERNO_PERSONA { get; set; }
-        public Nullable<decimal> TELEFONO_PERSONA { get; set; }
-        public string CORREO_PERSONA { get; set; }
-        public string ACTIVO_PERSONA { get; set; }
-        public decimal ID_CARGO_PERSONA { get; set; }
-        public decimal ID_COMUNA_PERSONA { get; set; }
+        public decimal ID_CLIENTE { get; set; }
+        public string RUTCLIENTE { get; set; }
+        public string NOMBRE { get; set; }
+        public string APELLIDOPATERNO { get; set; }
+        public string APELLIDOMATERNO { get; set; }
+        public string CORREO_ELECTRONICO { get; set; }
+        public string CONTRASENIA { get; set; }
+        public decimal COMUNA_ID_COMUNA { get; set; }
     
-        public virtual CARGO CARGO { get; set; }
         public virtual COMUNA COMUNA { get; set; }
         public virtual ICollection<RESERVA> RESERVA { get; set; }
-        public virtual ICollection<USUARIO> USUARIO { get; set; }
     }
 }

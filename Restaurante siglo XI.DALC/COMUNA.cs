@@ -16,14 +16,16 @@ namespace Restaurante_siglo_XI.DALC
     {
         public COMUNA()
         {
-            this.PERSONA = new HashSet<PERSONA>();
+            this.CLIENTE = new HashSet<CLIENTE>();
+            this.PERSONAL = new HashSet<PERSONAL>();
         }
     
         public decimal ID_COMUNA { get; set; }
         public string NOMBRE_COMUNA { get; set; }
-        public decimal ID_REGION { get; set; }
+        public decimal REGION_ID_REGION { get; set; }
     
+        public virtual ICollection<CLIENTE> CLIENTE { get; set; }
         public virtual REGION REGION { get; set; }
-        public virtual ICollection<PERSONA> PERSONA { get; set; }
+        public virtual ICollection<PERSONAL> PERSONAL { get; set; }
     }
 }
