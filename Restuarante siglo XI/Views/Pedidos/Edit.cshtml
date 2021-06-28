@@ -4,7 +4,7 @@
 }
 
 
-<h2>Editar el Pedido del cliente</h2>
+
 
 
 <button>@Html.ActionLink("Volver a la pagina principal", "homeAdmin", "Persona")</button>
@@ -13,7 +13,11 @@
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(p => p.id_pedido)
-    @Html.DropDownListFor(p => p.id_estado, new SelectList(ViewBag.estados, "id_estado", "nombre_estado"))
-    <button>Modificar Pedido</button>
+    <section id="formulario">
+        <h2>Editar el Pedido del cliente</h2>
+        @Html.HiddenFor(p => p.id_pedido)
+        @Html.DropDownListFor(p => p.id_estado, new SelectList(ViewBag.estados, "id_estado", "nombre_estado"))
+        <button>Modificar Pedido</button>
+    </section>
+
 }

@@ -30,6 +30,7 @@ namespace Restuarante_siglo_XI.Controllers
 
 
             //se almacena en una lista los datos que se manda a buscar por el id cliente
+            ViewBag.cliente = new Cliente().buscarCliente(id);
             ViewBag.listaReserva = new Reserva().buscarReservaCLiente(id);
             return View();
         }

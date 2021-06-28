@@ -4,12 +4,50 @@
  @import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
  @import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 /*--------------------------------------------------------------------- basic ---------------------------------------------------------------------*/
- body {
-     color: #666666;
-     font-size: 14px;
-     font-family: 'poppins', sans-serif;
-     line-height: 1.80857;
-     font-weight: normal;
+body {
+    color: #1a1a1a;
+    font-size: 14px;
+    font-family: 'poppins', sans-serif;
+    line-height: 1.80857;
+    font-weight: normal;
+    background-image: url("../images/fondoWeb1.jpg");
+}
+
+#main_user, #main_admin {
+    text-align: center;
+    height: 600px;
+}
+
+#formulario {
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid beige;
+    background-color: beige;
+}
+
+#botonCliente, #botonadmin {
+    font-size: 25px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: beige;
+    text-align: center;
+    background-color: beige;
+}
+
+th, td {
+    text-align: center;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid beige;
+    background-color: beige;
+}
+#navbar2 {
+    background-color: goldenrod !important;
 }
 
  a {
@@ -374,7 +412,7 @@
  #main_slider .carousel-control-prev, #main_slider .carousel-control-next {
      width: 65px;
      height: 65px;
-     background: #e1e0e0;
+     background-color: beige;
      opacity: 1;
      font-size: 30px;
      color: #212020;
@@ -640,6 +678,7 @@
 /** end Our Client **/
 /*--------------------------------------------------------------------- footer ---------------------------------------------------------------------*/
  .footer {
+     
      background: #d8b00f;
      padding-top:90px;
      margin-top: 90px;

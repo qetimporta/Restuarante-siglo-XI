@@ -16,7 +16,6 @@ namespace Restaurante_siglo_XI
         public int numeroMesa{ get; set; }
         [Required]
         public int maxima_comensales { get; set; }
-        [Required]
         public String mesaUsada{ get; set; }
         [Required]
         public int id_ubicacion { get; set; }
@@ -29,13 +28,13 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-                db.SP_CREATE_MESA(this.numeroMesa,this.id_ubicacion, this.maxima_comensales, "0");
+                db.SP_CREATE_MESA(this.numeroMesa,this.id_ubicacion,this.maxima_comensales);
                 return true;
             }
             catch (Exception)
             {
 
-                return false;
+                throw;
             }
         }
 

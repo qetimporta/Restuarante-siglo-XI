@@ -27,22 +27,46 @@ namespace Restuarante_siglo_XI.Controllers
         {
             return View();
         }
+        private void enviarMesas()
+        {
+            ViewBag.mesas = new Mesa().ListarMesa();
+        }
 
+        private void listar_menus() 
+        {
+            ViewBag.menus = new Menu().leer_todo();
+        }
         // GET: Pedidos/Create
         public ActionResult Create()
         {
+            enviarMesas();
+            listar_menus();
             return View();
         }
 
         // POST: Pedidos/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Pedido pedido)
         {
             try
             {
+
                 // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                if (!ModelState.IsValid)
+                {
+                    enviarMesas();
+                    listar_menus();
+                    return View(pedido);
+                }
+                if (pedido.AgregarPedido() ==true)
+                {
+                    return RedirectToAction("Index");
+                }
+                enviarEstados();
+                enviarMesas();
+                listar_menus();
+                return View();
             }
             catch
             {

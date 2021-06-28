@@ -38,18 +38,42 @@ namespace Restaurante_siglo_XI
             }).Where(m=> m.id_menu ==id).FirstOrDefault();
         }
 
+        public bool eliminarMenu(int id) 
+        {
+            try
+            {
+                var me = db.MENU.SingleOrDefault(x=> x.ID_MENU == id);
+                db.MENU.Remove(me);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
 
         public bool guardarMenu() 
         {
             try
             {
-                var menus = new MENU 
-                {
-                    NOMBRE_MENU = nombre_menu,
-                    DESCRIPCION_MENU = descripcion_menu
-                };
-                db.MENU.Add(menus);
-                db.SaveChanges();
+                db.SP_CREATE_MENU(this.nombre_menu, this.descripcion_menu);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
+
+        public bool ModificarMenu()
+        {
+            try
+            {
+                db.SP_UPDATE_MENU(this.id_menu,this.nombre_menu, this.descripcion_menu);
                 return true;
             }
             catch (Exception)

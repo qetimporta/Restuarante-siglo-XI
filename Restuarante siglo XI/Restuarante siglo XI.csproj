@@ -97,6 +97,7 @@
     <Content Include="Content\css\owl.carousel.min.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\fondoWeb1.jpg" />
     <Content Include="Content\images\logo1.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
@@ -129,7 +130,6 @@
     <Content Include="Views\Persona\Create.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Persona\Edit.cshtml" />
-    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <Content Include="Views\Producto\Index.cshtml" />
     <Content Include="Views\Producto\Create.cshtml" />
     <Content Include="Views\Reserva\Create.cshtml" />
@@ -143,12 +143,13 @@
     <Content Include="Views\Mesa\ListaAdmin.cshtml" />
     <Content Include="Views\Pedidos\Index.cshtml" />
     <Content Include="Views\Pedidos\Edit.cshtml" />
-    <None Include="Properties\PublishProfiles\IISProfile1.pubxml" />
     <Content Include="Views\Mesa\Edit.cshtml" />
     <Content Include="Views\Reserva\reCliente.cshtml" />
     <Content Include="Views\Auth\LoginAdmin.cshtml" />
     <Content Include="Views\Pedidos\Create.cshtml" />
     <Content Include="Views\Menu\Create.cshtml" />
+    <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\Menu\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -159,6 +160,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Restaurante siglo XI\RestauranteSigloXI.Negocio.csproj">

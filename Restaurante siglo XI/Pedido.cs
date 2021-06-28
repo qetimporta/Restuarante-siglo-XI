@@ -34,7 +34,7 @@ namespace Restaurante_siglo_XI
                 id_pedido= (int)pe.ID_PEDIDO,
                 id_menu = (int)pe.ID_MENU,
                 pedidoAdicional = pe.PEDIDOADICIONAL,
-                menu = new Menu() { id_menu = (int)pe.ID_MENU,nombre_menu=pe.MENU.DESCRIPCION_MENU },
+                menu = new Menu() { id_menu = (int)pe.ID_MENU,nombre_menu=pe.MENU.NOMBRE_MENU },
                 id_estado = (int)pe.ID_ESTADO,
                 estado = new Estado() { id_estado = (int)pe.ID_ESTADO, nombre_estado = pe.ESTADOPEDIDO.NOMBRE_ESTADO},
                 id_mesa = (int)pe.ID_MENU,
@@ -50,12 +50,26 @@ namespace Restaurante_siglo_XI
                 id_pedido = (int)pe.ID_PEDIDO,
                 id_menu = (int)pe.ID_MENU,
                 pedidoAdicional = pe.PEDIDOADICIONAL,
-                menu = new Menu() { id_menu = (int)pe.ID_MENU, nombre_menu = pe.MENU.DESCRIPCION_MENU },
+                menu = new Menu() { id_menu = (int)pe.ID_MENU, nombre_menu = pe.MENU.NOMBRE_MENU },
                 id_estado = (int)pe.ID_ESTADO,
                 estado = new Estado() { id_estado = (int)pe.ID_ESTADO, nombre_estado = pe.ESTADOPEDIDO.NOMBRE_ESTADO },
                 id_mesa = (int)pe.ID_MENU,
                 mesas = new Mesa() { id_mesa = (int)pe.ID_MENU, numeroMesa = (int)pe.MESA.NUMEROMESA, maxima_comensales = (int)pe.MESA.MAX_COMENSALES_MESA, mesaUsada = pe.MESA.USADO_MESA, id_ubicacion = (int)pe.MESA.ID_UBICACION }
             }).Where(pe => pe.id_pedido == pedi).FirstOrDefault();
+        }
+
+
+        public bool AgregarPedido() 
+        {
+            try
+            {
+                db.SP_CREATE_PEDIDO(this.pedidoAdicional, this.id_mesa,this.id_menu);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool ModificarPedido() 

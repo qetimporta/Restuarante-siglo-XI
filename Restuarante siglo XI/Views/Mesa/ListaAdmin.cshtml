@@ -6,7 +6,9 @@
 <h2>Lista de las mesas</h2>
 
 @{List<Mesa> mesas = (List<Mesa>)ViewBag.mesas;}
-<button>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+<button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+<button>@Html.ActionLink("crear Nueva Mesa", "Create", "Mesa")</button>
+
 <div class="row">
     <div class="col-md-12">
         <table>
@@ -18,7 +20,7 @@
                 <th>opciones</th>
             </tr>
             @foreach (var m in mesas)
-             {
+            {
                 <tr>
                     <td>@m.numeroMesa</td>
                     <td>@m.maxima_comensales</td>
@@ -29,7 +31,7 @@
                         @Html.ActionLink("Eliminar", "Delete", new { id = m.id_mesa })
                     </td>
                 </tr>
-             }
+            }
         </table>
     </div>
 </div>

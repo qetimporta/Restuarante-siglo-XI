@@ -1,0 +1,37 @@
+﻿@using Restaurante_siglo_XI
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+@{ List<Menu> menu = (List<Menu>)ViewBag.menu; }
+
+<button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+<h2>lista de los menus</h2>
+<div class="row">
+    
+    <div class="col-md-12">
+        <table>
+
+            <tr>
+
+                <th>nombre del menu</th>
+                <th>descripcion del menu</th>
+                <th></th>
+            </tr>
+
+            @foreach (var m in menu)
+            {
+                <tr>
+                    <td>@m.nombre_menu</td>
+                    <td>@m.descripcion_menu</td>
+                    <td>
+                        @Html.ActionLink("Modificar", "Edit", new { id = m.id_menu })
+                        <!--Html.ActionLink("Eliminar","Delete", new { id = m.id_menu})-->
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

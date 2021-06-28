@@ -4,15 +4,40 @@
 
 <h2>Administrador </h2>
 
+<section id="main_admin">
+    <div class="row">
+        <div class="col-md-4">
+            <button id="botonadmin"><i class="fas fa-plus"></i> @Html.ActionLink("Registrar Nuevo Producto", "Create", "Producto")</button>
+            <button id="botonadmin"><i class="fas fa-plus"></i> @Html.ActionLink("crear Nueva Mesa", "Create", "Mesa")</button>
+            <button id="botonadmin"><i class="fas fa-user-plus"></i>@Html.ActionLink("Crear trabajador", "Create", "Persona")</button>
+            <button id="botonadmin"><i class="fas fa-user-plus"></i>@Html.ActionLink("Crear Cliente", "Create", "Usuario")</button>
+            <button id="botonadmin"><i class="fas fa-book"></i> @Html.ActionLink("Crear nuevo menu", "Create", "Menu")</button>
+        </div>
+        <div class="col-md-4">
+            <button id="botonadmin"><i class="fas fa-archive"></i> @Html.ActionLink("Lista de todos los productos", "Index", "Producto")</button>
+            <button id="botonadmin"><i class="fas fa-list"></i> @Html.ActionLink("Ver reservas creadas", "Index", "Reserva")</button>
+            <button id="botonadmin"><i class="fas fa-list"></i> @Html.ActionLink("Lista de las mesas", "ListaAdmin", "Mesa")</button>
+            <button id="botonadmin"><i class="fas fa-list"></i> @Html.ActionLink("Ver trabajadores registrados", "Index", "Persona")</button>
+            <button id="botonadmin"><i class="fas fa-list"></i> @Html.ActionLink("ver menu creados", "Index", "Menu")</button>
+        </div>
+        <div class="col-md-4">
+            <button id="botonadmin"><i class="fas fa-cart-plus"></i> @Html.ActionLink("Crear Pedido", "Create", "Pedidos")</button>
+            <button id="botonadmin"><i class="fas fa-clipboard-list"></i> @Html.ActionLink("Ver pedidos en realizados", "Index", "Pedidos")</button>
 
-    <button id="botonadmin">@Html.ActionLink("Registrar Nuevo Producto", "Create", "Producto")</button>
-    <button id="botonadmin">@Html.ActionLink("Lista de todos los productos", "Index", "Producto")</button>
-    <button id="botonadmin">@Html.ActionLink("Ver reservas creadas", "Index", "Reserva")</button>
-    <button id="botonadmin">@Html.ActionLink("Lista de las mesas", "ListaAdmin", "Mesa")</button>
-    <button id="botonadmin">@Html.ActionLink("crear Nueva Mesa", "Create", "Mesa")</button>
-    <button id="botonadmin">@Html.ActionLink("Crear trabajador", "Create", "Persona")</button>
-    <button id="botonadmin">@Html.ActionLink("Crear Ciente", "Create", "Usuario")</button>
-    <button id="botonadmin">@Html.ActionLink("Ver trabajadores registrados", "Index", "Persona")</button>
-<button id="botonadmin">@Html.ActionLink("Ver pedidos en realizados", "Index", "Pedidos")</button>
-<button id="botonadmin">@Html.ActionLink("Crear Pedidos", "Index", "Pedidos")</button>
+        </div>
+
+    </div>
+    
+
+
+
+    
+    
+    
+    
+
+    
+    
+</section>
+
     

@@ -3,17 +3,23 @@
     ViewBag.Title = "LogIn";
 }
 
-<h2>Ingresa a tu cuenta</h2>
+
 
 @using (Html.BeginForm())
 {
-        @Html.TextBoxFor(u => u.correoCliente, new { placeholder = "Correo Electronico"})
+    <section id="formulario">
+        <h2>Ingresa a tu cuenta</h2>
+        @Html.TextBoxFor(u => u.correoCliente, new { placeholder = "Correo Electronico" })
         <br />
         @Html.PasswordFor(u => u.Password, new { placeholder = "Contraseña" })
         <br />
         <button>Ingresar</button>
+        <br />
+        @Html.ActionLink("no tienes cuenta? Registrate ahora!", "Create", "Usuario")
+    </section>
+
 }
-@Html.ActionLink("no tienes cuenta? Registrate ahora!","Create","Usuario")
+
 <br />
 @TempData["mensaje"]
 

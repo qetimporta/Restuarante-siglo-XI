@@ -363,11 +363,19 @@
           <Parameter Name="V_ID_TIPOCONSUMIBLE" Type="number" Mode="In" />
           <Parameter Name="V_BODEGA" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_CREATE_MENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
+        </Function>
         <Function Name="SP_CREATE_MESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_NUMEROMESA" Type="number" Mode="In" />
           <Parameter Name="V_UBICACIONM" Type="number" Mode="In" />
           <Parameter Name="V_MAX_CON" Type="number" Mode="In" />
-          <Parameter Name="V_USADO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_PEDIDOADICIONAL" Type="varchar2" Mode="In" />
+          <Parameter Name="V_IDMESA" Type="number" Mode="In" />
+          <Parameter Name="V_IDMENU" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_CREATE_PERSONAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_RUT" Type="varchar2" Mode="In" />
@@ -417,6 +425,11 @@
           <Parameter Name="V_ID_CATEGORIA" Type="number" Mode="In" />
           <Parameter Name="V_PRECIO" Type="number" Mode="In" />
           <Parameter Name="V_BODEGA" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_MENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+          <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
         </Function>
         <Function Name="SP_UPDATE_MESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
@@ -1004,11 +1017,19 @@
             <Parameter Name="V_ID_TIPOCONSUMIBLE" Mode="In" Type="Decimal" />
             <Parameter Name="V_BODEGA" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <FunctionImport Name="SP_CREATE_MENU">
+            <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="SP_CREATE_MESA">
             <Parameter Name="V_NUMEROMESA" Mode="In" Type="Decimal" />
             <Parameter Name="V_UBICACIONM" Mode="In" Type="Decimal" />
             <Parameter Name="V_MAX_CON" Mode="In" Type="Decimal" />
-            <Parameter Name="V_USADO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_PEDIDO">
+            <Parameter Name="V_PEDIDOADICIONAL" Mode="In" Type="String" />
+            <Parameter Name="V_IDMESA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDMENU" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_CREATE_PERSONAL">
             <Parameter Name="V_RUT" Mode="In" Type="String" />
@@ -1058,6 +1079,11 @@
             <Parameter Name="V_ID_CATEGORIA" Mode="In" Type="Decimal" />
             <Parameter Name="V_PRECIO" Mode="In" Type="Decimal" />
             <Parameter Name="V_BODEGA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_MENU">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+            <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_UPDATE_MESA">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
@@ -1257,7 +1283,9 @@
           <FunctionImportMapping FunctionImportName="SP_CREATE_BOLETA" FunctionName="Model.Store.SP_CREATE_BOLETA" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_CLIENTE" FunctionName="Model.Store.SP_CREATE_CLIENTE" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_CONSUMIBLE" FunctionName="Model.Store.SP_CREATE_CONSUMIBLE" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_MENU" FunctionName="Model.Store.SP_CREATE_MENU" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_MESA" FunctionName="Model.Store.SP_CREATE_MESA" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_PEDIDO" FunctionName="Model.Store.SP_CREATE_PEDIDO" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_PERSONAL" FunctionName="Model.Store.SP_CREATE_PERSONAL" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_RESERVA" FunctionName="Model.Store.SP_CREATE_RESERVA" />
           <FunctionImportMapping FunctionImportName="SP_DELETE_CLIENTE" FunctionName="Model.Store.SP_DELETE_CLIENTE" />
@@ -1267,6 +1295,7 @@
           <FunctionImportMapping FunctionImportName="SP_DELETE_RESERVA" FunctionName="Model.Store.SP_DELETE_RESERVA" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_CLIENTE" FunctionName="Model.Store.SP_UPDATE_CLIENTE" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_CONSUMIBLE" FunctionName="Model.Store.SP_UPDATE_CONSUMIBLE" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_MENU" FunctionName="Model.Store.SP_UPDATE_MENU" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_MESA" FunctionName="Model.Store.SP_UPDATE_MESA" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_PEDIDO" FunctionName="Model.Store.SP_UPDATE_PEDIDO" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_PERSONAL" FunctionName="Model.Store.SP_UPDATE_PERSONAL" />

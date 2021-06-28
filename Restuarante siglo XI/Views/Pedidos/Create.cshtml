@@ -3,9 +3,20 @@
     ViewBag.Title = "Crear pedido";
 }
 
-<h2>Crea el pedido</h2>
 
-@using (Html.BeginForm()) 
+<button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+@using (Html.BeginForm())
 {
+<section id="formulario">
+    <h2>Crea el pedido</h2>
+    @Html.DropDownListFor(p => p.id_menu, new SelectList(ViewBag.menus, "id_menu", "nombre_menu"))
+    <br />
+    @Html.TextBoxFor(p => p.pedidoAdicional, new { placeholder = "algo mas que agregar" })
+    <br />
+    @Html.DropDownListFor(p => p.id_mesa, new SelectList(ViewBag.mesas, "id_mesa", "numeroMesa"))
+    <br />
 
+
+    <button>Crear Pedido</button>
+</section>
 }

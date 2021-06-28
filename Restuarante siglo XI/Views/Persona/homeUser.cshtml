@@ -3,13 +3,16 @@
     ViewBag.Title = "Home";
 }
 
-@{ Cliente personas = (Cliente)ViewBag.cliente;}
 
+@{ Cliente personas = (Cliente)ViewBag.cliente;}
 <!--
     -->
 
-<h2>Bienvenido @personas.nombre_cliente @personas.apellidoP @personas.apellidoM</h2>
+<section id="main_user">
+    <h2>Bienvenido @personas.nombre_cliente @personas.apellidoP @personas.apellidoM</h2>
+    <br />
+    <a id="botonCliente" href="@Url.Action("Create","Reserva",new {id = personas.id_cliente })"><i class="fas fa-address-book"></i>Crear Reservas</a>
 
-<button id="botonCliente"><a href="@Url.Action("Create","Reserva",new {id = personas.id_cliente })"> Crear Reservas</a></button>
-<br />
-<button id="botonCLiente"><a href="@Url.Action("reCliente","Reserva",new {id = personas.id_cliente })"> Ver Reservas creadas</a></button>
+    <a id="botonCliente" href="@Url.Action("reCliente","Reserva",new {id = personas.id_cliente })"> <span><i class="fas fa-book"></i>Ver Reservas creadas</span></a>
+</section>
+

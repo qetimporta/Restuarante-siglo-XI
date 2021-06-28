@@ -1,20 +1,20 @@
 ﻿@model Restaurante_siglo_XI.Menu
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
-<button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
 
-@using (Html.BeginForm()) 
+<button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver al home", "homeAdmin", "Persona")</button>
+
+@using (Html.BeginForm())
 {
     <section id="formulario">
-        <h2>Crear nuevo menu</h2>
-
+        <h2>Modificar menu</h2>
+        @Html.HiddenFor(m => m.id_menu)
         @Html.TextBoxFor(m => m.nombre_menu, new { placeholder = "nombre del menu" })
         <br />
         @Html.TextAreaFor(m => m.descripcion_menu, new { placeholder = "nombre del menu" })
         <br />
-        <button>Crear Menu</button>
-
+        <button>Modificar Menu</button>
     </section>
 
 }

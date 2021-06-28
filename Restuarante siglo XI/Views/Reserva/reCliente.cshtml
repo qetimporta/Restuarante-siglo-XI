@@ -4,9 +4,9 @@
 }
 
 <h2>tus reservas</h2>
-
+@{ Cliente cl = (Cliente)ViewBag.cliente;}
 @{ List<Reserva> re = (List<Reserva>)ViewBag.ListaReserva;}
-
+<a href="@Url.Action("homeUser","Persona",new {correo =cl.correoCliente})"><i class="fas fa-arrow-circle-left"></i> VOLVER</a>
 
 
 <div class="row">
@@ -24,6 +24,6 @@
                     <td>@r.mesa.numeroMesa</td>
                 </tr>
             }
-            </table>
+        </table>
     </div>
 </div>

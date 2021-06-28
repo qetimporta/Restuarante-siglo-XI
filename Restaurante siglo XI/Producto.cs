@@ -52,6 +52,7 @@ namespace Restaurante_siglo_XI
                 nombre_producto = prod.NOMBRE_CONSUMIBLE,
                 decripcion_producto = prod.DESCRIPCION_CONSUMIBLE,
                 Stock = (int)prod.STOCK,
+                precioProducto = (int)prod.PRECIO_CONSUMIBLE,
                 id_categoria = (int)prod.ID_TIPO_CONSUMIBLE,
                 categoria = new categoria() { id_categoria = (int)prod.ID_TIPO_CONSUMIBLE, nombre_categoria = prod.TIPO_CONSUMIBLE.NOMBRE_TIPO_CONSUMIBLE},
                 id_bodega = (int)prod.ID_BODEGA,

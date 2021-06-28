@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Editando producto";
 }
-<button>@Html.ActionLink("Volver a la pagina principal del administrador", "homeAdmin", "Persona")</button>
-<button>@Html.ActionLink("Volver a la lista de productos", "Index", "Producto")</button>
+<button><i class="fas fa-arrow-circle-left"></i> @Html.ActionLink("Volver a la pagina principal del administrador", "homeAdmin", "Persona")</button>
+<button><i class="fas fa-arrow-circle-left"></i> @Html.ActionLink("Volver a la lista de productos", "Index", "Producto")</button>
 <h2>Editar Producto</h2>
 @using (Html.BeginForm())
 {

@@ -6,7 +6,7 @@
 <h2>LIstado de productos</h2>
 
 @{ List<Producto> producto = (List<Producto>)ViewBag.producto;}
-<button>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+<button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
 <div class="row">
     <div class="col-md-12">
         <table>
@@ -32,7 +32,7 @@
                         <td>@item.bodega.nombreBodega</td>
                         <td>
                             @Html.ActionLink("modificar", "Edit", new { id = item.id_producto })
-                            @Html.ActionLink("Eliminar", "Delete", new { id = item.id_producto })
+                            <!--Html.ActionLink("Eliminar", "Delete", new { id = item.id_producto })-->
                         </td>
                     }
 
@@ -75,7 +75,7 @@
                         <td>@item.bodega.nombreBodega</td>
                         <td>
                             @Html.ActionLink("modificar", "Edit", new { id = item.id_producto })
-                            @Html.ActionLink("Eliminar", "Delete", new { id = item.id_producto })
+                            <!--Html.ActionLink("Eliminar", "Delete", new { id = item.id_producto })-->
                         </td>
                     }
 

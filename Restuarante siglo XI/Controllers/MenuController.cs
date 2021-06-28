@@ -13,6 +13,7 @@ namespace Restuarante_siglo_XI.Controllers
         // GET: Menu
         public ActionResult Index()
         {
+            ViewBag.menu = new Menu().leer_todo();
             return View();
         }
 
@@ -54,28 +55,45 @@ namespace Restuarante_siglo_XI.Controllers
         // GET: Menu/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Menu me = new Menu().buscar(id);
+            if (me == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(me);
         }
 
         // POST: Menu/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Menu menu)
         {
             try
             {
                 // TODO: Add update logic here
-
+                menu.ModificarMenu();
+                TempData["mensaje"] = "modificado correctamente";
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View(menu);
             }
         }
 
         // GET: Menu/Delete/5
         public ActionResult Delete(int id)
         {
+            if (new Menu().buscar(id)== null)
+            {
+                TempData["mensaje"] = "no se encontro";
+                return RedirectToAction("Index");
+            }
+            if (new Menu().eliminarMenu(id))
+            {
+                TempData["mensaje"] = "elimiando correctamente";
+                return RedirectToAction("Index");
+            }
+            TempData["mensaje"] = "no se ha podido eliminar";
             return View();
         }
 

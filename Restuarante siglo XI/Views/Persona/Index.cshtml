@@ -6,7 +6,7 @@
 <h2>Listado de clientes registrados</h2>
 @{ List<Personal> personas = (List<Personal>)ViewBag.personas;}
 
-<button>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+<button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
 
 <div class="row">
     <div class="col-md-12">
@@ -96,4 +96,5 @@
         </table>
 
     </div>
+</div>
     @TempData["mensaje"]

@@ -3,15 +3,20 @@
     ViewBag.Title = "LoginAdmin";
 }
 
-<h2>LoginAdmin</h2>
+
 
 @using (Html.BeginForm())
 {
+<section id="formulario">
+    <h2>Login Administrador</h2>
     @Html.TextBoxFor(u => u.Correo_personal, new { placeholder = "Correo Electronico" })
     <br />
     @Html.PasswordFor(u => u.contrasenia, new { placeholder = "Contraseña" })
     <br />
     <button>Ingresar</button>
+    <br />
+    @TempData["mensaje"]
+</section>
+
 }
 <br />
-@TempData["mensaje"]

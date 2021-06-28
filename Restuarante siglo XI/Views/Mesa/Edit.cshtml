@@ -3,19 +3,22 @@
     ViewBag.Title = "Editar mesas";
 }
 
-<h2>Editar mesa</h2>
-<button>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+<button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(p => p.id_mesa)
-    @Html.TextBoxFor(m => m.numeroMesa, new { placeholder = "Ubicación de la Mesa" })
-    <br />
-    @Html.TextBoxFor(m => m.maxima_comensales, new { placeholder = "cantidad maxima de la mesa" })
-    <br />
-    @Html.TextBoxFor(m => m.mesaUsada, new { placeholder = "Mesa en uso (solo 1 o 0)" })
-    <br />
-    @Html.DropDownListFor(p => p.id_ubicacion, new SelectList(ViewBag.ubicacion, "id_ubicacionMesa", "nombre_ubicacion"))
-    <br />
-    <button>Modificar Mesa</button>
+    <section id="formulario">
+        <h2>Editar mesa</h2>
+        @Html.HiddenFor(p => p.id_mesa)
+        @Html.TextBoxFor(m => m.numeroMesa, new { placeholder = "Ubicación de la Mesa" })
+        <br />
+        @Html.TextBoxFor(m => m.maxima_comensales, new { placeholder = "cantidad maxima de la mesa" })
+        <br />
+        @Html.TextBoxFor(m => m.mesaUsada, new { placeholder = "Mesa en uso (solo 1 o 0)" })
+        <br />
+        @Html.DropDownListFor(p => p.id_ubicacion, new SelectList(ViewBag.ubicacion, "id_ubicacionMesa", "nombre_ubicacion"))
+        <br />
+        <button>Modificar Mesa</button>
+    </section>
+
 }
