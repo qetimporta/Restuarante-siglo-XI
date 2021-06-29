@@ -1,0 +1,29 @@
+﻿@using Restaurante_siglo_XI
+@{
+    ViewBag.Title = "lista de insumos requeridos";
+}
+@{ List<insumos> inso = (List<insumos>)ViewBag.insumos;}
+
+<button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+
+
+<h2>Lista de pedida de insumos</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <table>
+            <tr>
+                <th>detalle de pedido</th>
+                <th>bodega solicitante</th>
+            </tr>
+            @foreach (var ins in inso)
+            {
+                <tr>
+                     <td>@ins.descripcion</td>
+                    <td>@ins.bodega.nombreBodega</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

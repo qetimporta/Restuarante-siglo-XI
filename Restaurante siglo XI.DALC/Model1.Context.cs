@@ -36,6 +36,7 @@ namespace Restaurante_siglo_XI.DALC
         public DbSet<CONSUMIBLE> CONSUMIBLE { get; set; }
         public DbSet<DETA_MENU_CONSU> DETA_MENU_CONSU { get; set; }
         public DbSet<ESTADOPEDIDO> ESTADOPEDIDO { get; set; }
+        public DbSet<INSUMOS> INSUMOS { get; set; }
         public DbSet<MENU> MENU { get; set; }
         public DbSet<MESA> MESA { get; set; }
         public DbSet<PEDIDO> PEDIDO { get; set; }
@@ -122,6 +123,19 @@ namespace Restaurante_siglo_XI.DALC
                 new ObjectParameter("V_BODEGA", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CREATE_CONSUMIBLE", v_NOMBREParameter, v_DESCRIPCIONParameter, v_PRECIOParameter, v_STOCKParameter, v_ID_TIPOCONSUMIBLEParameter, v_BODEGAParameter);
+        }
+    
+        public virtual int SP_CREATE_INSUMOS(string v_DESCRIPCION, Nullable<decimal> v_ID_BODEGA)
+        {
+            var v_DESCRIPCIONParameter = v_DESCRIPCION != null ?
+                new ObjectParameter("V_DESCRIPCION", v_DESCRIPCION) :
+                new ObjectParameter("V_DESCRIPCION", typeof(string));
+    
+            var v_ID_BODEGAParameter = v_ID_BODEGA.HasValue ?
+                new ObjectParameter("V_ID_BODEGA", v_ID_BODEGA) :
+                new ObjectParameter("V_ID_BODEGA", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CREATE_INSUMOS", v_DESCRIPCIONParameter, v_ID_BODEGAParameter);
         }
     
         public virtual int SP_CREATE_MENU(string v_NOMBRE, string v_DESCRIPCION)

@@ -1,0 +1,18 @@
+﻿@model Restaurante_siglo_XI.insumos
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm()) 
+{
+<section id="formulario">
+
+    <h2>Pedir insumos</h2>
+    @Html.DropDownListFor(p => p.id_bodega, new SelectList(ViewBag.bodega, "id_bodega", "NOMBREBODEGA"))
+    <br />
+    @Html.TextAreaFor(i => i.descripcion, new { placeholder = "detalle del pedido", required = "required" })
+    <br />
+    <button>enviar solicitud</button>
+</section>
+}

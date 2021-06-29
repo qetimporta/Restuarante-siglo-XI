@@ -75,6 +75,9 @@
     <Compile Include="ESTADOPEDIDO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="INSUMOS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="MENU.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -76,6 +76,14 @@
           <Property Name="ID_ESTADO" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_ESTADO" Type="varchar2" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="INSUMOS">
+          <Key>
+            <PropertyRef Name="ID_INSUMOS" />
+          </Key>
+          <Property Name="ID_INSUMOS" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PEDIDOINSUMO" Type="varchar2" MaxLength="300" Nullable="false" />
+          <Property Name="ID_BODEGA" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="MENU">
           <Key>
             <PropertyRef Name="ID_MENU" />
@@ -233,6 +241,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="INSUMOS_BODEGA_FK">
+          <End Role="BODEGA" Type="Self.BODEGA" Multiplicity="1" />
+          <End Role="INSUMOS" Type="Self.INSUMOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BODEGA">
+              <PropertyRef Name="ID_BODEGA" />
+            </Principal>
+            <Dependent Role="INSUMOS">
+              <PropertyRef Name="ID_BODEGA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="MESA_UBICACION_MESA_FK">
           <End Role="UBICACION_MESA" Type="Self.UBICACION_MESA" Multiplicity="1" />
           <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
@@ -363,6 +383,10 @@
           <Parameter Name="V_ID_TIPOCONSUMIBLE" Type="number" Mode="In" />
           <Parameter Name="V_BODEGA" Type="number" Mode="In" />
         </Function>
+        <Function Name="SP_CREATE_INSUMOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
+          <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_ID_BODEGA" Type="number" Mode="In" />
+        </Function>
         <Function Name="SP_CREATE_MENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
           <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
@@ -468,6 +492,7 @@
           <EntitySet Name="CONSUMIBLE" EntityType="Self.CONSUMIBLE" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="DETA_MENU_CONSU" EntityType="Self.DETA_MENU_CONSU" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" Schema="RESTAURANTEXXI" store:Type="Tables" />
+          <EntitySet Name="INSUMOS" EntityType="Self.INSUMOS" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="MENU" EntityType="Self.MENU" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="MESA" EntityType="Self.MESA" Schema="RESTAURANTEXXI" store:Type="Tables" />
           <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" Schema="RESTAURANTEXXI" store:Type="Tables" />
@@ -503,6 +528,10 @@
           <AssociationSet Name="DETA_MENU_CONSU_MENU_FK" Association="Self.DETA_MENU_CONSU_MENU_FK">
             <End Role="MENU" EntitySet="MENU" />
             <End Role="DETA_MENU_CONSU" EntitySet="DETA_MENU_CONSU" />
+          </AssociationSet>
+          <AssociationSet Name="INSUMOS_BODEGA_FK" Association="Self.INSUMOS_BODEGA_FK">
+            <End Role="BODEGA" EntitySet="BODEGA" />
+            <End Role="INSUMOS" EntitySet="INSUMOS" />
           </AssociationSet>
           <AssociationSet Name="MESA_UBICACION_MESA_FK" Association="Self.MESA_UBICACION_MESA_FK">
             <End Role="UBICACION_MESA" EntitySet="UBICACION_MESA" />
@@ -553,6 +582,7 @@
           <Property Name="ID_BODEGA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_BODEGA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CONSUMIBLE" Relationship="Self.CONSUMIBLE_BODEGA_FK" FromRole="BODEGA" ToRole="CONSUMIBLE" />
+          <NavigationProperty Name="INSUMOS" Relationship="Self.INSUMOS_BODEGA_FK" FromRole="BODEGA" ToRole="INSUMOS" />
           <NavigationProperty Name="PERSONAL" Relationship="Self.PERSONAL_BODEGA_FK" FromRole="BODEGA" ToRole="PERSONAL" />
         </EntityType>
         <EntityType Name="BOLETA">
@@ -631,6 +661,15 @@
           <Property Name="ID_ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_ESTADO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_ESTADOPEDIDO_FK" FromRole="ESTADOPEDIDO" ToRole="PEDIDO" />
+        </EntityType>
+        <EntityType Name="INSUMOS">
+          <Key>
+            <PropertyRef Name="ID_INSUMOS" />
+          </Key>
+          <Property Name="ID_INSUMOS" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="PEDIDOINSUMO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_BODEGA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="BODEGA" Relationship="Self.INSUMOS_BODEGA_FK" FromRole="INSUMOS" ToRole="BODEGA" />
         </EntityType>
         <EntityType Name="MENU">
           <Key>
@@ -730,6 +769,18 @@
               <PropertyRef Name="ID_BODEGA" />
             </Principal>
             <Dependent Role="CONSUMIBLE">
+              <PropertyRef Name="ID_BODEGA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="INSUMOS_BODEGA_FK">
+          <End Role="BODEGA" Type="Self.BODEGA" Multiplicity="1" />
+          <End Role="INSUMOS" Type="Self.INSUMOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BODEGA">
+              <PropertyRef Name="ID_BODEGA" />
+            </Principal>
+            <Dependent Role="INSUMOS">
               <PropertyRef Name="ID_BODEGA" />
             </Dependent>
           </ReferentialConstraint>
@@ -923,6 +974,7 @@
           <EntitySet Name="CONSUMIBLE" EntityType="Self.CONSUMIBLE" />
           <EntitySet Name="DETA_MENU_CONSU" EntityType="Self.DETA_MENU_CONSU" />
           <EntitySet Name="ESTADOPEDIDO" EntityType="Self.ESTADOPEDIDO" />
+          <EntitySet Name="INSUMOS" EntityType="Self.INSUMOS" />
           <EntitySet Name="MENU" EntityType="Self.MENU" />
           <EntitySet Name="MESA" EntityType="Self.MESA" />
           <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" />
@@ -934,6 +986,10 @@
           <AssociationSet Name="CONSUMIBLE_BODEGA_FK" Association="Self.CONSUMIBLE_BODEGA_FK">
             <End Role="BODEGA" EntitySet="BODEGA" />
             <End Role="CONSUMIBLE" EntitySet="CONSUMIBLE" />
+          </AssociationSet>
+          <AssociationSet Name="INSUMOS_BODEGA_FK" Association="Self.INSUMOS_BODEGA_FK">
+            <End Role="BODEGA" EntitySet="BODEGA" />
+            <End Role="INSUMOS" EntitySet="INSUMOS" />
           </AssociationSet>
           <AssociationSet Name="PERSONAL_BODEGA_FK" Association="Self.PERSONAL_BODEGA_FK">
             <End Role="BODEGA" EntitySet="BODEGA" />
@@ -1016,6 +1072,10 @@
             <Parameter Name="V_STOCK" Mode="In" Type="Decimal" />
             <Parameter Name="V_ID_TIPOCONSUMIBLE" Mode="In" Type="Decimal" />
             <Parameter Name="V_BODEGA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_INSUMOS">
+            <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
+            <Parameter Name="V_ID_BODEGA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_CREATE_MENU">
             <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
@@ -1199,6 +1259,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="INSUMOS">
+            <EntityTypeMapping TypeName="Model.INSUMOS">
+              <MappingFragment StoreEntitySet="INSUMOS">
+                <ScalarProperty Name="ID_INSUMOS" ColumnName="ID_INSUMOS" />
+                <ScalarProperty Name="PEDIDOINSUMO" ColumnName="PEDIDOINSUMO" />
+                <ScalarProperty Name="ID_BODEGA" ColumnName="ID_BODEGA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MENU">
             <EntityTypeMapping TypeName="Model.MENU">
               <MappingFragment StoreEntitySet="MENU">
@@ -1283,6 +1352,7 @@
           <FunctionImportMapping FunctionImportName="SP_CREATE_BOLETA" FunctionName="Model.Store.SP_CREATE_BOLETA" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_CLIENTE" FunctionName="Model.Store.SP_CREATE_CLIENTE" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_CONSUMIBLE" FunctionName="Model.Store.SP_CREATE_CONSUMIBLE" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_INSUMOS" FunctionName="Model.Store.SP_CREATE_INSUMOS" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_MENU" FunctionName="Model.Store.SP_CREATE_MENU" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_MESA" FunctionName="Model.Store.SP_CREATE_MESA" />
           <FunctionImportMapping FunctionImportName="SP_CREATE_PEDIDO" FunctionName="Model.Store.SP_CREATE_PEDIDO" />

@@ -54,6 +54,7 @@
     <Compile Include="categoria.cs" />
     <Compile Include="Comuna.cs" />
     <Compile Include="Estado.cs" />
+    <Compile Include="insumos.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Mesa.cs" />
     <Compile Include="Pedido.cs" />
