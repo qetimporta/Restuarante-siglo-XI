@@ -4,9 +4,11 @@
 }
 <button><i class="fas fa-arrow-circle-left"></i> @Html.ActionLink("Volver a la pagina principal del administrador", "homeAdmin", "Persona")</button>
 <button><i class="fas fa-arrow-circle-left"></i> @Html.ActionLink("Volver a la lista de productos", "Index", "Producto")</button>
-<h2>Editar Producto</h2>
+
 @using (Html.BeginForm())
 {
+<section id="formulario">
+    <h2>Editar Producto</h2>
     @Html.HiddenFor(pr => pr.id_producto)
     @Html.TextBoxFor(prod => prod.nombre_producto, new { placeholder = "nombre del producto", required = "required" })
     <br />
@@ -20,4 +22,7 @@
     @Html.DropDownListFor(p => p.id_bodega, new SelectList(ViewBag.bodega, "id_bodega", "NOMBREBODEGA"))
     <br />
     <button>Modificar producto</button>
+
+</section>
+
 }

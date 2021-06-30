@@ -99,6 +99,7 @@
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\fondoWeb1.jpg" />
     <Content Include="Content\images\logo1.jpg" />
+    <Content Include="Content\images\platoComida.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />

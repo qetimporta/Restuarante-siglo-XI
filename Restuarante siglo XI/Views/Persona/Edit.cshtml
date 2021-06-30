@@ -3,12 +3,14 @@
     ViewBag.Title = "Editar";
 }
 
-<h2>Edita el cliente</h2>
+
 
 <button>@Html.ActionLink("Volver a la pagina principal del administrador", "homeAdmin", "Persona")</button>
 <button>@Html.ActionLink("Volver a la lista de personas", "Index", "Persona")</button>
 @using (Html.BeginForm())
 {
+<section id="formulario">
+    <h2>Edita Personal</h2>
     @Html.HiddenFor(p => p.id_persona)
     @Html.TextBoxFor(p => p.rutpersona, new { placeholder = "Rut:XXXXXXXX-X", required = "required" })
     <br />
@@ -24,4 +26,6 @@
     @Html.DropDownListFor(p => p.comuna_id, new SelectList(ViewBag.comunas, "id_comuna", "NOMBRE_COMUNA"))
     @Html.DropDownListFor(p => p.id_bodega, new SelectList(ViewBag.bodega, "id_bodega", "NOMBREBODEGA"))
     <button>Modificar</button>
+</section>
+
 }
