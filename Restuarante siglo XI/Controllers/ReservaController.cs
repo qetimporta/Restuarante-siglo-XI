@@ -92,8 +92,21 @@ namespace Restuarante_siglo_XI.Controllers
         }
 
         // GET: Reserva/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteC(int id, int idC)
         {
+
+            if (new Reserva().buscar(id)==null)
+            {
+                TempData["mensaje"] = "no se encontro";
+            }
+            Cliente c = new Cliente();
+            ViewBag.cliente = c.buscarCliente(id);
+
+            if (new Reserva().BorrarReserva(id))
+            {
+                TempData["mensaje"] = "Eliminado correctamente";
+                return RedirectToAction("reCliente", new { id = idC});
+            }
             return View();
         }
 
