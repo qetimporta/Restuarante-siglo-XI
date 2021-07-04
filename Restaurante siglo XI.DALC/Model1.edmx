@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BODEGA">
           <Key>
             <PropertyRef Name="ID_BODEGA" />
@@ -100,7 +100,7 @@
           <Property Name="NUMEROMESA" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="MAX_COMENSALES_MESA" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="USADO_MESA" Type="varchar2" MaxLength="10" Nullable="false" />
-          <Property Name="ID_UBICACION" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_UBICACION" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="PEDIDO">
           <Key>
@@ -254,7 +254,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="MESA_UBICACION_MESA_FK">
-          <End Role="UBICACION_MESA" Type="Self.UBICACION_MESA" Multiplicity="1" />
+          <End Role="UBICACION_MESA" Type="Self.UBICACION_MESA" Multiplicity="0..1" />
           <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UBICACION_MESA">
@@ -689,7 +689,7 @@
           <Property Name="NUMEROMESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="MAX_COMENSALES_MESA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="USADO_MESA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID_UBICACION" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_UBICACION" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="BOLETA" Relationship="Self.BOLETA_MESA_FK" FromRole="MESA" ToRole="BOLETA" />
           <NavigationProperty Name="UBICACION_MESA" Relationship="Self.MESA_UBICACION_MESA_FK" FromRole="MESA" ToRole="UBICACION_MESA" />
           <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_MESA_FK" FromRole="MESA" ToRole="PEDIDO" />
@@ -930,7 +930,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="MESA_UBICACION_MESA_FK">
-          <End Role="UBICACION_MESA" Type="Self.UBICACION_MESA" Multiplicity="1" />
+          <End Role="UBICACION_MESA" Type="Self.UBICACION_MESA" Multiplicity="0..1" />
           <End Role="MESA" Type="Self.MESA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UBICACION_MESA">

@@ -25,7 +25,7 @@ namespace Restaurante_siglo_XI.DALC
         public decimal NUMEROMESA { get; set; }
         public decimal MAX_COMENSALES_MESA { get; set; }
         public string USADO_MESA { get; set; }
-        public decimal ID_UBICACION { get; set; }
+        public Nullable<decimal> ID_UBICACION { get; set; }
     
         public virtual ICollection<BOLETA> BOLETA { get; set; }
         public virtual UBICACION_MESA UBICACION_MESA { get; set; }
