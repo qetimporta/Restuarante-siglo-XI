@@ -12,13 +12,13 @@
 <section id="formulario">
     <h2>Edita Personal</h2>
     @Html.HiddenFor(p => p.id_persona)
-    @Html.TextBoxFor(p => p.rutpersona, new { placeholder = "Rut:XXXXXXXX-X", required = "required" })
+    @Html.TextBoxFor(p => p.rutpersona, new { placeholder = "Rut:XXXXXXXX-X", required = "required", disabled = "disabled"})
     <br />
-    @Html.TextBoxFor(p => p.Nombre_persona, new { placeholder = "nombre", required = "required" })
+    @Html.TextBoxFor(p => p.Nombre_persona, new { placeholder = "nombre", required = "required", disabled = "disabled" })
     <br />
-    @Html.TextBoxFor(p => p.apellidosPersonal, new { placeholder = "Apellido Paterno", required = "required" })
+    @Html.TextBoxFor(p => p.apellidosPersonal, new { placeholder = "Apellido Paterno", required = "required", disabled = "disabled" })
     <br />
-    @Html.TextBoxFor(p => p.Correo_personal, new { Type = "email", placeholder = "Correo Electronico", required = "required" })
+    @Html.TextBoxFor(p => p.Correo_personal, new { Type = "email", placeholder = "Correo Electronico", required = "required", disabled = "disabled" })
     <br />
     @Html.HiddenFor(p => p.contrasenia)
     <br />

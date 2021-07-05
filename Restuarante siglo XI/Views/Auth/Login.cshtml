@@ -7,19 +7,20 @@
 
 @using (Html.BeginForm())
 {
-    <section id="formulario">
-        <h2>Ingresa a tu cuenta</h2>
-        @Html.TextBoxFor(u => u.correoCliente, new { placeholder = "Correo Electronico" })
-        <br />
-        @Html.PasswordFor(u => u.Password, new { placeholder = "Contraseña" })
-        <br />
-        <button>Ingresar</button>
-        <br />
-        @Html.ActionLink("no tienes cuenta? Registrate ahora!", "Create", "Usuario")
-    </section>
+<section id="formulario">
+    <h2>Ingresa a tu cuenta</h2>
+    @Html.TextBoxFor(u => u.correoCliente, new { placeholder = "Correo Electronico" })
+    <br />
+    @Html.PasswordFor(u => u.Password, new { placeholder = "Contraseña" })
+    <br />
+    <button>Ingresar</button>
+    <br />
+    @Html.ActionLink("no tienes cuenta? Registrate ahora!", "Create", "Usuario")
+    <br />
+    @TempData["mensaje"]
+</section>
 
 }
 
-<br />
-@TempData["mensaje"]
+
 
