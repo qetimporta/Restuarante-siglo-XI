@@ -11,7 +11,7 @@
 {
     <section id="formulario">
         <h2>Crear Reserva</h2>
-        @Html.TextBoxFor(r => r.fecha_reserva, new { type = "date" })
+        @Html.TextBoxFor(r => r.fecha_reserva, new {  id = "fecha" })
         <br />
         @Html.Hidden("id_cliente", (int)cl.id_cliente)
         @Html.Hidden("correo", cl.correoCliente)
@@ -24,5 +24,3 @@
 
 
 }
-
-

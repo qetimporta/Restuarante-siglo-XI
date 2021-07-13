@@ -7,7 +7,7 @@ using Restaurante_siglo_XI;
 
 namespace Restuarante_siglo_XI.Controllers
 {
-    
+    [Authorize]
     public class PedidosController : Controller
     {
         // GET: Pedidos

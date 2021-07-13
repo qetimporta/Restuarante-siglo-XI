@@ -7,9 +7,9 @@
 @{ Cliente personas = (Cliente)ViewBag.cliente;}
 <!--
     -->
-
+<h2>Bienvenido @personas.nombre_cliente @personas.apellidoP @personas.apellidoM</h2>
 <section id="main_user">
-    <h2>Bienvenido @personas.nombre_cliente @personas.apellidoP @personas.apellidoM</h2>
+    
     <br />
     <a id="botonCliente" href="@Url.Action("Create","Reserva",new {id = personas.id_cliente })"><i class="fas fa-address-book"></i>Crear Reservas</a>
 

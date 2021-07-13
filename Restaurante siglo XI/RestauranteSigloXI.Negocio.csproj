@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bodega.cs" />
+    <Compile Include="Boleta.cs" />
     <Compile Include="Cargo.cs" />
     <Compile Include="categoria.cs" />
     <Compile Include="Comuna.cs" />
