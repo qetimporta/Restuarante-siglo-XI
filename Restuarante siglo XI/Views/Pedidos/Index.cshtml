@@ -8,73 +8,73 @@
 @{List<Pedido> pedido = (List<Pedido>)ViewBag.pedidos; }
 <button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
 <button>@Html.ActionLink("Crear Pedidos", "Create", "Pedidos")</button>
+<button>@Html.ActionLink("Generar una boleta rapida", "Create", "Boleta")</button>
 @using (Html.BeginForm())
- {
+{
 
-<div class="row">
-    <div class="col-md-12">
-        <table>
-            <tr>
-                <th>Numero de la mesa</th>
-                <th>algo adicional</th>
-                <th>nombre del menu</th>
-                <th>estado actual</th>
-                <th></th>
-            </tr>
-            @foreach (var p in pedido)
-            {
+    <div class="row">
+        <div class="col-md-12">
+            <table>
                 <tr>
-                    @if (p.id_estado !=2 && p.id_estado != 3)
-                    {
-                        <td>@p.mesas.numeroMesa</td>
-                        <td>@p.pedidoAdicional</td>
-                        <td>@p.menu.nombre_menu</td>
-                        <td>@p.estado.nombre_estado</td>
-                        <td>
-                            @Html.ActionLink("Modificar", "Edit", new { id = p.id_pedido })
-                        </td>
-
-                    }
-
+                    <th>Numero de la mesa</th>
+                    <th>algo adicional</th>
+                    <th>nombre del menu</th>
+                    <th>estado actual</th>
+                    <th></th>
                 </tr>
-            }
-            
-        </table>
-    </div>
-</div>
-<br />
-<br />
+                @foreach (var p in pedido)
+                {
+                    <tr>
+                        @if (p.id_estado != 2 && p.id_estado != 3)
+                        {
+                            <td>@p.mesas.numeroMesa</td>
+                            <td>@p.pedidoAdicional</td>
+                            <td>@p.menu.nombre_menu</td>
+                            <td>@p.estado.nombre_estado</td>
+                            <td>
+                                @Html.ActionLink("Modificar", "Edit", new { id = p.id_pedido })
+                            </td>
 
-<div class="row">
-    <div class="col-md-12">
-        <table>
-            <tr>
-                <th>Numero de la mesa</th>
-                <th>algo adicional</th>
-                <th>nombre del menu</th>
-                <th>estado actual</th>
-                <th></th>
-            </tr>
-            @foreach (var p in pedido)
-            {
+                        }
+
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-md-12">
+            <table>
                 <tr>
-                    @if (p.id_estado!= 1 && p.id_estado != 3)
-                    {
-                        <td>@p.mesas.numeroMesa</td>
-                        <td>@p.pedidoAdicional</td>
-                        <td>@p.menu.nombre_menu</td>
-                        <td>@p.estado.nombre_estado</td>
-                        <td>
-                            @Html.ActionLink("Modificar", "Edit", new { id = p.id_pedido })
-                            <a href="@Url.Action("Create", "Boleta", new { id_mes = p.id_mesa})">generar boleta</a>                           
-                        </td>
-
-                    }
-
+                    <th>Numero de la mesa</th>
+                    <th>algo adicional</th>
+                    <th>nombre del menu</th>
+                    <th>estado actual</th>
+                    <th></th>
                 </tr>
-            }
+                @foreach (var p in pedido)
+                {
+                    <tr>
+                        @if (p.id_estado != 1 && p.id_estado != 3)
+                        {
+                            <td>@p.mesas.numeroMesa</td>
+                            <td>@p.pedidoAdicional</td>
+                            <td>@p.menu.nombre_menu</td>
+                            <td>@p.estado.nombre_estado</td>
+                            <td>
+                                @Html.ActionLink("Modificar", "Edit", new { id = p.id_pedido })
+                            </td>
 
-        </table>
+                        }
+
+                    </tr>
+                }
+
+            </table>
+        </div>
     </div>
-</div>
- }
+}

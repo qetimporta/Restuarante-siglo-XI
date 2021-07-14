@@ -1,15 +1,14 @@
 ﻿@model Restaurante_siglo_XI.Boleta
 @using Restaurante_siglo_XI
 
-
-@{ Pedido m = (Pedido)ViewBag.pedido; }
+<button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "Index", "Pedidos")</button>
 <section id="formulario">
+
     <h2>CREAR BOLETA</h2>
-    creando boleta para la mesa @m.mesas.numeroMesa
     @using (Html.BeginForm())
     {
-        @Html.TextBoxFor(b=> b.fechaEmision, new {Value = @DateTime.Now , disabled = "disabled" })
-        @Html.Hidden("id_mesa",(int)m.id_mesa)
+        <!--Html.TextBox("fechaEmision", DateTime.Now.ToString("dd/MM/yyyy") ,new { disabled = "disabled" })-->
+        <tr>seleccione una mesa</tr>@Html.DropDownListFor(p => p.id_mesa, new SelectList(ViewBag.mesas, "id_mesa", "numeroMesa"))
         <br />
         @Html.TextBoxFor(b => b.totalBoleta, new { type = "number", placeholder = "Total de la compra", required = "required" })
         <br />

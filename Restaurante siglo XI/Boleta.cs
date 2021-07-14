@@ -27,8 +27,8 @@ namespace Restaurante_siglo_XI
             id_boleta = (int)b.ID_BOLETA,
             totalBoleta = (int)b.TOTAL_BOLETA,
             fechaEmision = b.FECHA_BOLETA,
-            id_mesa = (int)b.MESA_ID_MESA,
-            mesa = new Mesa { id_mesa = (int)b.MESA_ID_MESA, numeroMesa=(int) b.MESA.NUMEROMESA }
+            id_mesa = (int)b.ID_MESA,
+            mesa = new Mesa { id_mesa = (int)b.ID_MESA, numeroMesa=(int) b.MESA.NUMEROMESA }
             
             }).ToList();
         }
@@ -38,8 +38,15 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-                db.SP_CREATE_BOLETA(totalBoleta,fechaEmision,id_mesa);
-                //db.SP_CREATE_BOLETA(this.totalBoleta,this.fechaEmision,this.id_mesa);
+                 db.SP_CREATE_BOLETA(totalBoleta,Convert.ToDateTime(DateTime.Now), id_mesa);
+      //          BOLETA bo = new BOLETA();
+    //            bo.TOTAL_BOLETA = totalBoleta;
+  //              bo.FECHA_BOLETA = Convert.ToDateTime(DateTime.Now);
+//                bo.ID_MESA = id_mesa;
+
+                //db.BOLETA.Add(bo);
+
+                //db.SaveChanges();
                 return true;
             }
             catch (Exception)

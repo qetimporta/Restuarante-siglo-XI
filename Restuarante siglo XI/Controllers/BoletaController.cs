@@ -16,7 +16,10 @@ namespace Restuarante_siglo_XI.Controllers
             ViewBag.boletas = new Boleta().listartodo();
             return View();
         }
-
+        private void enviarMesas()
+        {
+            ViewBag.mesas = new Mesa().ListarMesa();
+        }
         // GET: Boleta/Details/5
         public ActionResult Details(int id)
         {
@@ -24,10 +27,10 @@ namespace Restuarante_siglo_XI.Controllers
         }
 
         // GET: Boleta/Create
-        public ActionResult Create(int id_mes)
+        public ActionResult Create()
         {
-            Pedido m = new Pedido();
-            ViewBag.pedido = m.BuscarPedido(id_mes);
+            enviarMesas();
+            
             return View();
         }
 
@@ -35,21 +38,20 @@ namespace Restuarante_siglo_XI.Controllers
         [HttpPost]
         public ActionResult Create(Boleta bole)
         {
-            Pedido m = new Pedido();
             try
             {
                 // TODO: Add insert logic here
                 if (!ModelState.IsValid)
                 {
-                    ViewBag.pedido = m.BuscarPedido(bole.id_mesa);
+                    enviarMesas();
                     return View(bole);
                 }
                 //bole.GuardarBoleta();
                 if (bole.GuardarBoleta() == true)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index","Pedidos");
                 }
-                ViewBag.pedido = m.BuscarPedido(bole.id_mesa);
+                enviarMesas();
                 return View(bole);
             }
             catch(Exception)

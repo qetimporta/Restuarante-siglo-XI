@@ -17,7 +17,7 @@ namespace Restaurante_siglo_XI.DALC
         public decimal ID_BOLETA { get; set; }
         public decimal TOTAL_BOLETA { get; set; }
         public System.DateTime FECHA_BOLETA { get; set; }
-        public decimal MESA_ID_MESA { get; set; }
+        public decimal ID_MESA { get; set; }
     
         public virtual MESA MESA { get; set; }
     }
