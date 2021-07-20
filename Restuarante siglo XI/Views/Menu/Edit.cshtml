@@ -5,16 +5,21 @@
 
 <button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver al home", "homeAdmin", "Persona")</button>
 
-@using (Html.BeginForm())
-{
-    <section id="formulario">
-        <h2>Modificar menu</h2>
+<section id="formulario">
+    <h2>Modificar menu</h2>
+
+    @using (Html.BeginForm())
+    {
+
         @Html.HiddenFor(m => m.id_menu)
         @Html.TextBoxFor(m => m.nombre_menu, new { placeholder = "nombre del menu" })
         <br />
         @Html.TextAreaFor(m => m.descripcion_menu, new { placeholder = "nombre del menu" })
         <br />
+        @Html.TextBoxFor(m => m.precio, new { type = "number" })
+        <br />
         <button>Modificar Menu</button>
-    </section>
 
-}
+
+    }
+</section>

@@ -18,6 +18,7 @@
 
                 <th>nombre del menu</th>
                 <th>descripcion del menu</th>
+                <th>precio del menu</th>
                 <th></th>
             </tr>
 
@@ -26,6 +27,7 @@
                 <tr>
                     <td>@m.nombre_menu</td>
                     <td>@m.descripcion_menu</td>
+                    <td>@m.precio</td>
                     <td>
                         @Html.ActionLink("Modificar", "Edit", new { id = m.id_menu })
                         <!--Html.ActionLink("Eliminar","Delete", new { id = m.id_menu})-->

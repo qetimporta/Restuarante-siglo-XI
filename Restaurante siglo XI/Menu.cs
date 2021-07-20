@@ -12,6 +12,7 @@ namespace Restaurante_siglo_XI
         public int id_menu { get; set; }
         public String nombre_menu { get; set; }
         public String descripcion_menu { get; set; }
+        public int precio { get; set; }
 
         RestauranteEntities db = new RestauranteEntities();
 
@@ -23,7 +24,8 @@ namespace Restaurante_siglo_XI
             {
                 id_menu = (int)m.ID_MENU,
                 nombre_menu = m.NOMBRE_MENU,
-                descripcion_menu = m.DESCRIPCION_MENU
+                descripcion_menu = m.DESCRIPCION_MENU,
+                precio = (int)m.PRECIO_MENU
             }).ToList();
         }
 
@@ -34,7 +36,8 @@ namespace Restaurante_siglo_XI
             {
                 id_menu = (int)m.ID_MENU,
                 nombre_menu = m.NOMBRE_MENU,
-                descripcion_menu = m.DESCRIPCION_MENU
+                descripcion_menu = m.DESCRIPCION_MENU,
+                precio = (int)m.PRECIO_MENU
             }).Where(m=> m.id_menu ==id).FirstOrDefault();
         }
 
@@ -58,7 +61,7 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-                db.SP_CREATE_MENU(this.nombre_menu, this.descripcion_menu);
+                db.SP_CREATE_MENU(this.nombre_menu, this.descripcion_menu,this.precio);
                 return true;
             }
             catch (Exception)
@@ -73,7 +76,7 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-                db.SP_UPDATE_MENU(this.id_menu,this.nombre_menu, this.descripcion_menu);
+                db.SP_UPDATE_MENU(this.id_menu,this.nombre_menu, this.descripcion_menu, this.precio);
                 return true;
             }
             catch (Exception)

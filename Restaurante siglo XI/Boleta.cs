@@ -34,19 +34,20 @@ namespace Restaurante_siglo_XI
         }
 
 
+        public int Ganancia_total() 
+        {
+            var result = (from b in db.BOLETA select b).ToList();
+
+            var sumR = result.Sum(r=>(int) r.TOTAL_BOLETA);
+
+            return sumR;
+        }
+
         public bool GuardarBoleta()
         {
             try
             {
                  db.SP_CREATE_BOLETA(totalBoleta,Convert.ToDateTime(DateTime.Now), id_mesa);
-      //          BOLETA bo = new BOLETA();
-    //            bo.TOTAL_BOLETA = totalBoleta;
-  //              bo.FECHA_BOLETA = Convert.ToDateTime(DateTime.Now);
-//                bo.ID_MESA = id_mesa;
-
-                //db.BOLETA.Add(bo);
-
-                //db.SaveChanges();
                 return true;
             }
             catch (Exception)

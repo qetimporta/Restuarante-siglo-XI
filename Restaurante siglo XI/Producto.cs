@@ -17,8 +17,6 @@ namespace Restaurante_siglo_XI
         [Required]
         public int  Stock{ get; set; }
         [Required]
-        public int precioProducto{ get; set; }
-        [Required]
         public int id_categoria{ get; set; }
         //public int  id_menu{ get; set; }
         public categoria categoria { get; set; }
@@ -36,7 +34,6 @@ namespace Restaurante_siglo_XI
               nombre_producto = prod.NOMBRE_CONSUMIBLE,
               decripcion_producto = prod.DESCRIPCION_CONSUMIBLE,
               Stock =(int) prod.STOCK,
-              precioProducto = (int)prod.PRECIO_CONSUMIBLE,
               id_categoria = (int)prod.ID_TIPO_CONSUMIBLE,
               categoria = new categoria() { id_categoria =(int) prod.ID_TIPO_CONSUMIBLE, nombre_categoria = prod.TIPO_CONSUMIBLE.NOMBRE_TIPO_CONSUMIBLE},
               id_bodega = (int) prod.ID_BODEGA,
@@ -52,7 +49,6 @@ namespace Restaurante_siglo_XI
                 nombre_producto = prod.NOMBRE_CONSUMIBLE,
                 decripcion_producto = prod.DESCRIPCION_CONSUMIBLE,
                 Stock = (int)prod.STOCK,
-                precioProducto = (int)prod.PRECIO_CONSUMIBLE,
                 id_categoria = (int)prod.ID_TIPO_CONSUMIBLE,
                 categoria = new categoria() { id_categoria = (int)prod.ID_TIPO_CONSUMIBLE, nombre_categoria = prod.TIPO_CONSUMIBLE.NOMBRE_TIPO_CONSUMIBLE},
                 id_bodega = (int)prod.ID_BODEGA,
@@ -67,7 +63,7 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-                db.SP_UPDATE_CONSUMIBLE(this.id_producto,this.nombre_producto,this.decripcion_producto,this.Stock,this.id_categoria,this.precioProducto,this.id_bodega);
+                db.SP_UPDATE_CONSUMIBLE(this.id_producto,this.nombre_producto,this.decripcion_producto,this.Stock,this.id_categoria,this.id_bodega);
                 return true;
             }
             catch (Exception)
@@ -81,7 +77,7 @@ namespace Restaurante_siglo_XI
         {
             try
             {
-                db.SP_CREATE_CONSUMIBLE(this.nombre_producto, this.decripcion_producto, this.precioProducto,this.Stock, this.id_categoria, this.id_bodega);
+                db.SP_CREATE_CONSUMIBLE(this.nombre_producto, this.decripcion_producto,this.Stock, this.id_categoria, this.id_bodega);
                 return true;
             }
             catch (Exception)

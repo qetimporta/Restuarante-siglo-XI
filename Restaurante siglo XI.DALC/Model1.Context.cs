@@ -96,7 +96,7 @@ namespace Restaurante_siglo_XI.DALC
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CREATE_CLIENTE", v_NOMBREParameter, v_RUTParameter, v_APELLIDOPATERNOParameter, v_APELLIDOMATERNOParameter, v_CORREOParameter, v_CONTRASENIAParameter, v_ID_COMUNAParameter);
         }
     
-        public virtual int SP_CREATE_CONSUMIBLE(string v_NOMBRE, string v_DESCRIPCION, Nullable<decimal> v_PRECIO, Nullable<decimal> v_STOCK, Nullable<decimal> v_ID_TIPOCONSUMIBLE, Nullable<decimal> v_BODEGA)
+        public virtual int SP_CREATE_CONSUMIBLE(string v_NOMBRE, string v_DESCRIPCION, Nullable<decimal> v_STOCK, Nullable<decimal> v_ID_TIPOCONSUMIBLE, Nullable<decimal> v_BODEGA)
         {
             var v_NOMBREParameter = v_NOMBRE != null ?
                 new ObjectParameter("V_NOMBRE", v_NOMBRE) :
@@ -105,10 +105,6 @@ namespace Restaurante_siglo_XI.DALC
             var v_DESCRIPCIONParameter = v_DESCRIPCION != null ?
                 new ObjectParameter("V_DESCRIPCION", v_DESCRIPCION) :
                 new ObjectParameter("V_DESCRIPCION", typeof(string));
-    
-            var v_PRECIOParameter = v_PRECIO.HasValue ?
-                new ObjectParameter("V_PRECIO", v_PRECIO) :
-                new ObjectParameter("V_PRECIO", typeof(decimal));
     
             var v_STOCKParameter = v_STOCK.HasValue ?
                 new ObjectParameter("V_STOCK", v_STOCK) :
@@ -122,7 +118,7 @@ namespace Restaurante_siglo_XI.DALC
                 new ObjectParameter("V_BODEGA", v_BODEGA) :
                 new ObjectParameter("V_BODEGA", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CREATE_CONSUMIBLE", v_NOMBREParameter, v_DESCRIPCIONParameter, v_PRECIOParameter, v_STOCKParameter, v_ID_TIPOCONSUMIBLEParameter, v_BODEGAParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CREATE_CONSUMIBLE", v_NOMBREParameter, v_DESCRIPCIONParameter, v_STOCKParameter, v_ID_TIPOCONSUMIBLEParameter, v_BODEGAParameter);
         }
     
         public virtual int SP_CREATE_INSUMOS(string v_DESCRIPCION, Nullable<decimal> v_ID_BODEGA)
@@ -138,7 +134,7 @@ namespace Restaurante_siglo_XI.DALC
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CREATE_INSUMOS", v_DESCRIPCIONParameter, v_ID_BODEGAParameter);
         }
     
-        public virtual int SP_CREATE_MENU(string v_NOMBRE, string v_DESCRIPCION)
+        public virtual int SP_CREATE_MENU(string v_NOMBRE, string v_DESCRIPCION, Nullable<decimal> v_PRECIO)
         {
             var v_NOMBREParameter = v_NOMBRE != null ?
                 new ObjectParameter("V_NOMBRE", v_NOMBRE) :
@@ -148,7 +144,11 @@ namespace Restaurante_siglo_XI.DALC
                 new ObjectParameter("V_DESCRIPCION", v_DESCRIPCION) :
                 new ObjectParameter("V_DESCRIPCION", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CREATE_MENU", v_NOMBREParameter, v_DESCRIPCIONParameter);
+            var v_PRECIOParameter = v_PRECIO.HasValue ?
+                new ObjectParameter("V_PRECIO", v_PRECIO) :
+                new ObjectParameter("V_PRECIO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CREATE_MENU", v_NOMBREParameter, v_DESCRIPCIONParameter, v_PRECIOParameter);
         }
     
         public virtual int SP_CREATE_MESA(Nullable<decimal> v_NUMEROMESA, Nullable<decimal> v_UBICACIONM, Nullable<decimal> v_MAX_CON)
@@ -321,7 +321,7 @@ namespace Restaurante_siglo_XI.DALC
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_CLIENTE", v_IDParameter, v_RUTParameter, v_USUARIOParameter, v_APELLIDOPParameter, v_APELLIDOMParameter, v_PASSParameter, v_COMUNAParameter);
         }
     
-        public virtual int SP_UPDATE_CONSUMIBLE(Nullable<decimal> v_ID, string v_NOMBRE, string v_DESCRIPCION, Nullable<decimal> v_STOCK, Nullable<decimal> v_ID_CATEGORIA, Nullable<decimal> v_PRECIO, Nullable<decimal> v_BODEGA)
+        public virtual int SP_UPDATE_CONSUMIBLE(Nullable<decimal> v_ID, string v_NOMBRE, string v_DESCRIPCION, Nullable<decimal> v_STOCK, Nullable<decimal> v_ID_CATEGORIA, Nullable<decimal> v_BODEGA)
         {
             var v_IDParameter = v_ID.HasValue ?
                 new ObjectParameter("V_ID", v_ID) :
@@ -343,18 +343,14 @@ namespace Restaurante_siglo_XI.DALC
                 new ObjectParameter("V_ID_CATEGORIA", v_ID_CATEGORIA) :
                 new ObjectParameter("V_ID_CATEGORIA", typeof(decimal));
     
-            var v_PRECIOParameter = v_PRECIO.HasValue ?
-                new ObjectParameter("V_PRECIO", v_PRECIO) :
-                new ObjectParameter("V_PRECIO", typeof(decimal));
-    
             var v_BODEGAParameter = v_BODEGA.HasValue ?
                 new ObjectParameter("V_BODEGA", v_BODEGA) :
                 new ObjectParameter("V_BODEGA", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_CONSUMIBLE", v_IDParameter, v_NOMBREParameter, v_DESCRIPCIONParameter, v_STOCKParameter, v_ID_CATEGORIAParameter, v_PRECIOParameter, v_BODEGAParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_CONSUMIBLE", v_IDParameter, v_NOMBREParameter, v_DESCRIPCIONParameter, v_STOCKParameter, v_ID_CATEGORIAParameter, v_BODEGAParameter);
         }
     
-        public virtual int SP_UPDATE_MENU(Nullable<decimal> v_ID, string v_NOMBRE, string v_DESCRIPCION)
+        public virtual int SP_UPDATE_MENU(Nullable<decimal> v_ID, string v_NOMBRE, string v_DESCRIPCION, Nullable<decimal> v_PRECIO)
         {
             var v_IDParameter = v_ID.HasValue ?
                 new ObjectParameter("V_ID", v_ID) :
@@ -368,7 +364,11 @@ namespace Restaurante_siglo_XI.DALC
                 new ObjectParameter("V_DESCRIPCION", v_DESCRIPCION) :
                 new ObjectParameter("V_DESCRIPCION", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_MENU", v_IDParameter, v_NOMBREParameter, v_DESCRIPCIONParameter);
+            var v_PRECIOParameter = v_PRECIO.HasValue ?
+                new ObjectParameter("V_PRECIO", v_PRECIO) :
+                new ObjectParameter("V_PRECIO", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_MENU", v_IDParameter, v_NOMBREParameter, v_DESCRIPCIONParameter, v_PRECIOParameter);
         }
     
         public virtual int SP_UPDATE_MESA(Nullable<decimal> v_ID, Nullable<decimal> v_NUMEROMESA, Nullable<decimal> v_UBICACIONM, Nullable<decimal> v_MAX_CON, string v_USADO)

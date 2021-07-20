@@ -22,7 +22,6 @@ namespace Restaurante_siglo_XI.DALC
         public decimal ID_CONSUMIBLE { get; set; }
         public string NOMBRE_CONSUMIBLE { get; set; }
         public string DESCRIPCION_CONSUMIBLE { get; set; }
-        public decimal PRECIO_CONSUMIBLE { get; set; }
         public decimal STOCK { get; set; }
         public decimal ID_TIPO_CONSUMIBLE { get; set; }
         public decimal ID_BODEGA { get; set; }

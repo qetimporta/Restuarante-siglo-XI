@@ -55,8 +55,7 @@
           </Key>
           <Property Name="ID_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_CONSUMIBLE" Type="varchar2" MaxLength="25" Nullable="false" />
-          <Property Name="DESCRIPCION_CONSUMIBLE" Type="varchar2" MaxLength="25" />
-          <Property Name="PRECIO_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION_CONSUMIBLE" Type="varchar2" MaxLength="100" />
           <Property Name="STOCK" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_TIPO_CONSUMIBLE" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_BODEGA" Type="number" Precision="38" Scale="0" Nullable="false" />
@@ -91,6 +90,7 @@
           <Property Name="ID_MENU" Type="number" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_MENU" Type="varchar2" MaxLength="100" Nullable="false" />
           <Property Name="DESCRIPCION_MENU" Type="varchar2" MaxLength="200" />
+          <Property Name="PRECIO_MENU" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="MESA">
           <Key>
@@ -378,7 +378,6 @@
         <Function Name="SP_CREATE_CONSUMIBLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
           <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
-          <Parameter Name="V_PRECIO" Type="number" Mode="In" />
           <Parameter Name="V_STOCK" Type="number" Mode="In" />
           <Parameter Name="V_ID_TIPOCONSUMIBLE" Type="number" Mode="In" />
           <Parameter Name="V_BODEGA" Type="number" Mode="In" />
@@ -390,6 +389,7 @@
         <Function Name="SP_CREATE_MENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
           <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PRECIO" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_CREATE_MESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_NUMEROMESA" Type="number" Mode="In" />
@@ -447,13 +447,13 @@
           <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
           <Parameter Name="V_STOCK" Type="number" Mode="In" />
           <Parameter Name="V_ID_CATEGORIA" Type="number" Mode="In" />
-          <Parameter Name="V_PRECIO" Type="number" Mode="In" />
           <Parameter Name="V_BODEGA" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_UPDATE_MENU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
           <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
           <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PRECIO" Type="number" Mode="In" />
         </Function>
         <Function Name="SP_UPDATE_MESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="RESTAURANTEXXI">
           <Parameter Name="V_ID" Type="number" Mode="In" />
@@ -635,8 +635,7 @@
           </Key>
           <Property Name="ID_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_CONSUMIBLE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DESCRIPCION_CONSUMIBLE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="PRECIO_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION_CONSUMIBLE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="STOCK" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_TIPO_CONSUMIBLE" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="ID_BODEGA" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
@@ -678,6 +677,7 @@
           <Property Name="ID_MENU" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="NOMBRE_MENU" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DESCRIPCION_MENU" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PRECIO_MENU" Type="Decimal" Precision="38" Scale="0" />
           <NavigationProperty Name="DETA_MENU_CONSU" Relationship="Self.DETA_MENU_CONSU_MENU_FK" FromRole="MENU" ToRole="DETA_MENU_CONSU" />
           <NavigationProperty Name="PEDIDO" Relationship="Self.PEDIDO_MENU_FK" FromRole="MENU" ToRole="PEDIDO" />
         </EntityType>
@@ -1068,7 +1068,6 @@
           <FunctionImport Name="SP_CREATE_CONSUMIBLE">
             <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
             <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
-            <Parameter Name="V_PRECIO" Mode="In" Type="Decimal" />
             <Parameter Name="V_STOCK" Mode="In" Type="Decimal" />
             <Parameter Name="V_ID_TIPOCONSUMIBLE" Mode="In" Type="Decimal" />
             <Parameter Name="V_BODEGA" Mode="In" Type="Decimal" />
@@ -1080,6 +1079,7 @@
           <FunctionImport Name="SP_CREATE_MENU">
             <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
             <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
+            <Parameter Name="V_PRECIO" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_CREATE_MESA">
             <Parameter Name="V_NUMEROMESA" Mode="In" Type="Decimal" />
@@ -1137,13 +1137,13 @@
             <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
             <Parameter Name="V_STOCK" Mode="In" Type="Decimal" />
             <Parameter Name="V_ID_CATEGORIA" Mode="In" Type="Decimal" />
-            <Parameter Name="V_PRECIO" Mode="In" Type="Decimal" />
             <Parameter Name="V_BODEGA" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_UPDATE_MENU">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
             <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
             <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
+            <Parameter Name="V_PRECIO" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SP_UPDATE_MESA">
             <Parameter Name="V_ID" Mode="In" Type="Decimal" />
@@ -1235,7 +1235,6 @@
                 <ScalarProperty Name="ID_CONSUMIBLE" ColumnName="ID_CONSUMIBLE" />
                 <ScalarProperty Name="NOMBRE_CONSUMIBLE" ColumnName="NOMBRE_CONSUMIBLE" />
                 <ScalarProperty Name="DESCRIPCION_CONSUMIBLE" ColumnName="DESCRIPCION_CONSUMIBLE" />
-                <ScalarProperty Name="PRECIO_CONSUMIBLE" ColumnName="PRECIO_CONSUMIBLE" />
                 <ScalarProperty Name="STOCK" ColumnName="STOCK" />
                 <ScalarProperty Name="ID_TIPO_CONSUMIBLE" ColumnName="ID_TIPO_CONSUMIBLE" />
                 <ScalarProperty Name="ID_BODEGA" ColumnName="ID_BODEGA" />
@@ -1274,6 +1273,7 @@
                 <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
                 <ScalarProperty Name="NOMBRE_MENU" ColumnName="NOMBRE_MENU" />
                 <ScalarProperty Name="DESCRIPCION_MENU" ColumnName="DESCRIPCION_MENU" />
+                <ScalarProperty Name="PRECIO_MENU" ColumnName="PRECIO_MENU" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

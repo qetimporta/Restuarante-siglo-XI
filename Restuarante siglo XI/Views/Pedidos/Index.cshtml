@@ -9,72 +9,104 @@
 <button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
 <button>@Html.ActionLink("Crear Pedidos", "Create", "Pedidos")</button>
 <button>@Html.ActionLink("Generar una boleta rapida", "Create", "Boleta")</button>
-@using (Html.BeginForm())
-{
 
-    <div class="row">
-        <div class="col-md-12">
-            <table>
+<div class="row">
+    <div class="col-md-12">
+        <table>
+            <tr>
+                <th>Numero de la mesa</th>
+                <th>algo adicional</th>
+                <th>nombre del menu</th>
+                <th>estado actual</th>
+                <th></th>
+            </tr>
+            @foreach (var p in pedido)
+            {
                 <tr>
-                    <th>Numero de la mesa</th>
-                    <th>algo adicional</th>
-                    <th>nombre del menu</th>
-                    <th>estado actual</th>
-                    <th></th>
+                    @if (p.id_estado != 2 && p.id_estado != 3 && p.id_estado != 4)
+                    {
+                        <td>@p.mesas.numeroMesa</td>
+                        <td>@p.pedidoAdicional</td>
+                        <td>@p.menu.nombre_menu</td>
+                        <td>@p.estado.nombre_estado</td>
+                        <td>
+                            @Html.ActionLink("Modificar", "Edit", new { id = p.id_pedido })
+                        </td>
+
+                    }
+
                 </tr>
-                @foreach (var p in pedido)
-                {
-                    <tr>
-                        @if (p.id_estado != 2 && p.id_estado != 3)
-                        {
-                            <td>@p.mesas.numeroMesa</td>
-                            <td>@p.pedidoAdicional</td>
-                            <td>@p.menu.nombre_menu</td>
-                            <td>@p.estado.nombre_estado</td>
-                            <td>
-                                @Html.ActionLink("Modificar", "Edit", new { id = p.id_pedido })
-                            </td>
+            }
 
-                        }
-
-                    </tr>
-                }
-
-            </table>
-        </div>
+        </table>
     </div>
-    <br />
-    <br />
+</div>
+<br />
+<br />
 
-    <div class="row">
-        <div class="col-md-12">
-            <table>
+<div class="row">
+    <div class="col-md-12">
+        <table>
+            <tr>
+                <th>Numero de la mesa</th>
+                <th>algo adicional</th>
+                <th>nombre del menu</th>
+                <th>estado actual</th>
+                <th></th>
+            </tr>
+            @foreach (var p in pedido)
+            {
                 <tr>
-                    <th>Numero de la mesa</th>
-                    <th>algo adicional</th>
-                    <th>nombre del menu</th>
-                    <th>estado actual</th>
-                    <th></th>
+                    @if (p.id_estado != 1 && p.id_estado != 3 && p.id_estado != 4)
+                    {
+                        <td>@p.mesas.numeroMesa</td>
+                        <td>@p.pedidoAdicional</td>
+                        <td>@p.menu.nombre_menu</td>
+                        <td>@p.estado.nombre_estado</td>
+                        <td>
+                            @Html.ActionLink("Modificar", "Edit", new { id = p.id_pedido })
+                        </td>
+
+                    }
+
                 </tr>
-                @foreach (var p in pedido)
-                {
-                    <tr>
-                        @if (p.id_estado != 1 && p.id_estado != 3)
-                        {
-                            <td>@p.mesas.numeroMesa</td>
-                            <td>@p.pedidoAdicional</td>
-                            <td>@p.menu.nombre_menu</td>
-                            <td>@p.estado.nombre_estado</td>
-                            <td>
-                                @Html.ActionLink("Modificar", "Edit", new { id = p.id_pedido })
-                            </td>
+            }
 
-                        }
-
-                    </tr>
-                }
-
-            </table>
-        </div>
+        </table>
     </div>
-}
+</div>
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <table>
+            <tr>
+                <th>Numero de la mesa</th>
+                <th>algo adicional</th>
+                <th>nombre del menu</th>
+                <th>estado actual</th>
+                <th></th>
+            </tr>
+            @foreach (var p in pedido)
+            {
+                <tr>
+                    @if (p.id_estado != 1 && p.id_estado != 2 && p.id_estado != 4)
+                    {
+                        <td>@p.mesas.numeroMesa</td>
+                        <td>@p.pedidoAdicional</td>
+                        <td>@p.menu.nombre_menu</td>
+                        <td>@p.estado.nombre_estado</td>
+                        <td>
+                            @Html.ActionLink("Modificar", "Edit", new { id = p.id_pedido })
+                        </td>
+
+                    }
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

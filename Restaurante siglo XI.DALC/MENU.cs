@@ -23,6 +23,7 @@ namespace Restaurante_siglo_XI.DALC
         public decimal ID_MENU { get; set; }
         public string NOMBRE_MENU { get; set; }
         public string DESCRIPCION_MENU { get; set; }
+        public Nullable<decimal> PRECIO_MENU { get; set; }
     
         public virtual ICollection<DETA_MENU_CONSU> DETA_MENU_CONSU { get; set; }
         public virtual ICollection<PEDIDO> PEDIDO { get; set; }

@@ -1,8 +1,12 @@
-﻿@{
+﻿@using Restaurante_siglo_XI
+@{
     ViewBag.Title = "Pagina principal administrador";
 }
 
 <h2>Administrador </h2>
+
+@{ var bole = (int)ViewBag.ganancia;}
+
 
 <section id="main_admin">
     <div class="row">
@@ -25,21 +29,12 @@
         <div class="col-md-4">
             <button id="botonadmin"><i class="fas fa-cart-plus"></i> @Html.ActionLink("Crear Pedido", "Create", "Pedidos")</button>
             <button id="botonadmin"><i class="fas fa-clipboard-list"></i> @Html.ActionLink("Ver pedidos en realizados", "Index", "Pedidos")</button>
-
         </div>
 
+        <button id="botonadmin">Ganancia total: @bole </button>
     </div>
-    
 
 
 
-    
-    
-    
-    
-
-    
-    
 </section>
 
-    

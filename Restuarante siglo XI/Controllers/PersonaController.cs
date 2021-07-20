@@ -44,11 +44,17 @@ namespace Restuarante_siglo_XI.Controllers
         {
             ViewBag.comunas = new Comuna().LeerAll();
         }
+
+        private void enviarGanancia()
+        {
+            ViewBag.ganancia = new Boleta().Ganancia_total();
+        }
         [Authorize]
         public ActionResult homeAdmin(string correo)
         {
             Personal p = new Personal();
             ViewBag.personal = p.buscarCorreoAdmin(correo);
+            enviarGanancia();
             return View();
         }
         [Authorize]

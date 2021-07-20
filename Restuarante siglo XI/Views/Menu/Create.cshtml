@@ -3,18 +3,18 @@
     ViewBag.Title = "Create";
 }
 <button><i class="fas fa-arrow-circle-left"></i>@Html.ActionLink("Volver", "homeAdmin", "Persona")</button>
+<section id="formulario">
+    @using (Html.BeginForm())
+    {
 
-@using (Html.BeginForm()) 
-{
-    <section id="formulario">
         <h2>Crear nuevo menu</h2>
 
         @Html.TextBoxFor(m => m.nombre_menu, new { placeholder = "nombre del menu" })
         <br />
         @Html.TextAreaFor(m => m.descripcion_menu, new { placeholder = "nombre del menu" })
         <br />
+        @Html.TextBoxFor(m => m.precio, new { type = "number" })
+        <br />
         <button>Crear Menu</button>
-
-    </section>
-
-}
+    }
+</section>
